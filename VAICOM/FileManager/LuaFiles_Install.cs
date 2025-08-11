@@ -232,6 +232,18 @@ namespace VAICOM
                                             basepath = UserSavedGamesFolder + "\\" + Server.dcsversion[set.Key] + "\\" + thisfile.installfolder;
                                         }
 
+                                        // Validate basepath
+                                        if (string.IsNullOrEmpty(basepath) || basepath.Length <= 3)
+                                        {
+                                            Log.Write($"Invalid basepath: {basepath}. Skipping directory creation.", Colors.Warning);
+                                            continue;
+                                        }
+
+                                        // Debug logs for paths
+                                        //Log.Write($"SavedGamesFolder: {UserSavedGamesFolder}", Colors.Text); // Tuned off for now
+                                        //Log.Write($"dcsprogramfilesfolder: {dcsprogramfilesfolder}", Colors.Text);
+                                        //Log.Write($"basepath: {basepath}", Colors.Text);
+
                                         // create folder if doesn't exit yet..
 
                                         if (!Directory.Exists(basepath))

@@ -155,8 +155,6 @@ namespace VAICOM
 
                 public KneeboardUnitsData(string recipientcat, bool AOCS)
                 {
-
-
                     category = recipientcat.ToUpper();
 
                     string cat;
@@ -170,12 +168,10 @@ namespace VAICOM
                         cat = recipientcat;
                     }
 
-                    //string header = String.Format("{0,-3} {1,-12} {2,-5} {3,-4} {4,-5}  {5,-10} {6,-10}\n\n", "   ", "UNIT", "BRAA", "RNG", "ALT", "MOD FRQ", "(FRQ)");
-                    //sb.Append(header);
-
                     unitslist = new List<string>();
-
                     List<KneeboardUnitSummary> units = new List<KneeboardUnitSummary>();
+
+                    Log.Write($"Processing {State.currentstate.availablerecipients[cat].Count} Flight units for kneeboard.", Colors.Text);
 
                     foreach (Server.DcsUnit unit in State.currentstate.availablerecipients[cat])
                     {
@@ -187,51 +183,70 @@ namespace VAICOM
 
                             descr.cat = cat;
                             descr.code = "XXX";
-                            descr.callsign = unit.callsign; //+ " (" +unit.fullname + ")";
+                            descr.callsign = unit.callsign;
 
                             string searchcallsign = Regex.Replace(unit.callsign.Replace("-", ""), "[0-9]", "");
 
-                            var FoundKey = Database.Aliases.airecipients.FirstOrDefault(x => (x.Value.Equals(searchcallsign) || x.Value.Equals(searchcallsign.ToLower()) || x.Value.Equals(unit.fullname) || x.Value.Equals(unit.fullname.ToLower()))).Key;
+                            var FoundKey = Database.Aliases.airecipients.FirstOrDefault(x =>
+                                (x.Value.Equals(searchcallsign) ||
+                                 x.Value.Equals(searchcallsign.ToLower()) ||
+                                 x.Value.Equals(unit.fullname) ||
+                                 x.Value.Equals(unit.fullname.ToLower()))).Key;
+
                             if (!FoundKey.Equals(null))
                             {
-                                // Alias (retrieved from alias table)
                                 descr.alias = FoundKey;
                             }
                             else
                             {
-                                // Alias (pragmatic)
                                 string substract = Regex.Replace(unit.callsign.Replace("-", ""), "[0-9]", "");
-                                if (substract.Equals(""))
-                                {
-                                    descr.alias = unit.callsign; // for pure numeric callsins
-                                }
-                                else
-                                {
-                                    descr.alias = substract; // for now, not the actual recovered alias
-                                }
+                                descr.alias = substract.Equals("") ? unit.callsign : substract;
                             }
 
                             descr.istuned = unit.isunittuned();
 
-                            if (!State.currentmodule.Theme.Equals("WWII") && unit.altfreq.Count >= 1) // there are 1 alts minimum
+                            if (!State.currentmodule.Theme.Equals("WWII"))
                             {
-                                descr.frq = unit.getmodstr() + " " + Helpers.Common.NormalizeFreqString(unit.altfreq[0]);
+                                // Prioritize UHF, then VHF, then FM
+                                string selectedFreq = null;
+
+                                // Check for UHF frequencies
+                                selectedFreq = unit.altfreq.FirstOrDefault(freq => unit.getmodstr().Contains("UHF"));
+                                if (selectedFreq == null)
+                                {
+                                    // Check for VHF frequencies
+                                    selectedFreq = unit.altfreq.FirstOrDefault(freq => unit.getmodstr().Contains("VHF"));
+                                }
+                                if (selectedFreq == null)
+                                {
+                                    // Check for FM frequencies
+                                    selectedFreq = unit.altfreq.FirstOrDefault(freq => unit.getmodstr().Contains("FM"));
+                                }
+
+                                // If no alternate frequency matches, fall back to the main frequency
+                                if (selectedFreq != null)
+                                {
+                                    descr.frq = unit.getmodstr() + " " + Helpers.Common.NormalizeFreqString(selectedFreq);
+                                }
+                                else
+                                {
+                                    descr.frq = unit.getmodstr() + " " + unit.getfreqstr();
+                                }
                             }
                             else
                             {
+                                // For WWII theme, use the main frequency
                                 descr.frq = unit.getmodstr() + " " + unit.getfreqstr();
                             }
 
-                            if (AOCS) // supply details
+                            if (AOCS)
                             {
-                                descr.bearing = unit.getbearingstr(); //.PadRight(3)
+                                descr.bearing = unit.getbearingstr();
                                 descr.range = unit.getrangestr();
                                 descr.alt = unit.getaltstr();
-
-
                                 descr.humanname = unit.gethumanname();
-
                                 descr.altfreq = unit.altfreq;
+
                                 foreach (string alt in descr.altfreq)
                                 {
                                     altfreqs += Helpers.Common.NormalizeFreqString(alt) + " ";
@@ -240,19 +255,18 @@ namespace VAICOM
 
                             units.Add(descr);
 
-                            string lineitem = descr.frq + " " + "[" + descr.alias + "]" + descr.istuned + " " + descr.callsign + " " + descr.bearing + " " + descr.range + " " + descr.alt + " " + " " + altfreqs;
+                            string lineitem = descr.frq + " " + "[" + descr.alias + "]" + descr.istuned + " " + descr.callsign + " " + descr.bearing + " " + descr.range + " " + descr.alt + " " + altfreqs;
 
                             unitslist.Add(lineitem);
-
                         }
                         catch (Exception x)
                         {
                             Log.Write(x.Message, Colors.Inline);
                         }
-
                     }
-                }
 
+                    Log.Write($"Sending {unitslist.Count} Flight units to kneeboard.", Colors.Text);
+                }
             }
 
         }

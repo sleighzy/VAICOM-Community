@@ -107,7 +107,7 @@ namespace VAICOM
 
                 // Marianas Map
 
-                { "wAIUnitATCMarianasNull",           new Recipient { uniqueid = 15100, category = RecipientCategories.aiatc, name = "wAIUnitATCMarianasNull",        } },
+                { "wAIUnitATCMarianasNull",         new Recipient { uniqueid = 15100, category = RecipientCategories.aiatc, name = "wAIUnitATCMarianasNull",        } },
 
                 { "Andersen AFB",                   new Recipient { uniqueid = 15101, category = RecipientCategories.aiatc, name = "wAIUnitATCMarianasAndersen",    displayname = Labels.airecipients["Andersen AFB"] } },
                 { "Antonio B. Won Pat Intl",        new Recipient { uniqueid = 15102, category = RecipientCategories.aiatc, name = "wAIUnitATCMarianasAntonioB",    displayname = Labels.airecipients["Antonio B. Won Pat Intl"] } },
@@ -116,6 +116,25 @@ namespace VAICOM
                 { "Saipan Intl",                    new Recipient { uniqueid = 15105, category = RecipientCategories.aiatc, name = "wAIUnitATCMarianasSaipanIntl",  displayname = Labels.airecipients["Saipan Intl"] } },
 
                 { "wAIUnitATCMarianasMaximum",      new Recipient { uniqueid = 15110, category = RecipientCategories.aiatc, name = "wAIUnitATCMarianasMaximum",     } },
+
+                // Marianas WWII Map
+
+                { "wAIUnitATCMarianasWWIINull",     new Recipient { uniqueid = 15111, category = RecipientCategories.aiatc, name = "wAIUnitATCMarianasWWIINull",        } },
+
+                { "Pagan",                          new Recipient { uniqueid = 15113, category = RecipientCategories.aiatc, name = "wAIUnitATCMarianasWWIIPagan",          displayname = Labels.airecipients["Pagan"] } },
+                { "Marpi",                          new Recipient { uniqueid = 15114, category = RecipientCategories.aiatc, name = "wAIUnitATCMarianasWWIIMarpi",          displayname = Labels.airecipients["Marpi"] } },
+                { "Kagman",                         new Recipient { uniqueid = 15115, category = RecipientCategories.aiatc, name = "wAIUnitATCMarianasWWIIKagman",         displayname = Labels.airecipients["Kagman"] } },
+                { "Charon Kanoa",                   new Recipient { uniqueid = 15116, category = RecipientCategories.aiatc, name = "wAIUnitATCMarianasWWIICharonKanoa",    displayname = Labels.airecipients["Charon Kanoa"] } },
+                { "Isley",                          new Recipient { uniqueid = 15117, category = RecipientCategories.aiatc, name = "wAIUnitATCMarianasWWIIIsley",          displayname = Labels.airecipients["Isley"] } },
+                { "Ushi",                           new Recipient { uniqueid = 15118, category = RecipientCategories.aiatc, name = "wAIUnitATCMarianasWWIIUshi",           displayname = Labels.airecipients["Ushi"] } },
+                { "Airfield 3",                     new Recipient { uniqueid = 15119, category = RecipientCategories.aiatc, name = "wAIUnitATCMarianasWWIIAirfield3",      displayname = Labels.airecipients["Airfield 3"] } },
+                { "Gurguan Point",                  new Recipient { uniqueid = 15120, category = RecipientCategories.aiatc, name = "wAIUnitATCMarianasWWIIGurguanPoint",   displayname = Labels.airecipients["Gurguan Point"] } },
+                { "Rota",                           new Recipient { uniqueid = 15121, category = RecipientCategories.aiatc, name = "wAIUnitATCMarianasWWIIRota",           displayname = Labels.airecipients["Rota"] } },
+                { "Agana",                          new Recipient { uniqueid = 15122, category = RecipientCategories.aiatc, name = "wAIUnitATCMarianasWWIIAgana",          displayname = Labels.airecipients["Agana"] } },
+                { "Orote",                          new Recipient { uniqueid = 15123, category = RecipientCategories.aiatc, name = "wAIUnitATCMarianasWWIIOrote",          displayname = Labels.airecipients["Orote"] } },
+                
+
+                { "wAIUnitATCMarianasWWIIMaximum",  new Recipient { uniqueid = 15130, category = RecipientCategories.aiatc, name = "wAIUnitATCMarianasWWIIMaximum",     } },
 
                 // Nevada NTTR Map
 
@@ -352,26 +371,39 @@ namespace VAICOM
                 { "Puerto Natales",             new Recipient { uniqueid = 15422, category = RecipientCategories.aiatc, name = "wAIUnitATCSAtlanticPuertoNatales",  displayname = Labels.airecipients["Puerto Natales"], blockedforFree = true  } },
                 { "Aerodromo O'Higgins",        new Recipient { uniqueid = 15423, category = RecipientCategories.aiatc, name = "wAIUnitATCSAtlanticAerodromoO'Higgins",  displayname = Labels.airecipients["Aerodromo O'Higgins"], blockedforFree = true  } },
 
-                { "wAIUnitATCSAtlanticMaximum",   new Recipient { uniqueid = 15440, category = RecipientCategories.aiatc, name = "wAIUnitATCSAtlanticMaximum",           } },
+                { "wAIUnitATCSAtlanticMaximum", new Recipient { uniqueid = 15440, category = RecipientCategories.aiatc, name = "wAIUnitATCSAtlanticMaximum",           } },
                 
                 // Kola Penisular Map
 
                 { "wAIUnitATCKolaNull",         new Recipient { uniqueid = 15450, category = RecipientCategories.aiatc, name = "wAIUnitATCKolaNull",              } },
-
-                { "BAS100",                     new Recipient { uniqueid = 15451, category = RecipientCategories.aiatc, name = "wAIUnitATCCKolaBAS100",  displayname = Labels.airecipients["BAS100"], blockedforFree = true  } },
-                //{ "Kemi",                       new Recipient { uniqueid = 15452, category = RecipientCategories.aiatc, name = "wAIUnitATCKolaKemi",  displayname = Labels.airecipients["Kemi"], blockedforFree = true  } },
-                { "Kemi Tornio",                new Recipient { uniqueid = 15453, category = RecipientCategories.aiatc, name = "wAIUnitATCKolaKemiTornio",  displayname = Labels.airecipients["Kemi Tornio"], blockedforFree = true  } },
-                { "Rovaniemi",                  new Recipient { uniqueid = 15454, category = RecipientCategories.aiatc, name = "wAIUnitATCKolaRovaniemi",  displayname = Labels.airecipients["Rovaniemi"], blockedforFree = true  } },
-                { "Bodo",                       new Recipient { uniqueid = 15455, category = RecipientCategories.aiatc, name = "wAIUnitATCKolaBodo",  displayname = Labels.airecipients["Bodo"], blockedforFree = true  } },
-                { "Lakselv",                    new Recipient { uniqueid = 15456, category = RecipientCategories.aiatc, name = "wAIUnitATCKolaLakselv",  displayname = Labels.airecipients["Lakselv"], blockedforFree = true  } },
-                { "Jokkmokk",                   new Recipient { uniqueid = 15457, category = RecipientCategories.aiatc, name = "wAIUnitATCKolaJokkmokk",  displayname = Labels.airecipients["Jokkmokk"], blockedforFree = true  } },
-                { "Kiruna",                     new Recipient { uniqueid = 15458, category = RecipientCategories.aiatc, name = "wAIUnitATCKolaKiruna",  displayname = Labels.airecipients["Kiruna"], blockedforFree = true  } },
-                { "Kalixfors",                  new Recipient { uniqueid = 15459, category = RecipientCategories.aiatc, name = "wAIUnitATCKolaKalixfors",  displayname = Labels.airecipients["Kalixfors"], blockedforFree = true  } },
-                { "Severomorsk1",               new Recipient { uniqueid = 15460, category = RecipientCategories.aiatc, name = "wAIUnitATCKolaSeveromorsk1",  displayname = Labels.airecipients["Severomorsk1"], blockedforFree = true  } },
-                { "Severomorsk3",               new Recipient { uniqueid = 15461, category = RecipientCategories.aiatc, name = "wAIUnitATCKolaSeveromorsk3",  displayname = Labels.airecipients["Severomorsk3"], blockedforFree = true  } },
-                { "Monchegorsk",                new Recipient { uniqueid = 15462, category = RecipientCategories.aiatc, name = "wAIUnitATCKolaMonchegorsk",  displayname = Labels.airecipients["Monchegorsk"], blockedforFree = true  } },
-                { "Murmansk International",     new Recipient { uniqueid = 15463, category = RecipientCategories.aiatc, name = "wAIUnitATCKolaMurmanskInternational",  displayname = Labels.airecipients["Murmansk International"], blockedforFree = true  } },
-                { "Olenegorsk",                 new Recipient { uniqueid = 15464, category = RecipientCategories.aiatc, name = "wAIUnitATCKolaOlenegorsk",  displayname = Labels.airecipients["Olenegorsk"], blockedforFree = true  } },
+                
+                { "Andoya",                     new Recipient { uniqueid = 15451, category = RecipientCategories.aiatc, name = "wAIUnitATCKolaAndoya", displayname = Labels.airecipients["Andoya"], blockedforFree = true } },
+                { "Bodo",                       new Recipient { uniqueid = 15452, category = RecipientCategories.aiatc, name = "wAIUnitATCKolaBodo", displayname = Labels.airecipients["Bodo"], blockedforFree = true } },
+                { "Bardufoss",                  new Recipient { uniqueid = 15453, category = RecipientCategories.aiatc, name = "wAIUnitATCKolaBardufoss", displayname = Labels.airecipients["Bardufoss"], blockedforFree = true } },
+                { "Evenes",                     new Recipient { uniqueid = 15454, category = RecipientCategories.aiatc, name = "wAIUnitATCKolaEvenes", displayname = Labels.airecipients["Evenes"], blockedforFree = true } },
+                { "Alta",                       new Recipient { uniqueid = 15455, category = RecipientCategories.aiatc, name = "wAIUnitATCKolaAlta", displayname = Labels.airecipients["Alta"], blockedforFree = true } },
+                { "Banak",                      new Recipient { uniqueid = 15456, category = RecipientCategories.aiatc, name = "wAIUnitATCKolaBanak", displayname = Labels.airecipients["Banak"], blockedforFree = true } },
+                { "Enontekio",                  new Recipient { uniqueid = 15457, category = RecipientCategories.aiatc, name = "wAIUnitATCKolaEnontekio", displayname = Labels.airecipients["Enontekio"], blockedforFree = true } },
+                { "Kiruna",                     new Recipient { uniqueid = 15458, category = RecipientCategories.aiatc, name = "wAIUnitATCKolaKiruna", displayname = Labels.airecipients["Kiruna"], blockedforFree = true } },
+                { "Kalixfors",                  new Recipient { uniqueid = 15459, category = RecipientCategories.aiatc, name = "wAIUnitATCKolaKalixfors", displayname = Labels.airecipients["Kalixfors"], blockedforFree = true } },
+                { "Jokkmokk",                   new Recipient { uniqueid = 15460, category = RecipientCategories.aiatc, name = "wAIUnitATCKolaJokkmokk", displayname = Labels.airecipients["Jokkmokk"], blockedforFree = true } },
+                { "Vidsel",                     new Recipient { uniqueid = 15461, category = RecipientCategories.aiatc, name = "wAIUnitATCKolaVidsel", displayname = Labels.airecipients["Vidsel"], blockedforFree = true } },
+                { "Kallax",                     new Recipient { uniqueid = 15462, category = RecipientCategories.aiatc, name = "wAIUnitATCKolaKallax", displayname = Labels.airecipients["Kallax"], blockedforFree = true } },
+                { "Kemi Torino",                new Recipient { uniqueid = 15463, category = RecipientCategories.aiatc, name = "wAIUnitATCKolaKemiTorino", displayname = Labels.airecipients["Kemi Torino"], blockedforFree = true } },
+                { "Hosio",                      new Recipient { uniqueid = 15464, category = RecipientCategories.aiatc, name = "wAIUnitATCKolaHosio", displayname = Labels.airecipients["Hosio"], blockedforFree = true } },
+                { "Rovaniemi",                  new Recipient { uniqueid = 15465, category = RecipientCategories.aiatc, name = "wAIUnitATCKolaRovaniemi", displayname = Labels.airecipients["Rovaniemi"], blockedforFree = true } },
+                { "Vuojarvi",                   new Recipient { uniqueid = 15466, category = RecipientCategories.aiatc, name = "wAIUnitATCKolaVuojarvi", displayname = Labels.airecipients["Vuojarvi"], blockedforFree = true } },
+                { "Sodankyla",                  new Recipient { uniqueid = 15467, category = RecipientCategories.aiatc, name = "wAIUnitATCKolaSodankyla", displayname = Labels.airecipients["Sodankyla"], blockedforFree = true } },
+                { "Kittila",                    new Recipient { uniqueid = 15468, category = RecipientCategories.aiatc, name = "wAIUnitATCKolaKittila", displayname = Labels.airecipients["Kittila"], blockedforFree = true } },
+                { "Ivalo",                      new Recipient { uniqueid = 15469, category = RecipientCategories.aiatc, name = "wAIUnitATCKolaIvalo", displayname = Labels.airecipients["Ivalo"], blockedforFree = true } },
+                { "Kirkenes",                   new Recipient { uniqueid = 15470, category = RecipientCategories.aiatc, name = "wAIUnitATCKolaKirkenes", displayname = Labels.airecipients["Kirkenes"], blockedforFree = true } },
+                { "Severomorsk-1",              new Recipient { uniqueid = 15471, category = RecipientCategories.aiatc, name = "wAIUnitATCKolaSeveromorsk1", displayname = Labels.airecipients["Severomorsk-1"], blockedforFree = true } },
+                { "Severomorsk-3",              new Recipient { uniqueid = 15472, category = RecipientCategories.aiatc, name = "wAIUnitATCKolaSeveromorsk3", displayname = Labels.airecipients["Severomorsk-3"], blockedforFree = true } },
+                { "Murmansk International",     new Recipient { uniqueid = 15473, category = RecipientCategories.aiatc, name = "wAIUnitATCKolaMurmanskInternational", displayname = Labels.airecipients["Murmansk International"], blockedforFree = true } },
+                { "Olenya",                     new Recipient { uniqueid = 15474, category = RecipientCategories.aiatc, name = "wAIUnitATCKolaOlenya", displayname = Labels.airecipients["Olenya"], blockedforFree = true } },
+                { "Monchegorsk",                new Recipient { uniqueid = 15475, category = RecipientCategories.aiatc, name = "wAIUnitATCKolaMonchegorsk", displayname = Labels.airecipients["Monchegorsk"], blockedforFree = true } },
+                { "Alakurtti",                  new Recipient { uniqueid = 15476, category = RecipientCategories.aiatc, name = "wAIUnitATCKolaAlakurtti", displayname = Labels.airecipients["Alakurtti"], blockedforFree = true } },
+                { "Kuusamo",                    new Recipient { uniqueid = 15477, category = RecipientCategories.aiatc, name = "wAIUnitATCKolaKuusamo", displayname = Labels.airecipients["Kuusamo"], blockedforFree = true } },
 
                 { "wAIUnitATCKolaMaximum",      new Recipient { uniqueid = 15480, category = RecipientCategories.aiatc, name = "wAIUnitATCKolaMaximum",           } },
 
@@ -428,6 +460,107 @@ namespace VAICOM
                 { "Sulaimaniyah International Airport",     new Recipient { uniqueid = 15563, category = RecipientCategories.aiatc, name = "wAIUnitATCIraqSulaimaniyahInternationalAirport",  displayname = Labels.airecipients["Sulaimaniyah International Airport"], blockedforFree = true  } },
                    // South TODO
                 { "wAIUnitATCIraqMaximum",      new Recipient { uniqueid = 15590, category = RecipientCategories.aiatc, name = "wAIUnitATCIraqMaximum",           } },
+
+                // Germany Cold War                
+                { "wAIUnitATCColdWarNull",      new Recipient { uniqueid = 15750, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarNull",              } }, 
+                   // Nato
+                { "Airracing Frankfurt",        new Recipient { uniqueid = 15751, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarAirracingFrankfurt",  displayname = Labels.airecipients["Airracing Frankfurt"], blockedforFree = true  } },
+                { "Airracing Koblenz",          new Recipient { uniqueid = 15752, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarAirracingKoblenz",  displayname = Labels.airecipients["Airracing Koblenz"], blockedforFree = true  } },
+                { "Airracing Lubeck",           new Recipient { uniqueid = 15753, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarAirracingLubeck",  displayname = Labels.airecipients["Airracing Lubeck"], blockedforFree = true  } },
+                { "Bad Durkheim",               new Recipient { uniqueid = 15754, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarBadDurkheim",  displayname = Labels.airecipients["Bad Durkheim"], blockedforFree = true  } },
+                { "Bienenfarm",                 new Recipient { uniqueid = 15755, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarBienenfarm",  displayname = Labels.airecipients["Bienenfarm"], blockedforFree = true  } },
+                { "Dedelow",                    new Recipient { uniqueid = 15756, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarDedelow",  displayname = Labels.airecipients["Dedelow"], blockedforFree = true  } },
+                { "Gardelegen",                 new Recipient { uniqueid = 15757, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarGardelegen",  displayname = Labels.airecipients["Gardelegen"], blockedforFree = true  } },
+                { "Gelnhausen",                 new Recipient { uniqueid = 15758, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarGelnhausen",  displayname = Labels.airecipients["Gelnhausen"], blockedforFree = true  } },
+                { "Glindbruchkippe",            new Recipient { uniqueid = 15759, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarGlindbruchkippe",  displayname = Labels.airecipients["Glindbruchkippe"], blockedforFree = true  } },
+                { "GrosseWiese",                new Recipient { uniqueid = 15760, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarGrosseWiese",  displayname = Labels.airecipients["GrosseWiese"], blockedforFree = true  } },
+                { "Hasselfelde",                new Recipient { uniqueid = 15761, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarHasselfelde", displayname = Labels.airecipients["Hasselfelde"], blockedforFree = true } },
+                { "Herrenteich",                new Recipient { uniqueid = 15762, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarHerrenteich", displayname = Labels.airecipients["Herrenteich"], blockedforFree = true } },
+                { "Hockenheim",                 new Recipient { uniqueid = 15763, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarHockenheim", displayname = Labels.airecipients["Hockenheim"], blockedforFree = true } },
+                { "Kammermark",                 new Recipient { uniqueid = 15764, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarKammermark", displayname = Labels.airecipients["Kammermark"], blockedforFree = true } },
+                { "Langenselbold",              new Recipient { uniqueid = 15765, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarLangenselbold", displayname = Labels.airecipients["Langenselbold"], blockedforFree = true } },
+                { "Luneburg",                   new Recipient { uniqueid = 15766, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarLuneburg", displayname = Labels.airecipients["Luneburg"], blockedforFree = true } },
+                { "Albstadt Degerfeld",         new Recipient { uniqueid = 15767, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarAlbstadtDegerfeld", displayname = Labels.airecipients["Albstadt Degerfeld"], blockedforFree = true } },
+                { "Ober-Morlen",                new Recipient { uniqueid = 15768, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarOberMorlen", displayname = Labels.airecipients["Ober-Morlen"], blockedforFree = true } },
+                { "Pinnow",                     new Recipient { uniqueid = 15769, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarPinnow", displayname = Labels.airecipients["Pinnow"], blockedforFree = true } },
+                { "Pottschutthohe",             new Recipient { uniqueid = 15770, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarPottschutthohe", displayname = Labels.airecipients["Pottschutthohe"], blockedforFree = true } },
+                { "Rinteln",                    new Recipient { uniqueid = 15771, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarRinteln", displayname = Labels.airecipients["Rinteln"], blockedforFree = true } },
+                { "Uelzen",                     new Recipient { uniqueid = 15772, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarUelzen", displayname = Labels.airecipients["Uelzen"], blockedforFree = true } },
+                { "Uetersen",                   new Recipient { uniqueid = 15773, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarUetersen", displayname = Labels.airecipients["Uetersen"], blockedforFree = true } },
+                { "Ummern",                     new Recipient { uniqueid = 15774, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarUmmern", displayname = Labels.airecipients["Ummern"], blockedforFree = true } },
+                { "Verden-Scharnhorst",         new Recipient { uniqueid = 15775, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarVerdenScharnhorst", displayname = Labels.airecipients["Verden-Scharnhorst"], blockedforFree = true } },
+                { "Waren_Vielist",              new Recipient { uniqueid = 15776, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarWarenVielist", displayname = Labels.airecipients["Waren_Vielist"], blockedforFree = true } },
+                { "Weser Wumme",                new Recipient { uniqueid = 15777, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarWeserWumme", displayname = Labels.airecipients["Weser Wumme"], blockedforFree = true } },
+                { "Wismar",                     new Recipient { uniqueid = 15778, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarWismar", displayname = Labels.airecipients["Wismar"], blockedforFree = true } },
+                { "Worms",                      new Recipient { uniqueid = 15779, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarWorms", displayname = Labels.airecipients["Worms"], blockedforFree = true } },
+                { "Wadajom",                    new Recipient { uniqueid = 15780, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarWadajom", displayname = Labels.airecipients["Wadajom"], blockedforFree = true } },
+                { "Lexija",                     new Recipient { uniqueid = 15781, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarLexija", displayname = Labels.airecipients["Lexija"], blockedforFree = true } },
+                { "Barth",                      new Recipient { uniqueid = 15782, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarBarth", displayname = Labels.airecipients["Barth"], blockedforFree = true } },
+                { "Proima",                     new Recipient { uniqueid = 15783, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarProima", displayname = Labels.airecipients["Proima"], blockedforFree = true } },
+                { "Bitburg",                    new Recipient { uniqueid = 15784, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarBitburg", displayname = Labels.airecipients["Bitburg"], blockedforFree = true } },
+                { "Braunschweig",               new Recipient { uniqueid = 15785, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarBraunschweig", displayname = Labels.airecipients["Braunschweig"], blockedforFree = true } },
+                { "Bremen",                     new Recipient { uniqueid = 15786, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarBremen", displayname = Labels.airecipients["Bremen"], blockedforFree = true } },
+                { "Unrecht",                    new Recipient { uniqueid = 15787, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarUnrecht", displayname = Labels.airecipients["Unrecht"], blockedforFree = true } },
+                { "Buchel",                     new Recipient { uniqueid = 15788, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarBuchel", displayname = Labels.airecipients["Buchel"], blockedforFree = true } },
+                { "Buckeburg",                  new Recipient { uniqueid = 15789, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarBuckeburg", displayname = Labels.airecipients["Buckeburg"], blockedforFree = true } },
+                { "Celle",                      new Recipient { uniqueid = 15790, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarCelle", displayname = Labels.airecipients["Celle"], blockedforFree = true } },
+                { "Sadovij",                    new Recipient { uniqueid = 15791, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarSadovij", displayname = Labels.airecipients["Sadovij"], blockedforFree = true } },
+                { "Melodrama",                  new Recipient { uniqueid = 15792, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarMelodrama", displayname = Labels.airecipients["Melodrama"], blockedforFree = true } },
+                { "Wurzen",                     new Recipient { uniqueid = 15793, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarWurzen", displayname = Labels.airecipients["Wurzen"], blockedforFree = true } },
+                { "Fassberg",                   new Recipient { uniqueid = 15794, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarFassberg", displayname = Labels.airecipients["Fassberg"], blockedforFree = true } },
+                { "Narsan",                     new Recipient { uniqueid = 15795, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarNarsan", displayname = Labels.airecipients["Narsan"], blockedforFree = true } },
+                { "Frankfurt",                  new Recipient { uniqueid = 15796, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarFrankfurt", displayname = Labels.airecipients["Frankfurt"], blockedforFree = true } },
+                { "Fritzlar",                   new Recipient { uniqueid = 15797, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarFritzlar", displayname = Labels.airecipients["Fritzlar"], blockedforFree = true } },
+                { "Fulda",                      new Recipient { uniqueid = 15798, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarFulda", displayname = Labels.airecipients["Fulda"], blockedforFree = true } },
+                { "Gesetz",                     new Recipient { uniqueid = 15799, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarGesetz", displayname = Labels.airecipients["Gesetz"], blockedforFree = true } },
+                { "Gatow",                      new Recipient { uniqueid = 15800, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarGatow", displayname = Labels.airecipients["Gatow"], blockedforFree = true } },
+                { "Giebelstadt",                new Recipient { uniqueid = 15801, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarGiebelstadt", displayname = Labels.airecipients["Giebelstadt"], blockedforFree = true } },
+                { "Greif",                      new Recipient { uniqueid = 15802, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarGreif", displayname = Labels.airecipients["Greif"], blockedforFree = true } },
+                { "Gutersloh",                  new Recipient { uniqueid = 15803, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarGutersloh", displayname = Labels.airecipients["Gutersloh"], blockedforFree = true } },
+                { "Hahn",                       new Recipient { uniqueid = 15804, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarHahn", displayname = Labels.airecipients["Hahn"], blockedforFree = true } },
+                { "Haina",                      new Recipient { uniqueid = 15805, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarHaina", displayname = Labels.airecipients["Haina"], blockedforFree = true } },
+                { "Hamburg",                    new Recipient { uniqueid = 15806, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarHamburg", displayname = Labels.airecipients["Hamburg"], blockedforFree = true } },
+                { "Hamburg Finkenwerder",       new Recipient { uniqueid = 15807, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarHamburgFinkenwerder", displayname = Labels.airecipients["Hamburg Finkenwerder"], blockedforFree = true } },
+                { "Hannover",                   new Recipient { uniqueid = 15808, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarHannover", displayname = Labels.airecipients["Hannover"], blockedforFree = true } },
+                { "Hildesheim",                 new Recipient { uniqueid = 15809, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarHildesHeim", displayname = Labels.airecipients["HildesHeim"], blockedforFree = true } },
+                { "Halifax",                    new Recipient { uniqueid = 15810, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarHalifax", displayname = Labels.airecipients["Halifax"], blockedforFree = true } },
+                { "Semelni",                    new Recipient { uniqueid = 15811, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarSemelni", displayname = Labels.airecipients["Semelni"], blockedforFree = true } },
+                { "Lektorstart",                new Recipient { uniqueid = 15812, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarLektorstart", displayname = Labels.airecipients["Lektorstart"], blockedforFree = true } },
+                { "Gusar",                      new Recipient { uniqueid = 15813, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarGusar", displayname = Labels.airecipients["Gusar"], blockedforFree = true } },
+                { "Latex",                      new Recipient { uniqueid = 15814, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarLatex", displayname = Labels.airecipients["Latex"], blockedforFree = true } },
+                { "Leipzig Mockau",             new Recipient { uniqueid = 15815, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarLeipzigMockau", displayname = Labels.airecipients["Leipzig Mockau"], blockedforFree = true } },
+                { "Lubeck",                     new Recipient { uniqueid = 15816, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarLubeckNormal", displayname = Labels.airecipients["Lubeck"], blockedforFree = true } },
+                { "Osenniy",                    new Recipient { uniqueid = 15817, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarOsenniy", displayname = Labels.airecipients["Osenniy"], blockedforFree = true } },
+                { "Sembach",                    new Recipient { uniqueid = 15818, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarSembach", displayname = Labels.airecipients["Sembach"], blockedforFree = true } },
+                { "Mendig",                     new Recipient { uniqueid = 15819, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarMendig", displayname = Labels.airecipients["Mendig"], blockedforFree = true } },
+                { "Muskat",                     new Recipient { uniqueid = 15820, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarMuskat", displayname = Labels.airecipients["Muskat"], blockedforFree = true } },
+                { "Defekt",                     new Recipient { uniqueid = 15821, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarDefekt", displayname = Labels.airecipients["Defekt"], blockedforFree = true } },
+                { "Gidrostat",                  new Recipient { uniqueid = 15822, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarGidrostat", displayname = Labels.airecipients["Gidrostat"], blockedforFree = true } },
+                { "Pestrij",                    new Recipient { uniqueid = 15823, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarPestrij", displayname = Labels.airecipients["Pestrij"], blockedforFree = true } },
+                { "Klejonka",                   new Recipient { uniqueid = 15824, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarKlejonka", displayname = Labels.airecipients["Klejonka"], blockedforFree = true } },
+                { "Narcoze",                    new Recipient { uniqueid = 15825, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarNarcoze", displayname = Labels.airecipients["Narcoze"], blockedforFree = true } },
+                { "Pferdsfeld",                 new Recipient { uniqueid = 15826, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarPferdsfeld", displayname = Labels.airecipients["Pferdsfeld"], blockedforFree = true } },
+                { "Ramstein",                   new Recipient { uniqueid = 15827, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarRamstein", displayname = Labels.airecipients["Ramstein"], blockedforFree = true } },
+                { "Schonefeld",                 new Recipient { uniqueid = 15828, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarSchonefeld", displayname = Labels.airecipients["Schonefeld"], blockedforFree = true } },
+                { "Schweinfurt",                new Recipient { uniqueid = 15829, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarSchweinfurt", displayname = Labels.airecipients["Schweinfurt"], blockedforFree = true } },                
+                { "Spangdahlem",                new Recipient { uniqueid = 15830, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarSpangdahlem", displayname = Labels.airecipients["Spangdahlem"], blockedforFree = true } },
+                { "Souvenir",                   new Recipient { uniqueid = 15831, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarSouvenir", displayname = Labels.airecipients["Souvenir"], blockedforFree = true } },
+                { "Kukan",                      new Recipient { uniqueid = 15832, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarKukan", displayname = Labels.airecipients["Kukan"], blockedforFree = true } },
+                { "Tegel",                      new Recipient { uniqueid = 15833, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarTegel", displayname = Labels.airecipients["Tegel"], blockedforFree = true } },
+                { "Tempelhof",                  new Recipient { uniqueid = 15834, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarTempelhof", displayname = Labels.airecipients["Tempelhof"], blockedforFree = true } },
+                { "Leopard",                    new Recipient { uniqueid = 15835, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarLeopard", displayname = Labels.airecipients["Leopard"], blockedforFree = true } },
+                { "Baath",                      new Recipient { uniqueid = 15836, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarBaath", displayname = Labels.airecipients["Baath"], blockedforFree = true } },
+                { "Werneuchen",                 new Recipient { uniqueid = 15837, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarWerneuchen", displayname = Labels.airecipients["Werneuchen"], blockedforFree = true } },
+                { "Wiesbaden",                  new Recipient { uniqueid = 15838, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarWiesbaden", displayname = Labels.airecipients["Wiesbaden"], blockedforFree = true } },
+                { "Gazovij",                    new Recipient { uniqueid = 15839, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarGazovij", displayname = Labels.airecipients["Gazovij"], blockedforFree = true } },
+                { "Wunstorf",                   new Recipient { uniqueid = 15840, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarWunstorf", displayname = Labels.airecipients["Wunstorf"], blockedforFree = true } },
+                { "Zerbst",                     new Recipient { uniqueid = 15841, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarZerbst", displayname = Labels.airecipients["Zerbst"], blockedforFree = true } },
+                { "Zweibrucken",                new Recipient { uniqueid = 15842, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarZweibrucken", displayname = Labels.airecipients["Zweibrucken"], blockedforFree = true } },
+                { "Merseburg",                  new Recipient { uniqueid = 15843, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarMerseburg", displayname = Labels.airecipients["Merseburg"], blockedforFree = true } },
+                { "Leipzig Halle",              new Recipient { uniqueid = 15844, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarLeipzigHalle", displayname = Labels.airecipients["Leipzig Halle"], blockedforFree = true } },
+                { "Garz",                       new Recipient { uniqueid = 15845, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarGarz", displayname = Labels.airecipients["Garz"], blockedforFree = true } },
+
+                { "wAIUnitATCColdWarMaximum",   new Recipient { uniqueid = 15899, category = RecipientCategories.aiatc, name = "wAIUnitATCColdWarMaximum",           } },
                 
                 // Farps
 
@@ -493,11 +626,11 @@ namespace VAICOM
                 { "wAIUnitCarrierRoleMaximum",  new Recipient { uniqueid = 15730, category = RecipientCategories.aiship, name = "wAIUnitCarrierRoleMaximum", }      },
 
 
-                { "wAIUnitATCCarriersMaximum",  new Recipient { uniqueid = 15790, category = RecipientCategories.aiship, name = "wAIUnitATCCarriersMaximum",   } },
+                { "wAIUnitATCCarriersMaximum",  new Recipient { uniqueid = 15740, category = RecipientCategories.aiship, name = "wAIUnitATCCarriersMaximum",   } },
 
                 // Auto Imported 
 
-                { "wAIUnitATCImportedNull",     new Recipient { uniqueid = 15800, category = RecipientCategories.aiatc, name = "wAIUnitATCImportedNull",      } },
+                { "wAIUnitATCImportedNull",     new Recipient { uniqueid = 15900, category = RecipientCategories.aiatc, name = "wAIUnitATCImportedNull",      } },
                 { "wAIUnitATCImportedMaximum",  new Recipient { uniqueid = 15998, category = RecipientCategories.aiatc, name = "wAIUnitATCImportedMaximum",   } },
 
                 { "wAIUnitATCMaximum",          new Recipient { uniqueid = 15999, category = RecipientCategories.aiatc, name = "wAIUnitATCMaximum",           } },
@@ -567,12 +700,6 @@ namespace VAICOM
                 { "wAIUnitKneeboardNull",       new Recipient { uniqueid = 19400, category = RecipientCategories.kneeboard, name = "wAIUnitKneeboardNull",      } },
                 { "kneeboard",                  new Recipient { uniqueid = 19401, category = RecipientCategories.kneeboard, name = "wAIUnitKneeboard",          displayname = Labels.airecipients["kneeboard"], blockedforFree = true  } },
                 { "wAIUnitKneeboardMaximum",    new Recipient { uniqueid = 19499, category = RecipientCategories.kneeboard, name = "wAIUnitKneeboardMaximum",   } },
-
-                // Moose Ops 
-                { "wAIUnitMooseNull" ,          new Recipient { uniqueid = 19500, category = RecipientCategories.Moose,    name = "wAIUnitMooseNull" } },
-                { "Moose" ,                     new Recipient { uniqueid = 19501, category = RecipientCategories.Moose,    name = "wAIUnitMoose",displayname = Labels.airecipients["Moose"],blockedforFree = true   } },
-                //{ "Radio Check LSO" ,           new Recipient { uniqueid = 19502, category = RecipientCategories.Moose,    name = "wAIUnitRadioChkLSO",displayname = Labels.airecipients["Radio Check LSO"],blockedforFree = true   } },
-                { "wAIUnitMooseMaximum" ,       new Recipient { uniqueid = 19999, category = RecipientCategories.Moose,    name = "wAIUnitMooseMaximum" } },
 
             };
         }

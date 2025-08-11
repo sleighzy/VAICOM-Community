@@ -39,7 +39,7 @@ namespace VAICOM
                     public bool insert;
                     public string selectrecipient = "";
                     public int selectunit;
-                    public List<object> parameters;
+                    public object parameters;
                     public List<int> cmdsequence;
                     public List<int> actionsequence;
                     public List<DeviceAction> devsequence;
@@ -170,7 +170,7 @@ namespace VAICOM
                     }
                 }
 
-                // comd sequence as in iCommands 0000-4000 (e.g. for Options menu)
+                // comd sequence as in iCommands 0000-4000 (e.g. for Options menu) -- can we expand this for icommands?
                 public class iCommandSequence
                 {
                     public bool debug;

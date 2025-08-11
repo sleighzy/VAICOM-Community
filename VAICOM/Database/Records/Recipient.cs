@@ -48,9 +48,6 @@
                 //Kneeboard
                 if ((this.uniqueid >= Recipients.Table["wAIUnitKneeboardNull"].uniqueid) & (this.uniqueid <= Recipients.Table["wAIUnitKneeboardMaximum"].uniqueid)) { value = Recipientclasses.Kneeboard; }
 
-                // Moose Ops
-                if ((this.uniqueid >= Recipients.Table["wAIUnitMooseNull"].uniqueid) & (this.uniqueid <= Recipients.Table["wAIUnitMooseMaximum"].uniqueid)) { value = Recipientclasses.Moose; }
-
                 return value;
             }
 
@@ -146,10 +143,6 @@
                         returnclass = Kneeboard;
                         break;
 
-                    case ("Moose"):
-                        returnclass = Moose;
-                        break;
-
                     default:
                         returnclass = Undefined;
                         break;
@@ -190,9 +183,6 @@
 
             public static Recipientclass Kneeboard = new Recipientclass { Name = "Kneeboard" };
 
-            // Moose direct integrated comms
-            public static Recipientclass Moose = new Recipientclass { Name = "Moose" };
-
         }
 
 
@@ -218,7 +208,6 @@
             AI_pilot,
             ally,
             kneeboard,
-            Moose,
         }
 
 

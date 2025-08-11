@@ -11,9 +11,3 @@ if not devices then
 end
 
 devices["VAICOMPRO"] = VAICOM_id
-
-
-
-
-
-

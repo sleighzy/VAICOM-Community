@@ -432,6 +432,3 @@ function DecodeMessage(rawdata)
 	end
 	return msg
 end		
-
-
-

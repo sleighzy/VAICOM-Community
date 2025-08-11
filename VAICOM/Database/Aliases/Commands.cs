@@ -193,6 +193,8 @@ namespace VAICOM
                 { "Request Startup",        "requestenginesstart"   },
                 { "Request Hover",          "requesthover"          },
                 { "Request Taxi to Runway", "requesttaxitorunway"   },
+                { "Request Taxi for Takeoff","requesttaxitorunway"  },
+                { "Taxi Clearance",         "requesttaxitorunway"   },
                 { "Request Takeoff",        "requesttakeoff"        },
                 { "Request Departure",      "requesttakeoff"        },
                 { "Ready for Takeoff",      "requesttakeoff"        },
@@ -208,9 +210,7 @@ namespace VAICOM
                 { "Inbound for Landing",    "inbound"               },
                 { "Abort Inbound",          "abortinbound"          },
                 { "Cancel Approach",        "abortinbound"          },
-                { "Request Landing",        "requestlanding"        },
-                { "Request Taxi for Takeoff","reqtaxifortakeoff"    },
-                { "Taxi Clearance",          "reqtaxifortakeoff"    },
+                { "Request Landing",        "requestlanding"        },                
                 { "Request Taxi to Parking","reqtaxitoparking"      },
                 { "For parking Stand",      "reqtaxitoparking"      },
                 { "Inbound Straight",       "inboundstraight"       },
@@ -401,7 +401,7 @@ namespace VAICOM
                 
                 { "Established" ,              "wMsgLeaderEsteblished"                 },
                 { "Commencing" ,               "wMsgLeaderCommencing"                  },// CASE III
-                { "Checking In" ,              "wMsgLeaderCheckingIn"                  },// CASE III //fixed? Pene testing
+                { "Checking In" ,              "wMsgLeaderCheckingIn"                  },// CASE III 
                 { "Approach Check In" ,        "wMsgLeaderCheckingIn"                  }, //forced
                 { "Platform" ,                 "wMsgLeaderPlatform"                    },// CASE III
 
@@ -453,9 +453,10 @@ namespace VAICOM
                 { "Take Twelve",            "menu12"                },
 
                 // special
-                { "Switch",                "switch"                },
+                { "Switch",                 "switch"                },
                 { "Select",                 "select"                },
                 { "Options",                "options"               },
+                { "View Loadout",           "loadout"               },
 
                 // aocs
                 { "Interrogate",            "state"                 },
@@ -505,7 +506,7 @@ namespace VAICOM
                 { "Airboss Show Greenie Board",      "Action Greenie Board"                            },
                 { "Airboss Show my Grades",          "Action My LSO Grades"                            },
                 { "Airboss show last debrief",       "Action Last Debrief"                             },
-                { "Airboss Briefing ",               "Action Carrier Info"                             },
+                { "Airboss Information",             "Action Carrier Info"                             },
                 { "Airboss Weather",                 "Action Weather Report"                           },
                 { "Airboss Set our Group ",          "Action Set Section"                              },
                 { "Airboss Display Marshal Queue",   "Action Marshal Queue"                            },
@@ -522,6 +523,7 @@ namespace VAICOM
                 { "I'll be marking orange",          "Action Orange Smoke"                             },
                 { "I'll be marking red",             "Action Red Smoke"                                },
                 { "I'll be marking white",           "Action White Smoke"                              },
+                { "Range Weather",                   "Action Weather Report"                           },
                     
                     // Moose AWACS TODO
                 { "Chalice Checking In",             "Action Check In"                                 }, // difficult due to conflicts with DCS aliases.
@@ -570,8 +572,14 @@ namespace VAICOM
                 { "Say Again last",                 "Action Repeat last transmission"                 },
 
                     //Tower
-                { "Clearance to Cross three Right", "Action Request clearance to cross 03R"           },
-                { "Clearance to Cross three Left",  "Action Request clearance to cross 03L"           },
+                { "Clearance to Cross three Right", "Action Request clearance to cross 03R"           }, //Nellis
+                { "Clearance to Cross three Left",  "Action Request clearance to cross 03L"           }, //Nellis
+                { "Clearance to Cross Two One Left","Action Request clearance to cross 21L"           }, //Nellis
+                { "Clearance to Cross Two One Right","Action Request clearance to cross 21R"          }, //Nellis
+                { "Clearance to Cross Six Left",    "Action Request clearance to cross 06L"           }, //Andersen
+                { "Clearance to Cross Six Right",   "Action Request clearance to cross 06R"           }, //Andersen
+                { "Clearance to Cross Two Four Left", "Action Request clearance to cross 24L"         }, //Andersen
+                { "Clearance to Cross Two Four Right","Action Request clearance to cross 24R"         }, //Andersen
                 { "Requesting Takeoff Clearance",   "Action Request Takeoff"                          },
                 { "Ready in turn",                  "Action Request Takeoff"                          },
                 { "Ready at the Hold",              "Action Request Takeoff"                          },
@@ -684,6 +692,16 @@ namespace VAICOM
                 { "Lee vector to SARAH",            "Action SARAH"                                    },
                 { "Sally vector to gate three",     "Action Gate 3"                                   },
                 { "Sally vector to gate four",      "Action Gate 4"                                   },
+            //};
+
+            //public static Dictionary<string, string> cockpitcontrol = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+            //{
+
+                /// Direct Cockpit Commnads
+                { "Gear Up",                          "gearup"                                          },
+                { "Gear Down",                        "geardown"                                        },
+                //{ "View Loadout",                     "loadout"                                         },
+                //{ "Emergency Landing",               "Emergency Landing"                                  },
 
             };
 

@@ -1,3 +1,4 @@
+-- Get Argument name and data
 base = _G
 
 local dev = 38
@@ -11,7 +12,7 @@ base.trigger.action.outText("arg "..arg.." = "..base.tostring(value),5)
 
 
 
-
+-- Get iCommands dumpfile
 base = _G
 local lfs = require("lfs")
 local io = require("io")
@@ -49,4 +50,8 @@ end
 end 
 listtables(0,6,base.speech)
 dumpfile:close()
+end
+
+for k, v in pairs(_G) do -- Print all global variables to see what tables exist in the lua environment has the table name changed?
+       print(k, type(v))
 end

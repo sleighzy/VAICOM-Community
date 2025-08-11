@@ -29,21 +29,21 @@ namespace VAICOM
         // general
 
 
-        public static bool versionbeta = true; //set if Beta version
+        public static bool versionbeta = false; //set if Beta version
         public static bool versiondev = false; //set if Dev version
         public static bool usenewselectmethod = false;
         public static string debuguser = "VAICOM_Tester";
-        public static string clientmode = ClientModes.Normal;
+        public static string clientmode = ClientModes.Normal; //set to Normal for release, Debug for development
 
         public static string versionstring = "";
-        public static string pluginversionnumber = "3.0.1"; // used by Theme (Special page)
+        public static string pluginversionnumber = "3.0.5"; // used by Theme (Special page)
         public static string vaminversion = "1.16";
         public static string defProfileName = "VAICOM for DCS World";
         public static bool requirecarrierregkey = false;
         public static bool installkneeboard = true;
 
-        public static bool deepdebugmode = true; //set to deepdebug mode
-        public static bool databaseencrypted = true;
+        public static bool deepdebugmode = false; //set to deepdebug mode
+        public static bool databaseencrypted = true; //set to true if database is encrypted, false if not
         public static bool luahardreset = true;
         public static bool exitapp = false;
         public static bool datawasreset = false;
@@ -303,7 +303,6 @@ namespace VAICOM
             {"command",""       },
             {"apxwpn",""        },
             {"apxdir",""        },
-            {"moose",""         },
         };
 
         public static Dictionary<string, string> usedalias = new Dictionary<string, string>()
@@ -316,7 +315,6 @@ namespace VAICOM
             {"command",""       },
             {"apxwpn",""        },
             {"apxdir",""        },
-            {"moose",""        },
         };
 
         public static Dictionary<string, bool> have = new Dictionary<string, bool>()
@@ -329,7 +327,6 @@ namespace VAICOM
             {"command",         false       },
             {"apxwpn",          false       },
             {"apxdir",          false       },
-            {"moose",           false       },
         };
 
         public static void MessageReset()
@@ -343,7 +340,6 @@ namespace VAICOM
             have["command"] = false;
             have["apxwpn"] = false;
             have["apxdir"] = false;
-            have["moose"] = false;
             haveinputscomplete = false;
 
             currentkey["recipient"] = "";
@@ -354,7 +350,6 @@ namespace VAICOM
             currentkey["command"] = "";
             currentkey["apxwpn"] = "";
             currentkey["apxdir"] = "";
-            currentkey["moose"] = "";
 
             currentmessage = new DcsClient.Message.CommsMessage();
             currentrecipient = new Recipient();
@@ -396,7 +391,6 @@ namespace VAICOM
             { "Aux"     , new Server.DcsUnit() },
             { "Cargo"   , new Server.DcsUnit() },
             { "Allies"  , new Server.DcsUnit() },
-            { "Moose"   , new Server.DcsUnit() }, //Add moose
 
         };
 
@@ -417,7 +411,6 @@ namespace VAICOM
                 SelectedUnit["Aux"] = new Server.DcsUnit();
                 SelectedUnit["Cargo"] = new Server.DcsUnit();
                 SelectedUnit["Allies"] = new Server.DcsUnit();
-                SelectedUnit["Moose"] = new Server.DcsUnit(); //Add Moose
 
                 // populate with nearest units
 

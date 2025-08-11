@@ -160,26 +160,6 @@ namespace VAICOM
                     {
                     }
 
-                    // special case: Moose menus
-
-                    try
-                    {
-                        if (State.have["moose"])
-                        {
-                            Log.Write("Matched Moose menu command.", Colors.Text);
-
-                            State.currentkey["command"] = State.currentkey["moose"];
-                            State.usedalias["command"] = State.usedalias["moose"];
-                            State.currentkey["recipient"] = "moose";
-                            State.currentrecipientclass = Recipientclasses.Moose;
-                            State.have["recipient"] = true;
-                            State.have["command"] = true;
-                        }
-                    }
-                    catch
-                    {
-                    }
-
                 }
 
                 public static void scanforkeywords()
@@ -389,9 +369,7 @@ namespace VAICOM
 
                 public static void sendmessage()
                 {
-
                     Log.Write("Ready, sending message for recipient class " + State.currentrecipientclass.Name + ", calledisclass = " + State.calledisclass, Colors.Inline);
-
 
                     if (ConstructMessage())
                     {
@@ -400,8 +378,9 @@ namespace VAICOM
                         State.previousmessageunit = State.currentmessageunit;
                         State.previousrecipientclass = State.currentrecipientclass;
 
-                        // for ics hotmic:
+                        Log.Write("Message sent successfully for recipient class " + State.currentrecipientclass.Name + ".", Colors.Inline);
 
+                        // for ics hotmic:
                         if (State.AIRIOactive && State.activeconfig.ICShotmic)
                         {
                             if (!State.valistening)
@@ -415,14 +394,12 @@ namespace VAICOM
                                 Extensions.RIO.helper.ShowWheel(false);
                                 Extensions.RIO.helper.showingjestermenu = false;
                             }
-
-                        }
-                        else
-                        {
-                            Log.Write("No message sent.", Colors.Inline);
                         }
                     }
-
+                    else
+                    {
+                        Log.Write("No message sent: message construction failed.", Colors.Warning);
+                    }
                 }
 
                 public static void sendvoid()
@@ -666,13 +643,12 @@ namespace VAICOM
                             }
 
                             if (State.currentcommand.isCarrier() && !State.currentmessageunit.descr.ToLower().Contains("supercarrier"))
-                                if (State.currentcommand.isCarrier() && !State.currentmessageunit.fullname.ToLower().Contains("forrestal"))
-                                    if (State.currentcommand.isCarrier() && !State.currentmessageunit.fullname.ToLower().Contains("stennis"))
-                                    {
-                                        Log.Write("Selected recipient is not a Supercarrier unit.", Colors.Warning); // Pene changes to allow non SC units if module is installed
-                                        UI.Playsound.Error();
-                                        return true; //true
-                                    }
+                                if (State.currentcommand.isCarrier() && !State.currentmessageunit.fullname.ToLower().Contains("cvn-"))
+                                {
+                                    Log.Write("Selected recipient is not a Supercarrier unit.", Colors.Warning); // Pene changes to allow non SC units if module is installed
+                                    UI.Playsound.Error();
+                                    return true; //true
+                                }
                         }
 
                         // ---------------------------  

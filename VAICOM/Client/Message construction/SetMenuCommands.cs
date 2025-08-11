@@ -22,9 +22,7 @@ namespace VAICOM
                 public static List<int> showAWACS = new List<int>() { iCommands.ICommandMenuItem7 };
                 public static List<int> showTanker = new List<int>() { iCommands.ICommandMenuItem6, iCommands.ICommandMenuItem9 };
                 public static List<int> showCrew = new List<int>() { iCommands.ICommandMenuItem8 };
-                public static List<int> showAux = new List<int>() { iCommands.ICommandMenuItem10 };
-                public static List<int> showMoose = new List<int>() { iCommands.ICommandMenuItem10 }; // Add Moose
-
+                public static List<int> showAux = new List<int>() { iCommands.ICommandMenuItem10 };               
                 public static List<int> doAction1 = new List<int>() { iCommands.ICommandMenuItem1 };
                 public static List<int> doAction2 = new List<int>() { iCommands.ICommandMenuItem2 };
                 public static List<int> doAction3 = new List<int>() { iCommands.ICommandMenuItem3 };
@@ -45,6 +43,8 @@ namespace VAICOM
 
                 public static List<int> iCommandPushToTalkEnableVoice = new List<int>() { iCommands.iCommandPushToTalkEnableVoice };
                 public static List<int> iCommandPushToTalkDisableVoice = new List<int>() { iCommands.iCommandPushToTalkDisableVoice };
+                // Add more command sequences as needed
+                public static List<int> iCommandViewRearm = new List<int>() { iCommands.iCommandViewRearm };
 
                 public static List<int> menuindex()
                 {
@@ -110,6 +110,9 @@ namespace VAICOM
 
                 public static int iCommandPushToTalkEnableVoice = 1695;
                 public static int iCommandPushToTalkDisableVoice = 1696;
+
+                // Add more command IDs as needed
+                public static int iCommandViewRearm = 1754; // View rearm menu command testing
 
 
             }

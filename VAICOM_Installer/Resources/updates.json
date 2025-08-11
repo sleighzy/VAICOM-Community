@@ -2,16 +2,16 @@
   "updates":
   [
     {
-      "title": "VAICOM PRO Community Edition for DCS World",
+      "title": "VAICOM Community Edition for DCS World",
       "isrelease": true,
       "isbeta": false,
       "isdev": false,
       "productid": 1,
-      "releasedate": 20250413,
-      "version": 3018,
-      "versionstring": "3.0.1.8",
-      "downloadurl": "https://github.com/Penecruz/VAICOMPRO-Community/releases/download/v3.0.1.8/VAICOMPRO.zip",
-      "releasenotes": "Release 3.0.1.8 - Hotfix Alias conflicts with 'Request Taxi....', Add new S3 Tanker callsigns Bloodhound, Mauler and Navy One,Add Aditional AI_ATC return to Approach keywords, New Vaicom branding dropping the Pro suffix, Vaicom Manual updated. "
+      "releasedate": 20250811,
+      "version": 3053,
+      "versionstring": "3.0.5.3",
+      "downloadurl": "https://github.com/Penecruz/VAICOM-Community/releases/download/v3.0.5.3/VAICOMPRO.zip",
+      "releasenotes": "Release 3.0.5.3 -\t** HOTFIX for some systems having hooking issues with the new export.lua code (No other changes)**"
     }
   ]
 }

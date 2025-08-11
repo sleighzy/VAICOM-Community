@@ -525,7 +525,7 @@ namespace VAICOM
                   kneeboard = true,
                   binary = true,
                 } },
-                // Add radio.lua terrain files that are left incomplete by the terrain developer
+                // Add radio.lua terrain files that are left incomplete by the terrain developer these are files that are located in the Mods/terrains/ folder and are not part of the core game.
                 {"2.8 Sinai_radio.lua",new Server.LuaFile
                 {
                   filename = "radio.lua",

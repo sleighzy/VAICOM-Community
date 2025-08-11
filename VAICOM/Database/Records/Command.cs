@@ -34,7 +34,7 @@ namespace VAICOM
             public bool value;
             public bool close;
             public double volume;
-            public int parameters;
+            public object parameters;
             public bool readback;
             public Server.Vector point;
 
@@ -178,9 +178,6 @@ namespace VAICOM
                 // Kneeboard
                 if ((this.uniqueid >= Commands.Table["wMsgKneeboardCmndsNull"].uniqueid) & (this.uniqueid <= Commands.Table["wMsgKneeboardCmndsMaximum"].uniqueid)) { value = Recipientclasses.Kneeboard; }
 
-                // Moose
-                if ((this.uniqueid >= Commands.Table["wMsgLeaderToMooseCmndsNull"].uniqueid) & (this.uniqueid <= Commands.Table["wMsgLeaderToMooseCmndsMaximum"].uniqueid)) { value = Recipientclasses.Moose; } //Leader??
-
                 return value;
             }
 
@@ -267,7 +264,6 @@ namespace VAICOM
             RIO_misc,
             AI_pilot,
             kneeboard,
-            Moose,
         }
 
     }

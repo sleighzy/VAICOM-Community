@@ -32,27 +32,36 @@ namespace VAICOM
                         try
                         {
 
-
+                            // Determine the DCS program folder
                             string dcs_path = "NOT INSTALLED";
 
                             if (set.Key.Equals("2.9"))
                             {
                                 dcs_path = State.dcspath_release;
                             }
-                            if (set.Key.Equals("2.9 OpenBeta"))
+                            else if (set.Key.Equals("2.9 OpenBeta"))
                             {
                                 dcs_path = State.dcspath_openbeta;
                             }
-                            if (set.Key.Equals("STEAM"))
+                            else if (set.Key.Equals("STEAM"))
                             {
                                 dcs_path = State.dcspath_steam;
                             }
 
-                            string savedgames_path = Framework.SpecialFoldersRetrieve.GetSavedGames() + "\\" + Server.dcsversion[set.Key];
+                            // Validate dcs_path
+                            if (string.IsNullOrEmpty(dcs_path) || dcs_path.Equals("NOT INSTALLED"))
+                            {
+                                Log.Write($"Invalid DCS path for version {set.Key}. Skipping file installation. If you sure you have this version? Then manually assign the path in the Config Tab of the Vaicom UI.", Colors.Recognition);
+                                continue;
+                            }
 
-                            // set out of scope variables
+                            // Set program folder paths
                             dcsprogramfolder = dcs_path;
-                            SavedGamesFolder = savedgames_path;
+                            SavedGamesFolder = Framework.SpecialFoldersRetrieve.GetSavedGames() + "\\" + Server.dcsversion[set.Key];
+
+                            // Debug logging
+                            Log.Write($"dcsprogramfolder: {dcsprogramfolder}", Colors.Recognition);
+                            Log.Write($"SavedGamesFolder: {SavedGamesFolder}", Colors.Recognition);
 
                             // ----------------------
 
@@ -71,7 +80,7 @@ namespace VAICOM
                             string[] filesinsavedgames = new string[0];
                             try
                             {
-                                filesinsavedgames = Directory.GetDirectories(savedgames_path + "\\" + modsubfolder);
+                                filesinsavedgames = Directory.GetDirectories(SavedGamesFolder + "\\" + modsubfolder);        
                             }
                             catch
                             {
@@ -223,6 +232,7 @@ namespace VAICOM
 
                             // determine root/SavedGames target location
 
+                            // Construct basepath
                             if (thisfile.root) // to DCS program folder
                             {
                                 basepath = dcsprogramfolder + "\\" + thisfile.installfolder;
@@ -231,6 +241,17 @@ namespace VAICOM
                             {
                                 basepath = SavedGamesFolder + "\\" + thisfile.installfolder;
                             }
+
+                            // Validate basepath
+                            if (string.IsNullOrEmpty(basepath) || basepath.StartsWith("\\"))
+                            {
+                                Log.Write($"Invalid basepath: {basepath}. Skipping directory creation.", Colors.Warning);
+                                continue;
+                            }
+
+                            //Log.Write($"SavedGamesFolder: {SavedGamesFolder}", Colors.Warning); //turned off for now
+                            //Log.Write($"dcsprogramfolder: {dcsprogramfolder}", Colors.Warning);
+                            //Log.Write($"basepath: {basepath}", Colors.Warning);
 
                             // create the folder if doesn't exit yet..
 

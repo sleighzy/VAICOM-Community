@@ -177,7 +177,7 @@ namespace VAICOM
                         }
                         catch
                         {
-                            Log.Write("There was a problem importing F10 menu items.", Colors.Text); // TODO need seperate for Moose??
+                            Log.Write("There was a problem importing F10 menu items.", Colors.Text);
                             State.menuauximported = false;
                         }
                     }

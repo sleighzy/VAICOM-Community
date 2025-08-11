@@ -298,6 +298,12 @@ namespace VAICOM
                     State.currentmodule = DCSmodules.LookupTable["OH58D"];
                     return true;
                 }
+                //F4U-1D Corsair
+                if (State.currentstate.id.ToLower().Contains("F4U") & State.currentstate.id.ToLower().Contains("1") && (State.currentstate.id.ToLower().Contains("d")))
+                {
+                    State.currentmodule = DCSmodules.LookupTable["F4U-1D"];
+                    return true;
+                }
                 //Goshawk
                 // if (State.currentstate.id.ToLower().Contains("t") & (State.currentstate.id.ToLower().Contains("45")))
                 //{

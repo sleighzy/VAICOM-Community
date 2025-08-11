@@ -139,6 +139,7 @@ namespace VAICOM
                         {
                             try
                             {
+                                FileHandler.Lua.LuaFiles_Remove(); // <-- Remove all export.lua VAICOM blocks (current and legacy)
                                 FileHandler.Lua.LuaFiles_Install(true, true); // reset quietly;
                                 State.datawasreset = true;
 
@@ -407,6 +408,8 @@ namespace VAICOM
         }
     }
 }
+
+
 
 
 

@@ -96,18 +96,22 @@ namespace VAICOM.Properties {
         ///-- www.vaicompro.com
         ///
         ///function make(self, message)
-        ///	
+        ///
         ///	local role = self:findRole(message.event)
         ///	base.assert(role ~= nil)
+        ///	
         ///	local roleData = role
+        ///	
+        ///	--Country
         ///	local country = getCountry(message)
+        ///	base.print(&apos;make: country: &apos;, country)
+        ///
+        ///	--Module &amp; language
         ///	local messageModuleName = nil
         ///	local messageLanguage = nil
         ///	local module = getModuleName(message)
-        ///	local desiredLanguage = languageByCountry[country]
-        ///	if 	module ~= nil and
-        ///		roleData.modules ~= nil then
-        ///		local messageModuleAndLanguage = 	getMessageModuleA [rest of string was truncated]&quot;;.
+        ///	--base.print(&apos;make: module name: &apos;, module)
+        ///	local desiredLanguage = languageB [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Append_Core_common {
             get {
@@ -116,7 +120,17 @@ namespace VAICOM.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to local vaicomlfs = require(&apos;lfs&apos;); dofile(vaicomlfs.writedir()..[[Scripts\VAICOMPRO\VAICOMPRO.export.lua]]).
+        ///   Looks up a localized string similar to --[[ VAICOM BEGIN EXPORT BLOCK ]]
+        ///-- Load VAICOMPRO Export Script Safely
+        ///local lfs_status, lfs = pcall(require, &apos;lfs&apos;)
+        ///if lfs_status and lfs and type(lfs.writedir) == &quot;function&quot; then
+        ///    local exportPath = lfs.writedir() .. [[Scripts\VAICOMPRO\VAICOMPRO.export.lua]]
+        ///    local export_status, err = pcall(dofile, exportPath)
+        ///    if not export_status then
+        ///        log.write(&quot;VAICOM&quot;, log.ERROR, &quot;Failed to execute VAICOMPRO.export.lua: &quot; .. tostring(err))
+        ///    end
+        ///else
+        ///    log.write(&quot;VAICOM&quot;, log.ERROR,  [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Append_Core_Export {
             get {
@@ -172,19 +186,17 @@ namespace VAICOM.Properties {
         ///-- www.vaicompro.com
         ///
         ///function make(message)
-        ///	if message.type == base.Message.type.TYPE_MORZE then
-        ///		return p.morze(message.string, message.parameters.type)
-        ///	else
-        ///		base.assert(message.sender ~= nil)
-        ///		local country = getCountry(message)
-        ///		local stateProtocol = nil
-        ///		if country then
-        ///			stateProtocol = protocolByCountry[country] or defaultProtocol
-        ///		else
-        ///			stateProtocol = &apos;common&apos;
-        ///		end	
-        ///		local protocol = protocols[stateProtocol]
-        ///		ba [rest of string was truncated]&quot;;.
+        ///    -- Handle Morse code messages separately
+        ///    if message.type == base.Message.type.TYPE_MORZE then
+        ///        return p.morze(message.string, message.parameters.type)
+        ///    end
+        ///
+        ///    -- Sanity check: ensure sender exists
+        ///    base.assert(message.sender ~= nil)
+        ///
+        ///    -- Determine speech protocol based on sender&apos;s country
+        ///    local country = getCountry(message)
+        ///    local stateProtocol = protocolByCoun [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Append_Core_speech {
             get {
@@ -198,21 +210,20 @@ namespace VAICOM.Properties {
         ///-- www.vaicompro.com
         ///
         ///function construct(self)
-        ///	self.skin = {
-        ///		container = {},
-        ///		item = Skin.staticSkin(),
-        ///		selectedItem = Skin.staticSkin(),
-        ///		arrows = Skin.staticSkin(),
-        ///		spacing = 0,        
-        ///	}
+        ///    -- === UI Skin Definition ===
+        ///    self.skin = {
+        ///        container     = {},
+        ///        item          = Skin.staticSkin(),
+        ///        selectedItem  = Skin.staticSkin(),
+        ///        arrows        = Skin.staticSkin(),
+        ///        spacing       = 0
+        ///    }
         ///
-        ///    self.window = Window.new(0,0,1280,30)
+        ///    -- === Window Setup ===
+        ///    self.window = Window.new(0, 0, 1280, 30)
         ///    self.window:setHasCursor(false)
         ///    self.window:setVisible(false)
-        ///    
-        ///	self.container = Panel.new()
-        ///	self.container:setSkin(self.skin.container)
-        ///	local x, y, width, height = self.conta [rest of string was truncated]&quot;;.
+        ///        /// [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Append_Core_TabSheetBar {
             get {
@@ -221,31 +232,25 @@ namespace VAICOM.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to -- VAICOM PRO server-side script
-        ///-- VAICOMPRO.export.lua
-        ///-- www.vaicompro.com
+        ///   Looks up a localized string similar to -- VAICOM PRO server-side script (Optimized Version)
+        ///-- Original: VAICOMPRO.export.lua
+        ///-- Vaicom Discord at https://discord.gg/7c22BHNSCS 
         ///
-        ///package.path  = package.path..&quot;;.\\LuaSocket\\?.lua;&quot;
-        ///package.cpath = package.cpath..&quot;;.\\LuaSocket\\?.dll;&quot;
+        ///package.path  = package.path..&quot;;.\LuaSocket\?.lua;&quot;
+        ///package.cpath = package.cpath..&quot;;.\LuaSocket\?.dll;&quot;
         ///
         ///local socket = require(&quot;socket&quot;)
         ///
-        ///local purge
+        ///-- Debugging
+        ///local DEBUG = false
+        ///local function log(msg)
+        ///    if DEBUG then
+        ///        base.print(&quot;[VAICOM] &quot; .. msg)
+        ///    end
+        ///end
         ///
-        ///vaicom = {}
-        ///
-        ///vaicom.config = {
-        ///
-        ///		sendtoradio =		{ -- do not edit
-        ///							address	= &quot;127.0.0.1&quot;,
-        ///							port	= 33334,
-        ///							timeout = 0,
-        ///							},
-        ///							
-        ///		receivefromclient =	{ -- do not edit
-        ///							address	= &quot;*&quot;,
-        ///							port	= 33491,
-        ///							timeout  [rest of string was truncated]&quot;;.
+        ///-- Socket utility function
+        ///local function create_udp_socket(address, port, timeout, is_ [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Append_Core_VAICOMPRO_export {
             get {
@@ -375,14 +380,7 @@ namespace VAICOM.Properties {
         ///	devices = {}
         ///end
         ///
-        ///devices[&quot;VAICOMPRO&quot;] = VAICOM_id
-        ///
-        ///
-        ///
-        ///
-        ///
-        ///
-        ///.
+        ///devices[&quot;VAICOMPRO&quot;] = VAICOM_id.
         /// </summary>
         public static string Append_Kneeboard_declare_VAICOMPRO_device {
             get {
@@ -489,7 +487,7 @@ namespace VAICOM.Properties {
         ///local gettext = require(&quot;i_18n&quot;)
         ///local       _ = gettext.translate
         ///
-        ///--WORLD RADIO -- Appended by VaicomPro
+        ///--WORLD RADIO -- Appended by VAICOM
         ///
         ///radioTableFormat = 3
         ///radio = {
@@ -498,11 +496,11 @@ namespace VAICOM.Properties {
         ///		role = {&quot;ground&quot;, &quot;tower&quot;, &quot;approach&quot;};
         ///		callsign = {{[&quot;common&quot;] = {_(&quot;BAS100&quot;), &quot;BAS100&quot;}}};
         ///		frequency = {[UHF] = {MODULATIONTYPE_AM, 257100000.000000}};
-        ///		sceneObjects = {&apos;t:6021123&apos;};
+        ///		sceneObjects = {&apos;t:5988355&apos;};
         ///	};
         ///	{
-        ///		radioId = &apos;EFIV_Ivalo1&apos;;
-        ///		role = {&quot;ground [rest of string was truncated]&quot;;.
+        ///		radioId = &apos;airfield26_0&apos;;
+        ///		role = {&quot;ground&quot;, [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Append_Terrain_Kola_radio {
             get {
@@ -517,7 +515,7 @@ namespace VAICOM.Properties {
         ///local gettext = require(&quot;i_18n&quot;)
         ///local       _ = gettext.translate
         ///
-        ///--WORLD RADIO -- Appended by VaicomPro
+        ///--WORLD RADIO -- Appended by VAICOM
         ///
         ///radioTableFormat = 3
         ///radio = {
@@ -526,7 +524,7 @@ namespace VAICOM.Properties {
         ///		role = {&quot;ground&quot;, &quot;tower&quot;, &quot;approach&quot;};
         ///		callsign = {{[&quot;common&quot;] = {_(&quot;Boulderñity&quot;), &quot;Boulderñity&quot;}}};
         ///		frequency = {[UHF] = {MODULATIONTYPE_AM, 250100000.000000}, [VHF_HI] = {MODULATIONTYPE_AM, 118050000.000000}};
-        ///		sceneObjects = {&apos;t:48 [rest of string was truncated]&quot;;.
+        ///		sceneObjects = {&apos;t:48169 [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Append_Terrain_Nevada_Radio {
             get {
@@ -541,7 +539,7 @@ namespace VAICOM.Properties {
         ///local gettext = require(&quot;i_18n&quot;)
         ///local       _ = gettext.translate
         ///
-        ///--WORLD RADIO -- Appended by VaicomPro
+        ///--WORLD RADIO -- Appended by VAICOM
         ///
         ///radioTableFormat = 3
         ///radio = {
@@ -555,7 +553,7 @@ namespace VAICOM.Properties {
         ///	{
         ///		radioId = &apos;airfield1_0&apos;;
         ///		role = {&quot;ground&quot;, &quot;tower&quot;, &quot;approach&quot;};
-        ///		cal [rest of string was truncated]&quot;;.
+        ///		callsi [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Append_Terrain_Siani_radio {
             get {
@@ -777,7 +775,8 @@ namespace VAICOM.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to base = _G
+        ///   Looks up a localized string similar to -- Get Argument name and data
+        ///base = _G
         ///
         ///local dev = 38
         ///local arg = 3676
@@ -790,15 +789,14 @@ namespace VAICOM.Properties {
         ///
         ///
         ///
-        ///
+        ///-- Get iCommands dumpfile
         ///base = _G
         ///local lfs = require(&quot;lfs&quot;)
         ///local io = require(&quot;io&quot;)
         ///dumpfile = io.open(lfs.writedir()..&quot;crawl-x.csv&quot;, &quot;w&quot;)
         ///
         ///if dumpfile then
-        ///listtables = function (offset, maxdepth, tablename, filtertype)
-        ///if base.type(tablename) == &quot;tab [rest of string was truncated]&quot;;.
+        ///listtables = function (offset, maxdepth, [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Debug_code {
             get {
@@ -861,17 +859,20 @@ namespace VAICOM.Properties {
         ///{
         ///	installed	 = true,
         ///	dirName		 = current_mod_path,
-        ///	binaries	 = {&apos;VAICOMPRO.dll&apos;},
         ///
         ///	displayName	 = &quot;VAICOM PRO&quot;,
         ///	shortName	 = &quot;VAICOM PRO&quot;,
         ///	fileMenuName = &quot;VAICOM PRO&quot;,
         ///
-        ///	version		 = &quot;2.9.4&quot;,
+        ///	version		 = &quot;3.0.2&quot;,
         ///	state		 = &quot;installed&quot;, 	
         ///	developerName= &quot;VAICOM Community&quot;,
         ///	info		 = _(&quot;VAICOM PRO Community Edition is a voice communications interface plugin for VoiceAttack, enabling true-to-life radio communications with all AI units in the mission.&quot;),
-        ///        /// [rest of string was truncated]&quot;;.
+        ///
+        ///	Skins	=
+        ///	{
+        ///		{
+        ///			name	= &quot;VA [rest of string was truncated]&quot;;.
         /// </summary>
         public static string entry {
             get {
@@ -883,14 +884,14 @@ namespace VAICOM.Properties {
         ///   Looks up a localized string similar to ---------------------------
         ///MIT License
         ///
-        ///Copyright (c) 2022 VAICOM PRO Community Edition
+        ///Copyright (c) 2022 VAICOM Community Edition
         ///
         ///Permission is hereby granted, free of charge, to any person obtaining a copy
         ///of this software and associated documentation files (the &quot;Software&quot;), to deal
         ///in the Software without restriction, including without limitation the rights
         ///to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
         ///copies of the Software, and to permit persons to whom the Software is
-        ///furnished to do so, subject to the f [rest of string was truncated]&quot;;.
+        ///furnished to do so, subject to the follo [rest of string was truncated]&quot;;.
         /// </summary>
         public static string EULA {
             get {
@@ -899,7 +900,17 @@ namespace VAICOM.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to local vaicomlfs = require(&apos;lfs&apos;); dofile(vaicomlfs.writedir()..[[Scripts\VAICOMPRO\VAICOMPRO.export.lua]]).
+        ///   Looks up a localized string similar to --[[ VAICOM BEGIN EXPORT BLOCK ]]
+        ///-- Load VAICOMPRO Export Script Safely
+        ///local lfs_status, lfs = pcall(require, &apos;lfs&apos;)
+        ///if lfs_status and lfs and type(lfs.writedir) == &quot;function&quot; then
+        ///    local exportPath = lfs.writedir() .. [[Scripts\VAICOMPRO\VAICOMPRO.export.lua]]
+        ///    local export_status, err = pcall(dofile, exportPath)
+        ///    if not export_status then
+        ///        log.write(&quot;VAICOM&quot;, log.ERROR, &quot;Failed to execute VAICOMPRO.export.lua: &quot; .. tostring(err))
+        ///    end
+        ///else
+        ///    log.write(&quot;VAICOM&quot;, log.ERROR,  [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Exportmatch {
             get {
@@ -1004,6 +1015,15 @@ namespace VAICOM.Properties {
             get {
                 object obj = ResourceManager.GetObject("icon_select", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to local vaicomlfs = require(&apos;lfs&apos;); dofile(vaicomlfs.writedir()..[[Scripts\\VAICOMPRO\\VAICOMPRO.export.lua]]).
+        /// </summary>
+        public static string LegacyExportmatch {
+            get {
+                return ResourceManager.GetString("LegacyExportmatch", resourceCulture);
             }
         }
         
@@ -1439,12 +1459,11 @@ namespace VAICOM.Properties {
         ///		role = {&quot;ground&quot;, &quot;tower&quot;, &quot;approach&quot;};
         ///		callsign = {{[&quot;common&quot;] = {_(&quot;BAS100&quot;), &quot;BAS100&quot;}}};
         ///		frequency = {[UHF] = {MODULATIONTYPE_AM, 257100000.000000}};
-        ///		sceneObjects = {&apos;t:6021123&apos;};
+        ///		sceneObjects = {&apos;t:5988355&apos;};
         ///	};
         ///	{
-        ///		radioId = &apos;EFIV_Ivalo1&apos;;
-        ///		role = {&quot;ground&quot;, &quot;tower&quot;, &quot;approach&quot;};
-        /// [rest of string was truncated]&quot;;.
+        ///		radioId = &apos;airfield26_0&apos;;
+        ///		role = {&quot;ground&quot;, &quot;tower&quot;, &quot;approach&quot;}; [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Orig_Terrain_Kola_radio {
             get {
@@ -2135,7 +2154,7 @@ namespace VAICOM.Properties {
         ///TASKKILL /F /IM VoiceAttack.exe
         ///TIMEOUT /T 2
         ///ECHO Updating files...
-        ///COPY /Y &quot;Updates\Package\VAICOMPRO\Documentation\VAICOM PRO Community User Manual.pdf&quot; &quot;Documentation\VAICOM PRO Community User Manual.pdf&quot; 
+        ///COPY /Y &quot;Updates\Package\VAICOMPRO\Documentation\VAICOM Pro Community User Manual.pdf&quot; &quot;Documentation\VAICOM Pro Community User Manual.pdf&quot; 
         ///COPY /Y &quot;Updates\Package\VAICOMPRO\EULA.txt&quot; &quot;EULA.txt&quot; 
         ///COPY /Y &quot;Updates\Package\VAICOMPRO\VAICOMPRO.dll&quot; &quot;VAICOMPRO.dll&quot; 
         ///RMDIR /S /Q &quot;Updates&quot;
@@ -2176,7 +2195,7 @@ namespace VAICOM.Properties {
         ///&lt;Profile xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;
         ///  &lt;HasMB&gt;false&lt;/HasMB&gt;
         ///  &lt;Id&gt;65ee8337-d43c-4b26-aea9-4ce0f9d4e467&lt;/Id&gt;
-        ///  &lt;Name&gt;VAICOM PRO for DCS World&lt;/Name&gt;
+        ///  &lt;Name&gt;VAICOM for DCS World&lt;/Name&gt;
         ///  &lt;Commands&gt;
         ///    &lt;Command&gt;
         ///      &lt;Referrer xsi:nil=&quot;true&quot; /&gt;
@@ -2184,7 +2203,7 @@ namespace VAICOM.Properties {
         ///      &lt;Confidence&gt;0&lt;/Confidence&gt;
         ///      &lt;PrefixActionCount&gt;0&lt;/PrefixActionCount&gt;
         ///      &lt;IsDynamicallyCreated&gt;false&lt;/IsDynamicallyCreated&gt;
-        ///      &lt;TargetProcessSet&gt;false&lt;/ [rest of string was truncated]&quot;;.
+        ///      &lt;TargetProcessSet&gt;false&lt;/Targ [rest of string was truncated]&quot;;.
         /// </summary>
         public static string VAICOM_PRO_for_DCS_World {
             get {

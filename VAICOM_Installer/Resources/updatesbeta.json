@@ -7,11 +7,11 @@
       "isbeta": false,
       "isdev": false,
       "productid": 1,
-      "releasedate": 20250413,
-      "version": 3018,
-      "versionstring": "3.0.1.8",
-      "downloadurl": "https://raw.githubusercontent.com/Penecruz/VAICOMPRO-Community/Development/VAICOM_Installer/Resources/VAICOMPRO.zip",
-      "releasenotes": " Hotfix command alias conflicts, New Taker callsigns, AI_ATC additional command, Branding Change from Vaicom Pro to Vaicom - exe and dll retain old name of Vaicompro."
+      "releasedate": 20250811,
+      "version": 3053,
+      "versionstring": "3.0.5.3",
+      "downloadurl": "https://raw.githubusercontent.com/Penecruz/VAICOM-Community/Development/VAICOM_Installer/Resources/VAICOMPRO.zip",
+      "releasenotes": "Hotfix for Vaicompro.export.lua Hooking issues on some systems, please test"
     }
   ]
 }

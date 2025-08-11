@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using static VAICOM.Extensions.WorldAudio.Processor;
 
 namespace VAICOM
 {
@@ -12,10 +13,11 @@ namespace VAICOM
             public static Dictionary<string, Command> Table = new Dictionary<string, Command>(StringComparer.OrdinalIgnoreCase)
             {
 
-            // device control section 00000 //was this removed to limit scope creep???
+            // device control section 00000 // Pene testing direct control inputs via iCommands 5.25
             { "iCommandNull" ,          new Command { uniqueid = 00000, category = CommandCategories.cockpit, dcsid = "iCommandNull" } },
-            //{ "gearup" ,                new Command { uniqueid = 00000, category = cmdcat.cockpit, eventnumber = 0068, name = "iCommandGearUp" ,   displayname=Labels.cockpitcontrol["gearup"],   hasparameter =  true, on = true} },
-            //{ "geardown" ,              new Command { uniqueid = 00000, category = cmdcat.cockpit, eventnumber = 0068, name = "iCommandGearDown" , displayname=Labels.cockpitcontrol["geardown"], hasparameter =  true, on = false} },
+            { "gearup" ,                new Command { uniqueid = 00001, category = CommandCategories.cockpit, eventnumber = 0068, dcsid = "iCommandGearUp" ,   displayname=Labels.aicommands["gearup"],   hasparameter =  true, on = true} },
+            { "geardown" ,              new Command { uniqueid = 00002, category = CommandCategories.cockpit, eventnumber = 0068, dcsid = "iCommandGearDown" , displayname=Labels.aicommands["geardown"], hasparameter =  true, on = false} },
+            //{ "loadout" ,               new Command { uniqueid = 00003, category = CommandCategories.cockpit, eventnumber = 1754, dcsid = "iCommandViewRearm" , displayname=Labels.aicommands["loadout"], hasparameter =  true, on = true} },
             { "iCommandMaximum" ,       new Command { uniqueid = 09999, category = CommandCategories.cockpit, dcsid = "iCommandMaximum" } },
 
 
@@ -209,9 +211,9 @@ namespace VAICOM
             { "approachinstrument" ,    new Command { uniqueid = 15016, category = CommandCategories.aicommsatc, dcsid = "wMsgLeaderApproachInstrument",    displayname = Labels.aicommands["approachinstrument"], blockedforFree = true, requiresrealatc = true  } },
 
             // insert carrier ATC commands
-            // { "seeyouat10" ,    new Command { uniqueid = 15017, category = CommandCategories.aicommsatc, eventnumber = 4091, name = "wMsgLeaderApproachInstrument",    displayname = Labels.aicommands["approachinstrument"], blockedforFree = true, requirescarrier = true } },
+            //{ "seeyouat10" ,            new Command { uniqueid = 15017, category = CommandCategories.aicommsatc, eventnumber = 4091, name = "wMsgLeaderApproachInstrument",    displayname = Labels.aicommands["approachinstrument"], blockedforFree = true, requirescarrier = true } },
 
-            { "wMsgLeaderToATCMaximum", new Command { uniqueid = 15017, category = CommandCategories.aicommsatc, dcsid = "wMsgLeaderToATCMaximum",          } },
+            { "wMsgLeaderToATCMaximum", new Command { uniqueid = 15018, category = CommandCategories.aicommsatc, dcsid = "wMsgLeaderToATCMaximum",          } },
 
             // to AWACS 16000
             { "wMsgLeaderToAWACSNull" , new Command { uniqueid = 16000, category = CommandCategories.aicommsawacs, dcsid = "wMsgLeaderToAWACSNull",           } },
@@ -367,10 +369,6 @@ namespace VAICOM
 
             // to Aux (F10 menu) 20000
             { "wMsgLeaderToAuxNull" ,           new Command { uniqueid = 20000, category = CommandCategories.auxmenu, eventnumber = 4000, dcsid = "wMsgLeaderToAuxNull",             } },
-            // AI_ATC endpoints start
-            //{ "Action Request Engine Start" ,   new Command { uniqueid = 20001, category = CommandCategories.auxmenu, eventnumber = 4000, dcsid = "ActionRequestEngineStart", displayname = Labels.aicommands["Request Engine Start"] } },
-            //{ "Action Request Taxi Clearance" , new Command { uniqueid = 20002, category = CommandCategories.auxmenu, eventnumber = 4000, dcsid = "ActionRequestTaxiClearance", displayname = Labels.aicommands["Request Taxi Clearance"] } },
-            // AI_ATC endpoints finish
             { "wMsgLeaderToAuxMaximum" ,        new Command { uniqueid = 20999, category = CommandCategories.auxmenu, eventnumber = 4000, dcsid = "wMsgLeaderToAuxMaximum",          } },
 
             // to Cargo 21000
@@ -417,6 +415,7 @@ namespace VAICOM
             { "wMsgShowKneeboardTab",          new Command { uniqueid = 23004, category = CommandCategories.special, eventnumber = 4000, dcsid = "wMsgShowKneeboardTab",   displayname = Labels.aicommands["wMsgShowKneeboardTab"],blockedforFree = true } },
             //{ "wMsgClearKneeboardTab",         new Command { uniqueid = 23005, category = CommandCategories.special, eventnumber = 4000, name = "wMsgClearKneeboardTab",  displayname = Labels.aicommands["wMsgClearKneeboardTab"],blockedforFree = true } },
             { "repeat",                        new Command { uniqueid = 23006, category = CommandCategories.special, eventnumber = 4000, dcsid = "wMsgReplySayAgain",displayname = Labels.aicommands["repeat"], blockedforFCnonPro = true} }, //
+            { "loadout" ,                      new Command { uniqueid = 23007, category = CommandCategories.special, eventnumber = 4000, dcsid = "wMsgLoadout" , displayname=Labels.aicommands["loadout"]} },
             { "wMsgSpecialCmndsMaximum",       new Command { uniqueid = 23099, category = CommandCategories.special, eventnumber = 4000, dcsid = "wMsgSpecialCmndsMaximum" } },
 
             // AOCS commands 23100
@@ -443,17 +442,6 @@ namespace VAICOM
             { "wMsgKneeboardShowNotes" ,             new Command { uniqueid = 24005, category = CommandCategories.kneeboard,    eventnumber = 4000,  dcsid = "wMsgKneeboardShowNotes",blockedforFree = true   } },
             { "wMsgKneeboardShowLog" ,               new Command { uniqueid = 24006, category = CommandCategories.kneeboard,    eventnumber = 4000,  dcsid = "wMsgKneeboardShowLog",blockedforFree = true   } },
             { "wMsgKneeboardCmndsMaximum" ,          new Command { uniqueid = 24100, category = CommandCategories.kneeboard,    eventnumber = 4000,  dcsid = "wMsgKneeboardCmndsMaximum" } },
-
-
-            // Moose Ops 
-            { "wMsgLeaderToMooseCmndsNull" ,       new Command { uniqueid = 25000, category = CommandCategories.Moose,  eventnumber = 4000, dcsid = "wMsgLeaderToMooseCmndsNull" } },
-            //{ "Radio Check Marshal" ,              new Command { uniqueid = 25001, category = CommandCategories.Moose,  eventnumber = 4000, dcsid = "wMsgLeaderToMooseRadioChkMarshal",displayname = Labels.aicommands["Radio Check Marshal"],blockedforFree = true   } },
-            //{ "Radio Check LSO" ,                  new Command { uniqueid = 25002, category = CommandCategories.Moose,  eventnumber = 4000, dcsid = "wMsgLeaderToMooseRadioChkLSO",displayname = Labels.aicommands["Radio Check LSO"],blockedforFree = true   } },
-            //{ "Request Commence" ,                 new Command { uniqueid = 25003, category = CommandCategories.Moose,  eventnumber = 4000, dcsid = "wMsgLeaderToMooseRqstCommence",displayname = Labels.aicommands["Request Commence"],blockedforFree = true   } },
-            //{ "Emergency Landing" ,                new Command { uniqueid = 25003, category = CommandCategories.Moose,  eventnumber = 4000, dcsid = "wMsgLeaderToMooseEmerLanding",displayname = Labels.aicommands["Emergency Landing"],blockedforFree = true   } },
-            { "wMsgLeaderToMooseCmndsMaximum" ,    new Command { uniqueid = 25100, category = CommandCategories.Moose,  eventnumber = 4000, dcsid = "wMsgLeaderToMooseCmndsMaximum" } },
-            
-            // ----------------------------------------------------------------------
 
             };
 

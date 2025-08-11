@@ -55,23 +55,23 @@ local function strsplit(delimiter, text)
 end
 
 local function dumpdata()
+    base.vcprcp = base.vcprcp or {} -- ensure this exists and is a table
 
-	if not base.vcprcp.log then 
-	base.vcprcp.log = base.io.open(base.lfs.writedir()..[[Logs\VAICOM_Data_Dump.csv]], "w")
-	end
+    if not base.vcprcp.log then 
+        base.vcprcp.log = base.io.open(base.lfs.writedir()..[[Logs\VAICOM_Data_Dump.csv]], "w")
+    end
 
-	str= dumptables ("_G",_G) -- determine what to dump here
-	
-	local lines = strsplit("\n",str)
-	
-	for i,j in base.ipairs(lines) do
-		base.vcprcp.log:write(base.tostring(i)..";"..base.tostring(j).."\n")
-		base.vcprcp.log:flush()
-	end
-	
-	base.vcprcp.log:close()
-	base.vcprcp.log = nil
+    str = dumptables("_G", _G) -- determine what to dump here
 
+    local lines = strsplit("\n", str)
+
+    for i,j in base.ipairs(lines) do
+        base.vcprcp.log:write(base.tostring(i)..";"..base.tostring(j).."\n")
+        base.vcprcp.log:flush()
+    end
+
+    base.vcprcp.log:close()
+    base.vcprcp.log = nil
 end
 
 dumpdata()
@@ -93,7 +93,8 @@ if f then
 end
 
 	
---[[if (base.vcprcp.state.activemessage.mode == "debug") then
+if (base.vcprcp.state.activemessage.mode == "debug") then
+    base.vcprcp = base.vcprcp or {} -- ensure this exists and is a table
 
 	if not base.vcprcp.log then 
 	base.vcprcp.log = base.io.open(base.lfs.writedir()..[[Logs\VAICOM_TEST.csv]], "w")
@@ -105,9 +106,9 @@ end
 	base.vcprcp.log:close()
 	base.vcprcp.log = nil
 
-end --]]
+end
 	
---[[
+
 Function to recursively dump a table to a string:
 Usage (e.g. to gain introspection into _G table):
 str=dump("_G",_G)
@@ -115,14 +116,14 @@ local lines=strsplit("\n",str)
 for k,v in ipairs(lines) do
     log.alert(v)
 end
---]]
+
 
 -- Can also dump metatable of any Lua device from inside to find functions that device exposes, e.g.
---[[
+
 local dev = GetSelf()
 m=getmetatable(dev)
 str=dump("GetSelf meta",m)
 local lines=strsplit("\n",str)
 for k,v in ipairs(lines) do
    log.alert(v)
-end ]]--
+end

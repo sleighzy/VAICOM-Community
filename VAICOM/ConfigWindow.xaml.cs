@@ -33,7 +33,7 @@ namespace VAICOM
                 this.Height = 340;
 
                 //this.WindowStyle = WindowStyle.None;
-                this.Topmost = true;
+                this.Topmost = false;
 
                 //this.Opacity = 1.0;
 

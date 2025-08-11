@@ -4,7 +4,7 @@ dofile('Scripts/World/Radio/FrequencyBands.lua')
 local gettext = require("i_18n")
 local       _ = gettext.translate
 
---WORLD RADIO -- Appended by VaicomPro
+--WORLD RADIO -- Appended by VAICOM
 
 radioTableFormat = 3
 radio = {

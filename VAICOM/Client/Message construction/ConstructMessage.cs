@@ -254,7 +254,11 @@ namespace VAICOM
                         settunenum();
 
                         // inserts, parameters, appendices..
-                        if (State.currentcommand.RequiresFlightNumInsert()) { State.currentmessage.parameters.Add(State.currentflightrecipientnumber); }
+                        // Flight and Wingmen: Cast parameters to List<object> before calling Add
+                        if (State.currentcommand.RequiresFlightNumInsert())
+                        {
+                            (State.currentmessage.parameters as List<object>)?.Add(State.currentflightrecipientnumber);
+                        }
                         if (State.currentcommand.hasparameter) { SetParameters(); }
                         if (State.currentcommand.hasAppendix() & (State.have["apxwpn"] || State.have["apxdir"])) { SetAppendices(); }
 
@@ -391,12 +395,6 @@ namespace VAICOM
                             State.currentmessage.type = Messagetypes.ActionIndexSequence;
                             Message.SetMenuItemAction();
                         }
-                        // For Moose Pene testing
-                        if (State.currentrecipientclass.Equals(Recipientclasses.Moose))
-                        {
-                            State.currentmessage.type = Messagetypes.iCommandSequence;
-                            Message.SetMenuCmdSequence();
-                        }
                         // ------------------------------------------------------------------------
 
                         Log.Write("Done. ", Colors.Text);
@@ -412,6 +410,3 @@ namespace VAICOM
         }
     }
 }
-
-
-

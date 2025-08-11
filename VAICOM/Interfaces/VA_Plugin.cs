@@ -132,7 +132,7 @@ namespace VAICOM
                     // Config window 
 
                     case "config":
-                        UI.Initialize.OpenConfiguration(vaProxy, false); //Pene Broken in VA 1.7.55 WIP
+                        UI.Initialize.OpenConfiguration(vaProxy, false);
                         break;
 
                     case "config.resetwindow":
@@ -142,7 +142,7 @@ namespace VAICOM
                     // Chatter on/off
 
                     case "chatter":
-                        if (State.chatterthemesactivated && State.activeconfig.Chatter_Enabled) // Pene Playing
+                        if (State.chatterthemesactivated && State.activeconfig.Chatter_Enabled)
                         {
                             UI.Playsound.Commandcomplete();
                             Extensions.Chatter.AudioTimer.Chatter_TimerPlayToggle();

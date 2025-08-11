@@ -4,13 +4,12 @@ declare_plugin(self_ID,
 {
 	installed	 = true,
 	dirName		 = current_mod_path,
-	binaries	 = {'VAICOMPRO.dll'},
 
 	displayName	 = "VAICOM PRO",
 	shortName	 = "VAICOM PRO",
 	fileMenuName = "VAICOM PRO",
 
-	version		 = "3.0.0",
+	version		 = "3.0.2",
 	state		 = "installed", 	
 	developerName= "VAICOM Community",
 	info		 = _("VAICOM PRO Community Edition is a voice communications interface plugin for VoiceAttack, enabling true-to-life radio communications with all AI units in the mission."),

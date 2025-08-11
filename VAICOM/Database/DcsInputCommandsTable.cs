@@ -11,8 +11,34 @@ namespace VAICOM
             public static SortedDictionary<int, string> DcsInputCommandsTable;
             public static void CreateDcsInputCommandsTable()
             {
-                // generated directly from lua dump .csv / .xlxs
-                // updated list for DCS 2.8.6.41363
+                // generated directly from lua env dump .txt to the saved/games/dcs/logs folder
+                // updated list for DCS 2.9.18.12889
+
+                //This is the dump lua to be added to the start of the Eagle Dynamics\DCS World\Config\Input\Aircrafts\Default\keyboard\default.lua file
+                // to generate the DcsInputCommandsTable.In the format of a SortedDictionary<int, string>.
+                // local lfs = require("lfs")
+                //    local io = require("io")
+                //    local fenv = getfenv()
+                //    local results = { }
+
+                //   --Gather all iCommand*variables where the value is a number
+                //     for k, v in pairs(fenv) do
+                //       if type(k) == "string" and type(v) == "number" and k:find("^iCommand") then
+                //           table.insert(results, { name = k, value = v})
+                //       end
+                //      end
+
+                //   --Sort by the numeric value
+                //    table.sort(results, function(a, b) return a.value < b.value end)
+
+                //    --Write output
+                //    local f = io.open(lfs.writedir().. [[Logs\DcsInputCommandsTable.txt]], "w")
+                //        if f then
+                //            for _, item in ipairs(results) do
+                //           f: write(string.format('DcsInputCommandsTable.Add(%d, "%s");\n', item.value, item.name))
+                //        end
+                //    f: close()
+                //    end
 
                 DcsInputCommandsTable = new SortedDictionary<int, string>();
 
@@ -167,7 +193,7 @@ namespace VAICOM
                 DcsInputCommandsTable.Add(148, "iCommandPlaneAirBrakeOff");
                 DcsInputCommandsTable.Add(149, "iCommandViewWeapons");
                 DcsInputCommandsTable.Add(150, "iCommandViewStatic");
-                DcsInputCommandsTable.Add(151, "iCommandViewTargets");
+                DcsInputCommandsTable.Add(151, "iCommandCompassRose3D");
                 DcsInputCommandsTable.Add(152, "iCommandInfoOnOff");
                 DcsInputCommandsTable.Add(153, "iCommandInfoTextOnOff");
                 DcsInputCommandsTable.Add(154, "iCommandInfoDataOnOff");
@@ -232,7 +258,6 @@ namespace VAICOM
                 DcsInputCommandsTable.Add(213, "iCommandViewUpLeftSlow");
                 DcsInputCommandsTable.Add(214, "iCommandViewStopSlow");
                 DcsInputCommandsTable.Add(215, "iCommandPlaneTrimStop");
-                DcsInputCommandsTable.Add(216, "iHeadTrackerPosReset");
                 DcsInputCommandsTable.Add(217, "iCommandPointOfViewUpRight");
                 DcsInputCommandsTable.Add(218, "iCommandPointOfViewRight");
                 DcsInputCommandsTable.Add(219, "iCommandPointOfViewDownRight");
@@ -255,7 +280,7 @@ namespace VAICOM
                 DcsInputCommandsTable.Add(236, "iCommandViewSaveAngles");
                 DcsInputCommandsTable.Add(237, "iCommandViewTempCockpitToggle");
                 DcsInputCommandsTable.Add(238, "iCommandPilotGestureSalute");
-                DcsInputCommandsTable.Add(239, "iCommandViewSaveAngles4");
+                DcsInputCommandsTable.Add(239, "iCommandToggleVDLonOff");
                 DcsInputCommandsTable.Add(240, "iCommandViewSaveAngles5");
                 DcsInputCommandsTable.Add(241, "iCommandViewSaveAngles6");
                 DcsInputCommandsTable.Add(242, "iCommandViewSaveAngles7");
@@ -442,7 +467,7 @@ namespace VAICOM
                 DcsInputCommandsTable.Add(423, "iCommandViewAWACSUnitInfoOn");
                 DcsInputCommandsTable.Add(424, "iCommandViewAWACSUnitInfoOff");
                 DcsInputCommandsTable.Add(425, "iCommandViewIR");
-                DcsInputCommandsTable.Add(426, "iCommandViewTargetType");
+                DcsInputCommandsTable.Add(426, "iCommandWristWatchOnOff");
                 DcsInputCommandsTable.Add(427, "iCommandPlaneAutopilotOverrideOn");
                 DcsInputCommandsTable.Add(428, "iCommandPlaneAutopilotOverrideOff");
                 DcsInputCommandsTable.Add(429, "iCommandPlaneRouteAutopilot");
@@ -978,22 +1003,6 @@ namespace VAICOM
                 DcsInputCommandsTable.Add(963, "iCommandPlaneWheelBrakeRightOn");
                 DcsInputCommandsTable.Add(964, "iCommandPlaneWheelBrakeRightOff");
                 DcsInputCommandsTable.Add(965, "iCommandPlaneEmergencyDisconnectLever");
-                DcsInputCommandsTable.Add(966, "ICommandMenuItem1");
-                DcsInputCommandsTable.Add(967, "ICommandMenuItem2");
-                DcsInputCommandsTable.Add(968, "ICommandMenuItem3");
-                DcsInputCommandsTable.Add(969, "ICommandMenuItem4");
-                DcsInputCommandsTable.Add(970, "ICommandMenuItem5");
-                DcsInputCommandsTable.Add(971, "ICommandMenuItem6");
-                DcsInputCommandsTable.Add(972, "ICommandMenuItem7");
-                DcsInputCommandsTable.Add(973, "ICommandMenuItem8");
-                DcsInputCommandsTable.Add(974, "ICommandMenuItem9");
-                DcsInputCommandsTable.Add(975, "ICommandMenuItem10");
-                DcsInputCommandsTable.Add(976, "ICommandMenuItem11");
-                DcsInputCommandsTable.Add(977, "ICommandMenuItem12");
-                DcsInputCommandsTable.Add(978, "ICommandMenuExit");
-                DcsInputCommandsTable.Add(979, "ICommandSwitchDialog");
-                DcsInputCommandsTable.Add(980, "ICommandSwitchToCommonDialog");
-                DcsInputCommandsTable.Add(981, "ICommandToggleConsole");
                 DcsInputCommandsTable.Add(982, "iCommandPlaneLeftMFD_OSB1_Off");
                 DcsInputCommandsTable.Add(983, "iCommandPlaneLeftMFD_OSB2_Off");
                 DcsInputCommandsTable.Add(984, "iCommandPlaneLeftMFD_OSB3_Off");
@@ -1874,10 +1883,65 @@ namespace VAICOM
                 DcsInputCommandsTable.Add(1859, "iCommandViewUpRightStop");
                 DcsInputCommandsTable.Add(1860, "iCommandViewDownLeftStop");
                 DcsInputCommandsTable.Add(1861, "iCommandViewDownRightStop");
-                DcsInputCommandsTable.Add(1862, "iCommandViewFreeInputLayer");
+                DcsInputCommandsTable.Add(1862, "iCommandViewCameraInputLayer");
                 DcsInputCommandsTable.Add(1863, "iCommandClipboardToCockpit");
                 DcsInputCommandsTable.Add(1864, "iCommandPilotGestureReadyToTaxi");
-                DcsInputCommandsTable.Add(1865, "iCommandMaximum");
+                DcsInputCommandsTable.Add(1865, "iCommandViewSupercarrierJump");
+                DcsInputCommandsTable.Add(1866, "iCommandViewCameraSpeedUp");
+                DcsInputCommandsTable.Add(1867, "iCommandViewCameraSpeedDown");
+                DcsInputCommandsTable.Add(1868, "iCommandViewCameraSpeedDefault");
+                DcsInputCommandsTable.Add(1869, "iCommandViewInputControlToggle");
+                DcsInputCommandsTable.Add(1870, "iCommandViewCameraRotationSpeedUp");
+                DcsInputCommandsTable.Add(1871, "iCommandViewCameraRotationSpeedDown");
+                DcsInputCommandsTable.Add(1872, "iCommandViewCameraRotationSpeedDefault");
+                DcsInputCommandsTable.Add(1873, "iCommandAttachTrailer");
+                DcsInputCommandsTable.Add(1874, "iCommandPilotGestureSaluteRight");
+                DcsInputCommandsTable.Add(1875, "iCommandCargoUnitSetOut");
+                DcsInputCommandsTable.Add(1876, "iCommandCargoUnitOutside");
+                DcsInputCommandsTable.Add(1877, "iCommandCargoUnitSetIn");
+                DcsInputCommandsTable.Add(1878, "iCommandCargoUnitInside");
+                DcsInputCommandsTable.Add(1879, "iCommandShowMapCoordinatesPicker");
+                DcsInputCommandsTable.Add(1880, "iCommandViewQuadMenu");
+                DcsInputCommandsTable.Add(1881, "iCommandViewQuadMenuLeft");
+                DcsInputCommandsTable.Add(1882, "iCommandViewQuadMenuRight");
+                DcsInputCommandsTable.Add(1883, "iCommandViewQuadMenuUp");
+                DcsInputCommandsTable.Add(1884, "iCommandViewQuadMenuDown");
+                DcsInputCommandsTable.Add(1885, "iCommandViewQuadMenuCenter");
+                DcsInputCommandsTable.Add(1890, "iCommandViewObjectWithPosition");
+                DcsInputCommandsTable.Add(1891, "iCommandViewCameraRollLeft");
+                DcsInputCommandsTable.Add(1892, "iCommandViewCameraRollLeftStop");
+                DcsInputCommandsTable.Add(1893, "iCommandViewCameraRollRight");
+                DcsInputCommandsTable.Add(1894, "iCommandViewCameraRollRightStop");
+                DcsInputCommandsTable.Add(1895, "iCommandViewNextBookmark");
+                DcsInputCommandsTable.Add(1896, "iCommandCarrierParkingMenu");
+                DcsInputCommandsTable.Add(1897, "iCommandViewCameraRollReset");
+                DcsInputCommandsTable.Add(1898, "iCommandSwitchWipersMode");
+                DcsInputCommandsTable.Add(1899, "iCommandInfantryEquipeWeapon");
+                DcsInputCommandsTable.Add(1900, "iCommandInfantryAimWeapon");
+                DcsInputCommandsTable.Add(1901, "iCommandInfantryThrowTakeWeapon");
+                DcsInputCommandsTable.Add(1902, "iCommandInfantryRun");
+                DcsInputCommandsTable.Add(1903, "iCommandInfantryJump");
+                DcsInputCommandsTable.Add(1904, "iCommandInfantryCrouch");
+                DcsInputCommandsTable.Add(1905, "iCommandViewAWACSCASButton");
+                DcsInputCommandsTable.Add(1906, "iCommandViewAWACSCASCancelButton");
+                DcsInputCommandsTable.Add(1907, "iCommandViewAWACSCASGoBackButton");
+                DcsInputCommandsTable.Add(1908, "iCommandViewAWACSCASRemarkButton");
+                DcsInputCommandsTable.Add(1909, "iCommandViewAWACSCASProcessButton");
+                DcsInputCommandsTable.Add(1910, "iCommandViewAWACSCASExecuteButton");
+                DcsInputCommandsTable.Add(1911, "iCommandViewAWACSCASAbortButton");
+                DcsInputCommandsTable.Add(1912, "iCommandViewAWACSCASSlaveSensorsToTGTButton");
+                DcsInputCommandsTable.Add(1913, "iCommandViewAWACSCASShowTgpButton");
+                DcsInputCommandsTable.Add(1914, "iCommandViewAWACSCASAcViewButton");
+                DcsInputCommandsTable.Add(1915, "iCommandViewAWACSCASChangeOrdinance");
+                DcsInputCommandsTable.Add(1916, "iCommandViewAWACSCASChangeIpSelect");
+                DcsInputCommandsTable.Add(1917, "iCommandViewAWACSCASChangeFriendlyBasepoint");
+                DcsInputCommandsTable.Add(1918, "iCommandViewAWACSCASParamsChange");
+                DcsInputCommandsTable.Add(1920, "iCommandCarrierSwitchHelpersDisplay");
+                DcsInputCommandsTable.Add(1921, "iCommandViewAWACSSelectRoleOn");
+                DcsInputCommandsTable.Add(1922, "iCommandViewAWACSSelectRoleOff");
+                DcsInputCommandsTable.Add(1923, "iCommandCarrierSwitchMessagesDisplay");
+                DcsInputCommandsTable.Add(1924, "iCommandCarrierTeleportToParking");
+                DcsInputCommandsTable.Add(1925, "iCommandMaximum");
                 DcsInputCommandsTable.Add(2000, "iCommandKeyNull");
                 DcsInputCommandsTable.Add(2001, "iCommandPlanePitch");
                 DcsInputCommandsTable.Add(2002, "iCommandPlaneRoll");
@@ -2020,14 +2084,6 @@ namespace VAICOM
                 DcsInputCommandsTable.Add(2139, "iCommandViewAWACSShowHealths");
                 DcsInputCommandsTable.Add(2140, "iCommandViewAWACSInfoAddTargetButton");
                 DcsInputCommandsTable.Add(2141, "iCommandViewAWACSInfoDelTargetButton");
-                DcsInputCommandsTable.Add(2142, "iServiceInformAboutUserHAngle");
-                DcsInputCommandsTable.Add(2143, "iServiceInformAboutUserVAngle");
-                DcsInputCommandsTable.Add(2144, "iHeadTrackerYawNormed");
-                DcsInputCommandsTable.Add(2145, "iHeadTrackerPitchNormed");
-                DcsInputCommandsTable.Add(2146, "iHeadTrackerRollNormed");
-                DcsInputCommandsTable.Add(2147, "iHeadTrackerPosX");
-                DcsInputCommandsTable.Add(2148, "iHeadTrackerPosY");
-                DcsInputCommandsTable.Add(2149, "iHeadTrackerPosZ");
                 DcsInputCommandsTable.Add(2150, "iCommandRoleSet");
                 DcsInputCommandsTable.Add(2151, "iCommandCoalitionSet");
                 DcsInputCommandsTable.Add(2152, "iCommandServiceChangeSeat");
@@ -2050,11 +2106,6 @@ namespace VAICOM
                 DcsInputCommandsTable.Add(2503, "iCommand_UILayer_MouseWheelFwd");
                 DcsInputCommandsTable.Add(2504, "iCommand_UILayer_MouseWheelBwd");
                 DcsInputCommandsTable.Add(2600, "iCommand_UILayer_end");
-                DcsInputCommandsTable.Add(2601, "iHeadTrackerPosXNormed");
-                DcsInputCommandsTable.Add(2602, "iHeadTrackerPosYNormed");
-                DcsInputCommandsTable.Add(2603, "iHeadTrackerPosZNormed");
-                DcsInputCommandsTable.Add(2604, "iHeadTrackerZoomToggle");
-                DcsInputCommandsTable.Add(2605, "iHeadTrackerSpyglassZoomToggle");
                 DcsInputCommandsTable.Add(2606, "iCommandViewAWACSCheckMessageButton");
                 DcsInputCommandsTable.Add(2607, "iCommandViewAWACSChangeQuantityTarget");
                 DcsInputCommandsTable.Add(2608, "iCommandPlaneRotateNoseWheel");
@@ -2072,12 +2123,8 @@ namespace VAICOM
                 DcsInputCommandsTable.Add(2620, "iCommandPlaneKneeboardJumpBookmark");
                 DcsInputCommandsTable.Add(2621, "iCommandViewCameraHeader");
                 DcsInputCommandsTable.Add(2622, "iCommandViewAWACSDialog");
-                DcsInputCommandsTable.Add(2623, "iHeadTrackerYawAdd");
-                DcsInputCommandsTable.Add(2624, "iHeadTrackerPitchAdd");
                 DcsInputCommandsTable.Add(2625, "iCommandViewRoute");
                 DcsInputCommandsTable.Add(2626, "iCommandViewRouteSpeed");
-                DcsInputCommandsTable.Add(2627, "iHeadTrackerLeftHandEnable");
-                DcsInputCommandsTable.Add(2628, "iHeadTrackerRightHandEnable");
                 DcsInputCommandsTable.Add(2629, "iCommandViewSpawnSignalFlare");
                 DcsInputCommandsTable.Add(2630, "iCommandViewBROnAirSquadron");
                 DcsInputCommandsTable.Add(2631, "iCommandViewBROnPilot");
@@ -2094,10 +2141,22 @@ namespace VAICOM
                 DcsInputCommandsTable.Add(2642, "iCommandViewFreeCameraSpeedHeight");
                 DcsInputCommandsTable.Add(2643, "iCommandViewFreeCameraSpeedYaw");
                 DcsInputCommandsTable.Add(2644, "iCommandViewFreeCameraSpeedPitch");
-                DcsInputCommandsTable.Add(2645, "iCommandKeyMaximum");
+                DcsInputCommandsTable.Add(2645, "iCommandInsideVolume");
+                DcsInputCommandsTable.Add(2646, "iCommandViewCameraPredefinedBookmark");
+                DcsInputCommandsTable.Add(2647, "iCommandJFOTldAzimuth");
+                DcsInputCommandsTable.Add(2648, "iCommandJFOTldElevation");
+                DcsInputCommandsTable.Add(2649, "iCommandJFOTldRoll");
+                DcsInputCommandsTable.Add(2650, "iCommandViewCameraSpeedRoll");
+                DcsInputCommandsTable.Add(2654, "iCommandViewSelectConnector");
+                DcsInputCommandsTable.Add(2655, "iCommandViewUnselectConnector");
+                DcsInputCommandsTable.Add(2656, "iCommandViewSetObjectID");
+                DcsInputCommandsTable.Add(2657, "iCommandViewAWACSCASSetMapClickState");
+                DcsInputCommandsTable.Add(2658, "iCommandViewMapRouteTool");
+                DcsInputCommandsTable.Add(2659, "iCommandKeyMaximum");
                 DcsInputCommandsTable.Add(3000, "iCommandCockpitDeviceCommandsStart");
                 DcsInputCommandsTable.Add(3999, "iCommandCockpitDeviceCommandsEnd");
                 DcsInputCommandsTable.Add(4000, "iCommandRepKeyBegin");
+
 
 
 

@@ -1,4 +1,5 @@
-﻿using VAICOM.Database;
+﻿using System.Collections.Generic;
+using VAICOM.Database;
 
 namespace VAICOM
 {
@@ -11,7 +12,6 @@ namespace VAICOM
             {
                 public static void SetAppendices()
                 {
-
                     State.apxwpnallowed = State.activeconfig.AllowAppendices & State.currentmodule.ApxWpn;
                     State.apxdirallowed = State.activeconfig.AllowAppendices & State.currentmodule.ApxDir;
 
@@ -32,16 +32,18 @@ namespace VAICOM
                         direction = Appendices.Direction[State.currentkey["apxdir"]].direction;
                     }
 
-                    State.currentmessage.parameters.Add(useweapon);
-                    State.currentmessage.parameters.Add(usedirection);
-                    State.currentmessage.parameters.Add(weaponnumber);
-                    State.currentmessage.parameters.Add(direction);
-
+                    // Ensure parameters is a List<object> before adding
+                    if (!(State.currentmessage.parameters is List<object>))
+                    {
+                        State.currentmessage.parameters = new List<object>();
+                    }
+                    var paramList = (List<object>)State.currentmessage.parameters;
+                    paramList.Add(useweapon);
+                    paramList.Add(usedirection);
+                    paramList.Add(weaponnumber);
+                    paramList.Add(direction);
                 }
             }
         }
     }
 }
-
-
-

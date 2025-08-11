@@ -13,7 +13,7 @@ namespace VAICOM
             public static partial class Lua
             {
 
-                public static void LuaFiles_Remove() // called by reset page
+                public static void LuaFiles_Remove() // called by reset page of the Vaicom UI Reset Lua Code check box
                 {
 
                     try
@@ -124,34 +124,28 @@ namespace VAICOM
                                                 if (File.Exists(path))
                                                 {
                                                     string exportfile = File.ReadAllText(path);
-                                                    string exportmatch = "";
-                                                    int matchoccurences = 0;
 
-                                                    exportmatch = thisfile.source;
-                                                    matchoccurences = (exportfile.Length - exportfile.Replace(exportmatch, "").Length) / exportmatch.Length;
-
-                                                    if (matchoccurences >= 1)
+                                                    // Remove both current and legacy Vaicom code blocks in export.lua if present
+                                                    var blocksToRemove = new (string Block, string Name)[]
                                                     {
-                                                        exportfile = exportfile.Replace(exportmatch, ""); // clear
-                                                        string writestring = exportfile;
-                                                        using (StreamWriter writer = new StreamWriter(path, false)) { writer.Write(writestring); };
+                                                        (Properties.Resources.Exportmatch, "New Vaicom code"),
+                                                        (Properties.Resources.LegacyExportmatch, "Legacy Vaicom code"),
+                                                        ("local vaicomlfs = require('lfs'); dofile(vaicomlfs.writedir()..[[Scripts\\VAICOMPRO\\VAICOMPRO.export.lua]])", "Legacy Vaicom code with double backslashes"),
+                                                        ("local vaicomlfs = require('lfs'); dofile(vaicomlfs.writedir()..[[Scripts\\VAICOMPRO\\VAICOMPRO.export.lua]])".Replace(@"\\", @"\"), "Legacy Vaicom code with single backslashes")
+                                                    };
+
+                                                    foreach (var blockInfo in blocksToRemove)
+                                                    {
+                                                        if (!string.IsNullOrEmpty(blockInfo.Block) && exportfile.Contains(blockInfo.Block))
+                                                        {
+                                                            exportfile = exportfile.Replace(blockInfo.Block, "");
+                                                            Log.Write($"Removed {blockInfo.Name} block from export.lua.", Colors.Text);
+                                                        }
                                                     }
-                                                    else // big code block not found, try smaller
+
+                                                    using (StreamWriter writer = new StreamWriter(path, false))
                                                     {
-                                                        exportmatch = Properties.Resources.Exportmatch;
-                                                        matchoccurences = (exportfile.Length - exportfile.Replace(exportmatch, "").Length) / exportmatch.Length;
-
-                                                        if (matchoccurences >= 1)
-                                                        {
-                                                            exportfile = exportfile.Replace(exportmatch, ""); // clear
-                                                            string writestring = exportfile;
-                                                            using (StreamWriter writer = new StreamWriter(path, false)) { writer.Write(writestring); };
-
-                                                        }
-                                                        else
-                                                        {
-                                                            // no matching content found
-                                                        }
+                                                        writer.Write(exportfile);
                                                     }
                                                 }
                                             }

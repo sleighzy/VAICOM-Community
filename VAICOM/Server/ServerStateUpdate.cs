@@ -162,7 +162,7 @@ namespace VAICOM
                 processingchunks = true;
                 try
                 {
-                    List<string> cats = new List<string>() { "Player", "Flight", "JTAC", "AWACS", "Tanker", "Crew", "Aux", "Cargo", "Moose" };
+                    List<string> cats = new List<string>() { "Player", "Flight", "JTAC", "AWACS", "Tanker", "Crew", "Aux", "Cargo" };
                     foreach (string catstr in cats)
                     {
                         try
@@ -286,7 +286,6 @@ namespace VAICOM
                     {
                         State.currentstate.menuaux = serverMessage.menuaux;
                         State.currentstate.menucargo = serverMessage.menucargo;
-                        State.currentstate.menumoose = serverMessage.menumoose; // add Moose
                     }
                 }
                 catch (Exception e)
@@ -341,8 +340,11 @@ namespace VAICOM
                 }
             }
 
-
-
+            public static void LogFlightUnits(ServerMessage serverMessage)
+            {
+                Log.Write($"Flight units in serverMessage: {serverMessage.availablerecipients["Flight"]?.Count ?? 0}", Colors.Text);
+                Log.Write($"Flight units in State: {State.currentstate.availablerecipients["Flight"].Count}", Colors.Text);
+            }
         }
     }
 }

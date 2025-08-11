@@ -228,5 +228,3 @@ get_page_active = function()
 		end
 	end
 end
-
-

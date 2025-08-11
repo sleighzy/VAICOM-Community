@@ -353,7 +353,7 @@
                 {
                     "{9EF0B969-E518-4E46-987F-47570745A589}:_3989EF8353E3463CA10F43A44F52739A"
                     {
-                    "Name" = "8:VAICOM PRO Community Edition for DCS World"
+                    "Name" = "8:VAICOM Community Edition for DCS World"
                     "AlwaysCreate" = "11:TRUE"
                     "Condition" = "8:"
                     "Transitive" = "11:FALSE"
@@ -409,9 +409,33 @@
             "Value" = "8:Path"
             "Property" = "8:DCSWORLDPATH"
             }
+            "{CF66B7F7-B7DA-4B08-A67A-233430638C9C}:_9BE4364911A5434AA38D93E8C0D82C73"
+            {
+            "Name" = "8:Voice Attack2"
+            "Root" = "2:2"
+            "RegKey" = "8:Software\\VoiceAttack.com\\VoiceAttack2\\LastRun"
+            "Value" = "8:VAFolder"
+            "Property" = "8:VAPATH"
+            }
             "{CF66B7F7-B7DA-4B08-A67A-233430638C9C}:_B5BFA9C34B1943F0B3C70E62CEA8F12F"
             {
             "Name" = "8:VoiceAttackAppPath"
+            "Root" = "2:2"
+            "RegKey" = "8:Software\\VoiceAttack.com\\VoiceAttack\\LastRun"
+            "Value" = "8:AppsFolder"
+            "Property" = "8:VAAPPPATH"
+            }
+            "{CF66B7F7-B7DA-4B08-A67A-233430638C9C}:_D3646005FE2A4AE6BFB2708AEF830316"
+            {
+            "Name" = "8:VoiceAttack2InstallType"
+            "Root" = "2:1"
+            "RegKey" = "8:SOFTWARE\\VoiceAttack.com\\VoiceAttack2"
+            "Value" = "8:InstallType"
+            "Property" = "8:VAINSTALLTYPE"
+            }
+            "{CF66B7F7-B7DA-4B08-A67A-233430638C9C}:_E13BF9F2222B4530A953E77ABFFCD95B"
+            {
+            "Name" = "8:VoiceAttack2AppPath"
             "Root" = "2:2"
             "RegKey" = "8:Software\\VoiceAttack.com\\VoiceAttack2\\LastRun"
             "Value" = "8:AppsFolder"
@@ -427,18 +451,18 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:VAICOM Community Edition for DCS World"
-        "ProductCode" = "8:{1893BEF0-9C65-4FE9-AD1D-23D582BACAC1}"
-        "PackageCode" = "8:{52E9122A-8245-4804-94A3-3B92E068F235}"
+        "ProductCode" = "8:{BBD98931-04DC-4CD1-BF25-03C63C007391}"
+        "PackageCode" = "8:{14A8DFE7-994D-4DAF-BFA8-EC550627E669}"
         "UpgradeCode" = "8:{16C6ACD8-D83D-44F3-93C0-5BD1BEB540A4}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
-        "DetectNewerInstalledVersion" = "11:FALSE"
+        "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:2.9.2"
+        "ProductVersion" = "8:3.0.2"
         "Manufacturer" = "8:DCS Community"
         "ARPHELPTELEPHONE" = "8:"
-        "ARPHELPLINK" = "8:"
+        "ARPHELPLINK" = "8: https://discord.gg/7c22BHNSCS"
         "Title" = "8:VAICOM Community Edition for DCS World"
         "Subject" = "8:Interactive Voice Control Plugin"
         "ARPCONTACT" = "8:"
@@ -743,7 +767,7 @@
                 {
                     "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_5467589AC14A4293BEEFE9820C0956B7"
                     {
-                    "Sequence" = "3:500"
+                    "Sequence" = "3:400"
                     "DisplayName" = "8:Confirm Installation"
                     "UseDynamicProperties" = "11:TRUE"
                     "IsDependency" = "11:FALSE"
@@ -766,7 +790,7 @@
                     }
                     "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_82F53E4048A14A3482CE9671D632A3C3"
                     {
-                    "Sequence" = "3:210"
+                    "Sequence" = "3:100"
                     "DisplayName" = "8:Welcome"
                     "UseDynamicProperties" = "11:TRUE"
                     "IsDependency" = "11:FALSE"
@@ -815,7 +839,7 @@
                     }
                     "{688940B3-5CA9-4162-8DEE-2993FA9D8CBC}:_ADD20D63C0514A75B89508FE8D3A8748"
                     {
-                    "Sequence" = "3:400"
+                    "Sequence" = "3:300"
                     "DisplayName" = "8:Installation Folder"
                     "UseDynamicProperties" = "11:TRUE"
                     "IsDependency" = "11:FALSE"

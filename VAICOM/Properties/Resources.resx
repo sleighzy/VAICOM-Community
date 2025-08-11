@@ -239,7 +239,7 @@
     <value>..\resources\audio\ui\stereo 44khz 16bit -26db\ui radio noise.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Exportmatch" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\files\exportmatch.lua;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+    <value>..\Resources\Files\Exportmatch.lua;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="Button_TX1_IN" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\images\button_tx1_in.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -433,9 +433,6 @@
   <data name="UI_2511_BG_Reset" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\images\ui_2511_bg_reset.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Append_Core_Export" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\files\append.core.export.lua;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
   <data name="Append_Core_gameMessages" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\files\append.core.gamemessages.lua;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
@@ -447,9 +444,6 @@
   </data>
   <data name="Append_Core_TabSheetBar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\files\append.core.tabsheetbar.lua;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
-  </data>
-  <data name="Append_Core_VAICOMPRO_export" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\files\append.core.vaicompro.export.lua;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="Append_F14_JesterAI_Page" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\files\append.f14.jesterai_page.lua;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
@@ -603,5 +597,14 @@
   </data>
   <data name="Orig_Terrain_Kola_radio" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Files\Orig.Terrain.Kola.radio.lua;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="Append_Core_VAICOMPRO_export" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Files\Append.Core.VAICOMPRO.export.lua;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="Append_Core_Export" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Files\Append.Core.Export.lua;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="LegacyExportmatch" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Files\LegacyExportmatch.lua;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
 </root>

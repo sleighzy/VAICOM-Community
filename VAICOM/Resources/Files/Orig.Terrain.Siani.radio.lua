@@ -20,14 +20,14 @@ radio = {
 		role = {"ground", "tower", "approach"};
 		callsign = {{["common"] = {_("AbuSultan"), "AbuSultan"}}};
 		frequency = {};
-		sceneObjects = {'t:109969531'};
+		sceneObjects = {'t:109969530'};
 	};
 	{
 		radioId = 'airfield2_0';
 		role = {"ground", "tower", "approach"};
 		callsign = {{["common"] = {_("AbuSuwayr"), "AbuSuwayr"}}};
 		frequency = {};
-		sceneObjects = {'t:10118142'};
+		sceneObjects = {'t:10118099'};
 	};
 	{
 		radioId = 'airfield26_0';
@@ -41,28 +41,28 @@ radio = {
 		role = {"ground", "tower", "approach"};
 		callsign = {{["common"] = {_("Ismailia"), "Ismailia"}}};
 		frequency = {[VHF_HI] = {MODULATIONTYPE_AM, 118100000.000000}};
-		sceneObjects = {'t:10118143'};
+		sceneObjects = {'t:10118100'};
 	};
 	{
 		radioId = 'airfield31_0';
 		role = {"ground", "tower", "approach"};
 		callsign = {{["common"] = {_("EKH"), "EKH"}}};
 		frequency = {};
-		sceneObjects = {'t:9519232'};
+		sceneObjects = {'t:9519230'};
 	};
 	{
 		radioId = 'airfield32_0';
 		role = {"ground", "tower", "approach"};
 		callsign = {{["common"] = {_("ERH"), "ERH"}}};
 		frequency = {};
-		sceneObjects = {'t:122511554'};
+		sceneObjects = {'t:122519746'};
 	};
 	{
 		radioId = 'airfield14_0';
 		role = {"ground", "tower", "approach"};
 		callsign = {{["common"] = {_("AlMansurah"), "AlMansurah"}}};
 		frequency = {};
-		sceneObjects = {'t:10961058'};
+		sceneObjects = {'t:10961057'};
 	};
 	{
 		radioId = 'airfield3_0';
@@ -76,21 +76,21 @@ radio = {
 		role = {"ground", "tower", "approach"};
 		callsign = {{["common"] = {_("Zaqaziq"), "Zaqaziq"}}};
 		frequency = {};
-		sceneObjects = {'t:10092992'};
+		sceneObjects = {'t:10092988'};
 	};
 	{
 		radioId = 'airfield27_0';
 		role = {"ground", "tower", "approach"};
 		callsign = {{["common"] = {_("BAZL"), "BAZL"}}};
 		frequency = {};
-		sceneObjects = {'t:121029778'};
+		sceneObjects = {'t:121037970'};
 	};
 	{
 		radioId = 'airfield24_0';
 		role = {"ground", "tower", "approach"};
 		callsign = {{["common"] = {_("BGN"), "BGN"}}};
 		frequency = {[VHF_HI] = {MODULATIONTYPE_AM, 134600000.000000}};
-		sceneObjects = {'t:4679656'};
+		sceneObjects = {'t:4679660'};
 	};
 	{
 		radioId = 'airfield33_0';
@@ -125,13 +125,13 @@ radio = {
 		role = {"ground", "tower", "approach"};
 		callsign = {{["common"] = {_("BAR"), "BAR"}}};
 		frequency = {};
-		sceneObjects = {'t:117391687'};
+		sceneObjects = {'t:117399879'};
 	};
 	{
 		radioId = 'airfield35_0';
 		role = {"ground", "tower", "approach"};
 		callsign = {{["common"] = {_("BEAI"), "BEAI"}}};
-		frequency = {};
+		frequency = {[VHF_HI] = {MODULATIONTYPE_AM, 119100000.000000}};
 		sceneObjects = {'t:10839433'};
 	};
 	{
@@ -139,7 +139,7 @@ radio = {
 		role = {"ground", "tower", "approach"};
 		callsign = {{["common"] = {_("CAI"), "CAI"}}};
 		frequency = {[VHF_HI] = {MODULATIONTYPE_AM, 118100000.000000}};
-		sceneObjects = {'t:2918973'};
+		sceneObjects = {'t:2918972'};
 	};
 	{
 		radioId = 'airfield18_0';
@@ -153,7 +153,7 @@ radio = {
 		role = {"ground", "tower", "approach"};
 		callsign = {{["common"] = {_("EMY"), "EMY"}}};
 		frequency = {};
-		sceneObjects = {'t:19271119'};
+		sceneObjects = {'t:19279319'};
 	};
 	{
 		radioId = 'airfield29_0';
@@ -174,35 +174,35 @@ radio = {
 		role = {"ground", "tower", "approach"};
 		callsign = {{["common"] = {_("Fayed"), "Fayed"}}};
 		frequency = {};
-		sceneObjects = {'t:9675084'};
+		sceneObjects = {'t:9675082'};
 	};
 	{
 		radioId = 'airfield37_0';
 		role = {"ground", "tower", "approach"};
 		callsign = {{["common"] = {_("GEL"), "GEL"}}};
 		frequency = {};
-		sceneObjects = {'t:10027137'};
+		sceneObjects = {'t:10027135'};
 	};
 	{
 		radioId = 'airfield7_0';
 		role = {"ground", "tower", "approach"};
 		callsign = {{["common"] = {_("Hatzerim"), "Hatzerim"}}};
 		frequency = {};
-		sceneObjects = {'t:11682044'};
+		sceneObjects = {'t:11682041'};
 	};
 	{
 		radioId = 'airfield12_0';
 		role = {"ground", "tower", "approach"};
 		callsign = {{["common"] = {_("HatzerimHeliBase"), "HatzerimHeliBase"}}};
 		frequency = {};
-		sceneObjects = {'t:11682045'};
+		sceneObjects = {'t:11682042'};
 	};
 	{
 		radioId = 'airfield20_0';
 		role = {"ground", "tower", "approach"};
 		callsign = {{["common"] = {_("HATZ"), "HATZ"}}};
 		frequency = {};
-		sceneObjects = {'t:12207863'};
+		sceneObjects = {'t:12207824'};
 	};
 	{
 		radioId = 'airfield38_0';
@@ -216,7 +216,7 @@ radio = {
 		role = {"ground", "tower", "approach"};
 		callsign = {{["common"] = {_("ISH"), "ISH"}}};
 		frequency = {};
-		sceneObjects = {'t:9587264'};
+		sceneObjects = {'t:9587229'};
 	};
 	{
 		radioId = 'airfield39_0';
@@ -244,7 +244,7 @@ radio = {
 		role = {"ground", "tower", "approach"};
 		callsign = {{["common"] = {_("Nevatim"), "Nevatim"}}};
 		frequency = {[VHF_HI] = {MODULATIONTYPE_AM, 132400000.000000}};
-		sceneObjects = {'t:11436154'};
+		sceneObjects = {'t:11436153'};
 	};
 	{
 		radioId = 'airfield10_0';
@@ -265,14 +265,14 @@ radio = {
 		role = {"ground", "tower", "approach"};
 		callsign = {{["common"] = {_("QWN"), "QWN"}}};
 		frequency = {};
-		sceneObjects = {'t:10069007'};
+		sceneObjects = {'t:10068995'};
 	};
 	{
 		radioId = 'airfield9_0';
 		role = {"ground", "tower", "approach"};
 		callsign = {{["common"] = {_("RAM"), "RAM"}}};
 		frequency = {};
-		sceneObjects = {'t:10453169'};
+		sceneObjects = {'t:10453168'};
 	};
 	{
 		radioId = 'airfield41_0';
@@ -286,7 +286,7 @@ radio = {
 		role = {"ground", "tower", "approach"};
 		callsign = {{["common"] = {_("SDE"), "SDE"}}};
 		frequency = {};
-		sceneObjects = {'t:12602785'};
+		sceneObjects = {'t:12610975'};
 	};
 	{
 		radioId = 'airfield42_0';
@@ -307,7 +307,7 @@ radio = {
 		role = {"ground", "tower", "approach"};
 		callsign = {{["common"] = {_("TELN"), "TELN"}}};
 		frequency = {};
-		sceneObjects = {'t:12380500'};
+		sceneObjects = {'t:12380456'};
 	};
 	{
 		radioId = 'airfield43_0';
@@ -321,13 +321,13 @@ radio = {
 		role = {"ground", "tower", "approach"};
 		callsign = {{["common"] = {_("CCE"), "CCE"}}};
 		frequency = {[VHF_HI] = {MODULATIONTYPE_AM, 118900000.000000}};
-		sceneObjects = {'t:9306927'};
+		sceneObjects = {'t:9306925'};
 	};
 	{
 		radioId = 'airfield44_0';
 		role = {"ground", "tower", "approach"};
 		callsign = {{["common"] = {_("WAS"), "WAS"}}};
 		frequency = {};
-		sceneObjects = {'t:92102886'};
+		sceneObjects = {'t:92111078'};
 	};
 }

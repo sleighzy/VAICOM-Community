@@ -88,7 +88,7 @@ namespace VAICOM
                         WaveFileReader reader = new WaveFileReader(wavstream);
                         var upsampler = new WaveFormatConversionStream(new WaveFormat(22050, 16, 1), reader);
                         var vol = new NAudio.Wave.SampleProviders.VolumeSampleProvider(upsampler.ToSampleProvider());
-                        vol.Volume = 0.6f; //Processor.SetTTSVolume();
+                        vol.Volume = 0.8f; //Processor.SetTTSVolume();
                         var pan = new NAudio.Wave.SampleProviders.PanningSampleProvider(vol);
                         pan.Pan = State.activeconfig.PanSetting_AOCS; // change
 
@@ -139,7 +139,7 @@ namespace VAICOM
                 public static void AOCS_InitSpeechSynth()
                 {
 
-                    State.synth.Volume = 80;
+                    State.synth.Volume = 90;
                     //State.synth.Volume  = 305*(State.currentstate.options.sound.headphones * State.currentstate.options.sound.volume)/10000;
 
                     int basevolume = State.synth.Volume;
@@ -643,7 +643,7 @@ namespace VAICOM
                                 if (!classstr.Equals("ATC"))
                                 {
                                     namer = unit.callsign;
-                                    elevationstr = ", elevation " + elevstr;
+                                    elevationstr = ", altitude " + elevstr; //change to altitude Pene testing
                                 }
                                 else
                                 {
