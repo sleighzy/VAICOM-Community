@@ -7,11 +7,11 @@
       "isbeta": false,
       "isdev": false,
       "productid": 1,
-      "releasedate": 20250811,
-      "version": 3053,
-      "versionstring": "3.0.5.3",
+      "releasedate": 20250903,
+      "version": 3055,
+      "versionstring": "3.0.5.5",
       "downloadurl": "https://raw.githubusercontent.com/Penecruz/VAICOM-Community/Development/VAICOM_Installer/Resources/VAICOMPRO.zip",
-      "releasenotes": "Hotfix for Vaicompro.export.lua Hooking issues on some systems, please test"
+      "releasenotes": "Changes to module detection routine, Adds MiG-29 Fulcrum, Temp remove F-5E-3 FC version due to DCS crash, please test"
     }
   ]
 }
