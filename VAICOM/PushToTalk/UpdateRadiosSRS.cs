@@ -67,7 +67,7 @@ namespace VAICOM
                     {"L-39C" ,              new radioslotdevicelist() { Slot_map_INT = {0,0,0}, Slot_map_SRS = {0,0,0}, Slot_map_CUS = {0,0,0} } },
                     {"SA342M" ,             new radioslotdevicelist() { Slot_map_INT = {0,0,0}, Slot_map_SRS = {0,0,0}, Slot_map_CUS = {0,0,0} } },
                     {"SA342L" ,             new radioslotdevicelist() { Slot_map_INT = {0,0,0}, Slot_map_SRS = {0,0,0}, Slot_map_CUS = {0,0,0} } },
-                    {"MiG-29" ,             new radioslotdevicelist() { Slot_map_INT = {0,0,0}, Slot_map_SRS = {0,0,0}, Slot_map_CUS = {0,0,0} } },
+                    //{"MiG-29" ,             new radioslotdevicelist() { Slot_map_INT = {0,0,0}, Slot_map_SRS = {0,0,0}, Slot_map_CUS = {0,0,0} } },
                     {"J-11A" ,              new radioslotdevicelist() { Slot_map_INT = {0,0,0}, Slot_map_SRS = {0,0,0}, Slot_map_CUS = {0,0,0} } },
                     {"AV8BNA" ,             new radioslotdevicelist() { Slot_map_INT = {2,3,0}, Slot_map_SRS = {2,3,0}, Slot_map_CUS = {2,3,0} } },
                     {"F-16C_50" ,           new radioslotdevicelist() { Slot_map_INT = {0,0,0}, Slot_map_SRS = {0,0,0}, Slot_map_CUS = {0,0,0} } },
@@ -92,7 +92,7 @@ namespace VAICOM
                     {"OH58D" ,              new radioslotdevicelist() { Slot_map_INT = {0,0,0}, Slot_map_SRS = {0,0,0}, Slot_map_CUS = {0,0,0} } },
                     {"CH-47F" ,             new radioslotdevicelist() { Slot_map_INT = {0,0,0}, Slot_map_SRS = {0,0,0}, Slot_map_CUS = {0,0,0} } },
                     {"F4U-1D" ,             new radioslotdevicelist() { Slot_map_INT = {0,0,0}, Slot_map_SRS = {0,0,0}, Slot_map_CUS = {0,0,0} } },
-                    {"MiG-29 Fulcrum" ,    new radioslotdevicelist() { Slot_map_INT = {0,0,0}, Slot_map_SRS = {0,0,0}, Slot_map_CUS = {0,0,0} } },
+                    {"MiG-29 Fulcrum" ,     new radioslotdevicelist() { Slot_map_INT = {0,0,0}, Slot_map_SRS = {0,0,0}, Slot_map_CUS = {0,0,0} } },
                     {"F-22A" ,              new radioslotdevicelist() { Slot_map_INT = {0,0,0}, Slot_map_SRS = {0,0,0}, Slot_map_CUS = {0,0,0} } },
 
                 };
@@ -135,7 +135,7 @@ namespace VAICOM
                     {"L-39C" ,      new radioslotlist() { Slot_map = { "R-832M", "", "" } } },
                     {"SA342M" ,     new radioslotlist() { Slot_map = { "VHF AM", "UHF AM", "VHF FM" } } },
                     {"SA342L" ,     new radioslotlist() { Slot_map = { "VHF AM", "UHF AM", "VHF FM" } } },
-                    {"MiG-29" ,     new radioslotlist() { Slot_map = { "VHF AM", "UHF", "VHF FM" } } },
+                    //{"MiG-29" ,     new radioslotlist() { Slot_map = { "VHF AM", "UHF", "VHF FM" } } },
                     {"J-11A" ,      new radioslotlist() { Slot_map = { "VHF AM", "UHF", "VHF FM" } } },
                     {"AV8BNA" ,     new radioslotlist() { Slot_map = { "COMM1", "COMM2", ""} } },
                     {"F-16C_50" ,   new radioslotlist() { Slot_map = { "UHF Radio AN/ARC-164", "VHF Radio AN/ARC-222", "" } } },
@@ -174,7 +174,7 @@ namespace VAICOM
                     {"FA-18F",      new radioslotlist() { Slot_map = { "COMM1: ARC-210", "COMM2: ARC-210", ""} } },
                     {"EA-18G",      new radioslotlist() { Slot_map = { "COMM1: ARC-210", "COMM2: ARC-210", ""} } },
                     {"F4U-1D" ,     new radioslotlist() { Slot_map = { "R-ARC5", "", ""} } },
-                    {"MiG-29 Fulcrum" ,    new radioslotlist() { Slot_map = { "VHF R-855UM", "VHF/UHF R-862", "" } } },
+                    {"MiG-29 Fulcrum" ,     new radioslotlist() { Slot_map = { "VHF/UHF R-862", "VHF R-855UM", "" } } },
                     {"F-22A" ,      new radioslotlist() { Slot_map = { "VHF AM", "UHF", "VHF FM" } } }, //Pene WIP
 
                 };
@@ -217,7 +217,7 @@ namespace VAICOM
                     {"L-39C" ,      new radioslotlist() { Slot_map = { "R-832M", "", "" } } },
                     {"SA342M" ,     new radioslotlist() { Slot_map = { "TRAP 138A", "UHF TRA 6031", "TRC 9600 PR4G" } } },
                     {"SA342L" ,     new radioslotlist() { Slot_map = { "TRAP 138A", "UHF TRA 6031", "TRC 9600 PR4G" } } },
-                    {"MiG-29" ,     new radioslotlist() { Slot_map = { "R-862", "", "" } } },
+                    //{"MiG-29" ,     new radioslotlist() { Slot_map = { "R-862", "", "" } } },
                     {"J-11A" ,      new radioslotlist() { Slot_map = { "R-862", "", "" } } },
                     {"AV8BNA" ,     new radioslotlist() { Slot_map = { "ARC-210(1) V/UHF", "ARC-210(2) V/UHF", ""} } },
                     {"F-16C_50" ,   new radioslotlist() { Slot_map = { "AN/ARC-164 UHF", "AN/ARC-222 VHF", "" } } },
@@ -256,7 +256,7 @@ namespace VAICOM
                     {"FA-18F",      new radioslotlist() { Slot_map = { "AN/ARC-210 G5 V/UHF", "AN/ARC-210 V/UHF G5", "" } } },
                     {"EA-18G",      new radioslotlist() { Slot_map = { "AN/ARC-210 G5 V/UHF", "AN/ARC-210 V/UHF G5", "" } } },
                     {"F4U-1D" ,     new radioslotlist() { Slot_map = { "ARC-5", "", ""} } },
-                    {"MiG-29 Fulcrum" ,    new radioslotlist() { Slot_map = { "VHF R855UM", "VHF/UHF R862", "" } } },
+                    {"MiG-29 Fulcrum" ,     new radioslotlist() { Slot_map = { "VHF/UHF R-862", "", "" } } },
                     {"F-22A" ,      new radioslotlist() { Slot_map = { "AN/ARC-210 G5 V/UHF", "AN/ARC-210 V/UHF G5", "VHF FM" } } }, //Pene WIP
                 };
             }

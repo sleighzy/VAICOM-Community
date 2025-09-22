@@ -7,11 +7,11 @@
       "isbeta": false,
       "isdev": false,
       "productid": 1,
-      "releasedate": 20250903,
-      "version": 3055,
-      "versionstring": "3.0.5.5",
+      "releasedate": 20250922,
+      "version": 3057,
+      "versionstring": "3.0.5.7",
       "downloadurl": "https://raw.githubusercontent.com/Penecruz/VAICOM-Community/Development/VAICOM_Installer/Resources/VAICOMPRO.zip",
-      "releasenotes": "Changes to module detection routine, Adds MiG-29 Fulcrum, Temp remove F-5E-3 FC version due to DCS crash, please test"
+      "releasenotes": "Fix module detection routine on some modules SRS settings, Adds MiG-29 Fulcrum reworked, please test"
     }
   ]
 }

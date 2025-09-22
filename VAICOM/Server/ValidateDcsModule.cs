@@ -27,68 +27,64 @@ namespace VAICOM
 
             public static void ValidateDcsModule(bool silent)
             {
+
                 try
                 {
-                    // Reset to unknown
+
+                    // reset to unknown
+
                     bool moduleresolved = false;
                     State.currentmodule = DCSmodules.LookupTable["----"];
 
-                    // Check for existing modules
+                    // check for existing modules
+
                     foreach (KeyValuePair<string, DCSmodule> mod in DCSmodules.LookupTable)
                     {
-                        Log.Write($"Matching module with ID: {State.currentstate.id}", Colors.Text);
-
-                        if (State.currentstate.id.Equals(mod.Key, StringComparison.OrdinalIgnoreCase))
+                        if (State.currentstate.id.ToLower().Contains(mod.Key.ToLower()))
                         {
                             if (!silent)
                             {
-                                Log.Write($"Found module {mod.Value.Name}", Colors.Text);
+                                Log.Write("Found module " + State.currentstate.id, Colors.Text);
                             }
-
                             State.currentmodule = mod.Value;
                             moduleresolved = true;
-                            break; // Stop as soon as a specific match is found
                         }
                     }
 
-                    // Guess any unknowns
+                    // guess any unknowns
+
                     if (!moduleresolved)
                     {
                         moduleresolved = SetKnownModule();
                     }
 
-                    // Still not resolved? Import to table as new and store
+                    // still not resolved? import to table as new and store
+
                     if (!moduleresolved & State.activeconfig.AutoImportModules)
                     {
+
                         string id = State.currentstate.id;
                         string cat = State.currentstate.playerunitcat;
-                        DCSmodule newmod = new DCSmodule()
-                        {
-                            Name = id,
-                            Alias = "",
-                            ProOnly = true,
-                            IsFC = false,
-                            ApxWpn = true,
-                            ApxDir = true,
-                            IsHelo = (cat == "Helicopters"),
-                            Singlehotkey = (cat == "Helicopters")
-                        };
+                        DCSmodule newmod = new DCSmodule() { Name = id, Alias = "", ProOnly = true, IsFC = false, ApxWpn = true, ApxDir = true, IsHelo = (cat == "Helicopters"), Singlehotkey = (cat == "Helicopters") };
                         DCSmodules.LookupTable.Add(id, newmod);
                         State.importeddcsmodules.Add(newmod);
                         if (!silent)
                         {
-                            Log.Write($"Adding new {cat.ToLower()} module {id} to database.", Colors.Text);
+                            Log.Write("Adding new " + cat.ToLower() + " module " + id + " to database.", Colors.Text);
+
                         }
                         FileHandler.Database.WriteModulesToFile(true);
                         State.currentmodule = DCSmodules.LookupTable[id];
                     }
 
-                    // Module is resolved, check if allowed
+                    // module is resolved, check if allowed
+
                     if (!State.PRO & State.currentmodule.ProOnly)
                     {
                         if (!silent)
                         {
-                            Log.Write($"DCS module {State.currentmodule.Name} is available with PRO license only.", Colors.Warning);
+                            Log.Write("DCS module " + State.currentmodule.Name + " is available with PRO license only.", Colors.Warning);
+
                         }
                         State.blockedmodule = false;
                         UI.Playsound.Sorry();
@@ -102,11 +98,10 @@ namespace VAICOM
                         State.blockedmodule = false;
                     }
 
-                    Log.Write($"Current module resolved: {State.currentmodule.Name}", Colors.Text);
                 }
-                catch (Exception)
+
+                catch (Exception) // when error revert to default
                 {
-                    // When error, revert to default
                     if (State.PRO)
                     {
                         State.currentmodule = DCSmodules.LookupTable["Module Error"];
@@ -115,6 +110,7 @@ namespace VAICOM
                             DisplayCurrentModule();
                         }
                     }
+
                 }
             }
 
@@ -187,14 +183,8 @@ namespace VAICOM
                     State.currentmodule = DCSmodules.LookupTable["Mosquito"];
                     return true;
                 }
-                // Mig-29 Full fidelirty
-                if (State.currentstate.id.Equals("MiG-29 Fulcrum", StringComparison.OrdinalIgnoreCase))
-                {
-                    State.currentmodule = DCSmodules.LookupTable["MiG-29 Fulcrum"];
-                    return true;
-                }
                 // Mig-29
-                if (State.currentstate.id.Equals("MiG-29A", StringComparison.OrdinalIgnoreCase))
+                if (State.currentstate.id.ToLower().Contains("-29") || (State.currentstate.id.ToLower().Contains("fulcrum")))
                 {
                     State.currentmodule = DCSmodules.LookupTable["MiG-29"];
                     return true;
@@ -230,18 +220,18 @@ namespace VAICOM
                     return true;
                 }
                 //F-5E_FC Flaming Cliffs version
-                //if (State.currentstate.id.Equals("F-5E-3_FC", StringComparison.OrdinalIgnoreCase))
-                //{
-                    //State.currentmodule = DCSmodules.LookupTable["F-5E_FC"];
-                    //return true;
-                //}
+                if ((State.currentstate.id.ToLower().Contains("f") & State.currentstate.id.ToLower().Contains("5E-3_FC"))) //|| (State.currentstate.id.ToLower().Contains("FC"))) //try removing the or statement on both versions??
+                {
+                    State.currentmodule = DCSmodules.LookupTable["F-5E_FC"];
+                    return true;
+                }
                 //F-5E
-                if (State.currentstate.id.Equals("F-5E-3", StringComparison.OrdinalIgnoreCase))
+                if ((State.currentstate.id.ToLower().Contains("f") & State.currentstate.id.ToLower().Contains("5E-3"))) //|| (State.currentstate.id.ToLower().Contains("tiger")))
                 {
                     State.currentmodule = DCSmodules.LookupTable["F-5E-3"];
                     return true;
                 }
-                
+
                 //Aviojet
                 if (State.currentstate.id.ToLower().Contains("101") || (State.currentstate.id.ToLower().Contains("avio")))
                 {
@@ -329,4 +319,3 @@ namespace VAICOM
     }
 
 }
-
