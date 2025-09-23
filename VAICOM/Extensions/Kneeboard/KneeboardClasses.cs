@@ -116,7 +116,8 @@ namespace VAICOM
                 public string range;
                 public string bearing;
                 public string alt;
-                public string frq;
+                public string frq; // Primary frequency
+                public string frq2; // Secondary frequency
                 public string istuned;
                 public string humanname;
                 public List<string> altfreq;
@@ -172,6 +173,7 @@ namespace VAICOM
                     List<KneeboardUnitSummary> units = new List<KneeboardUnitSummary>();
 
                     Log.Write($"Processing {State.currentstate.availablerecipients[cat].Count} {cat} units for kneeboard.", Colors.Text);
+                    Log.Write($"Current Theater: {State.currentstate.theatre}", Colors.Text);
 
                     foreach (Server.DcsUnit unit in State.currentstate.availablerecipients[cat])
                     {
@@ -207,36 +209,86 @@ namespace VAICOM
 
                             if (!State.currentmodule.Theme.Equals("WWII"))
                             {
-                                // Prioritize UHF, then VHF, then FM
-                                string selectedFreq = null;
+                                // Prioritize UHF, then VHF_HI, then VHF_LOW, then HF
+                                string primaryFreq = null;
+                                string secondaryFreq = null;
 
-                                // Check for UHF frequencies
-                                selectedFreq = unit.altfreq.FirstOrDefault(freq => unit.getmodstr().Contains("UHF"));
-                                if (selectedFreq == null)
+                                // Combine main frequency and alternate frequencies into a single list
+                                List<string> allFrequencies = new List<string>();
+                                if (!string.IsNullOrEmpty(unit.freq))
                                 {
-                                    // Check for VHF frequencies
-                                    selectedFreq = unit.altfreq.FirstOrDefault(freq => unit.getmodstr().Contains("VHF"));
+                                    allFrequencies.Add(unit.freq);
                                 }
-                                if (selectedFreq == null)
+                                if (unit.altfreq != null && unit.altfreq.Any())
                                 {
-                                    // Check for FM frequencies
-                                    selectedFreq = unit.altfreq.FirstOrDefault(freq => unit.getmodstr().Contains("FM"));
+                                    allFrequencies.AddRange(unit.altfreq);
                                 }
 
-                                // If no alternate frequency matches, fall back to the main frequency
-                                if (selectedFreq != null)
+                                // Parse frequencies as numerical values and classify them
+                                var uhfFreqs = allFrequencies.Where(freq => double.TryParse(freq, out double f) && f >= 225000000 && f <= 399950000).ToList();
+                                var vhfHiFreqs = allFrequencies.Where(freq => double.TryParse(freq, out double f) && f >= 118000000 && f <= 137000000).ToList();
+                                var vhfLowFreqs = allFrequencies.Where(freq => double.TryParse(freq, out double f) && f >= 30000000 && f <= 75000000).ToList();
+                                var hfFreqs = allFrequencies.Where(freq => double.TryParse(freq, out double f) && f >= 3000000 && f <= 30000000).ToList();
+
+                                // Select the top two frequencies based on priority
+                                if (uhfFreqs.Any())
                                 {
-                                    descr.frq = unit.getmodstr() + " " + Helpers.Common.NormalizeFreqString(selectedFreq);
+                                    primaryFreq = uhfFreqs.First();
+                                    if (vhfHiFreqs.Any())
+                                    {
+                                        secondaryFreq = vhfHiFreqs.First();
+                                    }
+                                    else if (uhfFreqs.Count > 1)
+                                    {
+                                        secondaryFreq = uhfFreqs.Skip(1).FirstOrDefault();
+                                    }
                                 }
-                                else
+                                else if (vhfHiFreqs.Any())
                                 {
-                                    descr.frq = unit.getmodstr() + " " + unit.getfreqstr();
+                                    primaryFreq = vhfHiFreqs.First();
+                                    if (vhfHiFreqs.Count > 1)
+                                    {
+                                        secondaryFreq = vhfHiFreqs.Skip(1).FirstOrDefault();
+                                    }
+                                    else if (vhfLowFreqs.Any())
+                                    {
+                                        secondaryFreq = vhfLowFreqs.First();
+                                    }
                                 }
+                                else if (vhfLowFreqs.Any())
+                                {
+                                    primaryFreq = vhfLowFreqs.First();
+                                    if (vhfLowFreqs.Count > 1)
+                                    {
+                                        secondaryFreq = vhfLowFreqs.Skip(1).FirstOrDefault();
+                                    }
+                                    else if (hfFreqs.Any())
+                                    {
+                                        secondaryFreq = hfFreqs.First();
+                                    }
+                                }
+                                else if (hfFreqs.Any())
+                                {
+                                    primaryFreq = hfFreqs.First();
+                                    if (hfFreqs.Count > 1)
+                                    {
+                                        secondaryFreq = hfFreqs.Skip(1).FirstOrDefault();
+                                    }
+                                }
+
+                                // Normalize and assign frequencies
+                                descr.frq = primaryFreq != null ? Helpers.Common.NormalizeFreqString(primaryFreq) : unit.getfreqstr();
+                                descr.frq2 = secondaryFreq != null ? Helpers.Common.NormalizeFreqString(secondaryFreq) : null;
+
+                                // Log frequencies for debugging
+                                Log.Write($"Primary Frequency: {descr.frq}", Colors.Text);
+                                Log.Write($"Secondary Frequency: {descr.frq2}", Colors.Text);
                             }
                             else
                             {
                                 // For WWII theme, use the main frequency
-                                descr.frq = unit.getmodstr() + " " + unit.getfreqstr();
+                                descr.frq = unit.getfreqstr();
+                                descr.frq2 = null;
                             }
 
                             if (AOCS)
@@ -255,7 +307,10 @@ namespace VAICOM
 
                             units.Add(descr);
 
-                            string lineitem = descr.frq + " " + "[" + descr.alias + "]" + descr.istuned + " " + descr.callsign + " " + descr.bearing + " " + descr.range + " " + descr.alt + " " + altfreqs;
+                            string lineitem = descr.frq + (descr.frq2 != null ? " / " + descr.frq2 : "") + " " +
+                                              "[" + descr.alias + "]" + descr.istuned + " " +
+                                              descr.callsign + " " + descr.bearing + " " +
+                                              descr.range + " " + descr.alt + " " + altfreqs;
 
                             unitslist.Add(lineitem);
                         }
