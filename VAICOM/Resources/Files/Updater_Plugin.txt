@@ -9,9 +9,12 @@ ECHO Updating files...
 COPY /Y "Updates\Package\VAICOMPRO\Documentation\VAICOM Pro Community User Manual.pdf" "Documentation\VAICOM Pro Community User Manual.pdf" 
 COPY /Y "Updates\Package\VAICOMPRO\EULA.txt" "EULA.txt" 
 COPY /Y "Updates\Package\VAICOMPRO\VAICOMPRO.dll" "VAICOMPRO.dll" 
+COPY /Y "Updates\Package\VAICOMPRO\VAICOMPRO.exe" "VAICOMPRO.exe" 
 DEL /Q VAICOMPRO.exe
 RMDIR /S /Q "Updates"
 ECHO Restarting VoiceAttack...
 START "VoiceAttack" /MIN XXXXXX
+ECHO Restarting VAICOMPRO...
+START "VAICOMPRO" /MIN VAICOMPRO.exe
 ECHO Done!
 EXIT
