@@ -40,14 +40,33 @@ namespace VAICOM
 
                     foreach (KeyValuePair<string, DCSmodule> mod in DCSmodules.LookupTable)
                     {
-                        if (State.currentstate.id.ToLower().Contains(mod.Key.ToLower()))
+                        if (State.currentstate.id.Equals(mod.Key, StringComparison.OrdinalIgnoreCase)) // Exact match
                         {
                             if (!silent)
                             {
-                                Log.Write("Found module " + State.currentstate.id, Colors.Text);
+                                Log.Write("Found exact module match: " + State.currentstate.id, Colors.Text);
                             }
                             State.currentmodule = mod.Value;
                             moduleresolved = true;
+                            break; // Stop further checks
+                        }
+                    }
+
+                    // If no exact match, fallback to substring matching
+                    if (!moduleresolved)
+                    {
+                        foreach (KeyValuePair<string, DCSmodule> mod in DCSmodules.LookupTable)
+                        {
+                            if (State.currentstate.id.ToLower().Contains(mod.Key.ToLower())) // Substring match
+                            {
+                                if (!silent)
+                                {
+                                    Log.Write("Found module by substring: " + State.currentstate.id, Colors.Text);
+                                }
+                                State.currentmodule = mod.Value;
+                                moduleresolved = true;
+                                break;
+                            }
                         }
                     }
 
@@ -184,7 +203,12 @@ namespace VAICOM
                     return true;
                 }
                 // Mig-29
-                if (State.currentstate.id.ToLower().Contains("-29") || (State.currentstate.id.ToLower().Contains("fulcrum")))
+                if (State.currentstate.id.ToLower().Contains("fulcrum"))
+                {
+                    State.currentmodule = DCSmodules.LookupTable["MiG-29 Fulcrum"];
+                    return true;
+                }
+                if (State.currentstate.id.ToLower().Contains("-29"))
                 {
                     State.currentmodule = DCSmodules.LookupTable["MiG-29"];
                     return true;
