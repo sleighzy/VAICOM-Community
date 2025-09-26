@@ -51,7 +51,7 @@
                             </TransformGroup>
                         </Image.RenderTransform>
                     </Image>
-                    <TextBlock x:Name="labelvolume" FontSize="10" Foreground="#FFDBDBDB" HorizontalAlignment="Left" Margin="248,100,0,0" TextWrapping="Wrap" Text="VOL" VerticalAlignment="Top" Width="38" TextAlignment="Center" Height="16" FontWeight="Bold" Grid.Column="1"/>
+                    <TextBlock x:Name="labelvolume" FontSize="10" Foreground="#FFDBDBDB" HorizontalAlignment="Left" Margin="245,100,0,0" TextWrapping="Wrap" Text="CHATTER" VerticalAlignment="Top" Width="46" TextAlignment="Center" Height="16" FontWeight="Bold" Grid.Column="1" RenderTransformOrigin="0.193,0.531"/>
                     <TextBlock x:Name="labelsrs" FontSize="10" Foreground="#FFDBDBDB" HorizontalAlignment="Left" Margin="47,187,0,0" TextWrapping="Wrap" Text="SRS" VerticalAlignment="Top" Width="38" TextAlignment="Center" Height="16" FontWeight="Bold" Visibility="Hidden"/>
                     <Image x:Name="Test_Button" HorizontalAlignment="Left" Height="24" Margin="255,70,0,0" VerticalAlignment="Top" Width="24" Source="Resources/Images/Code_Button_Up.png" MouseDown="SwitchPage_Push" Cursor="Hand" MouseUp="SwitchPage_Release" Visibility="Hidden" Grid.Column="1"/>
                     <Image x:Name="Sidebar6" HorizontalAlignment="Left" Height="118" VerticalAlignment="Top" Width="42" Source="Resources/Images/Sidetitle-PTT.png" Stretch="None" Margin="6,75,0,0"/>
