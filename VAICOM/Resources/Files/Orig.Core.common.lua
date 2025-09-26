@@ -260,6 +260,10 @@ unitSystemByCountry = {
 	--Combined Joint Task Forces Red
 }
 
+getUnitSystemByCountry = function(country)
+	return unitSystemByCountry[country] or unitSystems.imperial
+end
+
 space_ 			= p.separator(' ')
 comma_space_  	= p._p({', ',	'delimeter',	','})
 CR_  			= p._p({'\n',	'CR',			'\n'})
@@ -506,7 +510,7 @@ do
 Pressure = {
 	make = function(self, pressure, aircraftType, fmt)
 		local country = aircraftNativeCountry[aircraftType] or base.country.USA
-		local unit = unitSystemByCountry[country].pressure
+		local unit = getUnitSystemByCountry(country).pressure
 		return self.sub.Digits:make(u.round(pressure * unit.coeff, 0.01), fmt)
 	end,
 	sub = {
@@ -519,7 +523,7 @@ end
 BearingAndRange = {
 	make = function(self, dir, country)
 	--base.print("~~~~~~~ BearingAndRange dir[x],dir[y],country"..country)
-		local distanceUnit = unitSystemByCountry[country].distance
+		local distanceUnit = getUnitSystemByCountry(country).distance
 		return 	self.sub.Digits:make(u.round(u.get_azimuth(dir) * u.units.deg.coeff, 1),'%03d') +
 				space_ + self.sub.pfor:make() + space_ + self.sub.Digits:make(u.adv_round(u.get_lengthZX(dir) * distanceUnit.coeff))
 	end,
@@ -532,7 +536,7 @@ BearingAndRange = {
 Bearing = {
 	make = function(self, dir, country)
 	--base.print("~~~~~~~ BearingAndRange dir[x],dir[y],country"..country)
-		local distanceUnit = unitSystemByCountry[country].distance
+		local distanceUnit = getUnitSystemByCountry(country).distance
 		return 	self.sub.Digits:make(u.round(u.get_azimuth(dir) * u.units.deg.coeff, 1)) + space_ 
 	end,
 	sub = {
@@ -1012,7 +1016,7 @@ WingmanBearingHandler = {
 WingmanContactHandler = {
 	make = function(self, message)
 		local country = message.sender:getUnit():getCountry()
-		local distanceUnit = unitSystemByCountry[country].distance
+		local distanceUnit = getUnitSystemByCountry(country).distance
 		return 	self.sub.WingmanMessageHandler:make(message) + ' ' +
 				self.sub.targetType:make(message.parameters.type) + ' ' +
 				self.sub.BearingOClock:make(u.get_azimuth(message.parameters.dir)) + comma_space_ +
@@ -1117,7 +1121,7 @@ ToWingmen = {
 
 Direction = {
 	make = function(self, dir, country)
-		local distanceUnit = unitSystemByCountry[country].distance
+		local distanceUnit = getUnitSystemByCountry(country).distance
 		return 	self.sub.Digits:make(u.round(u.get_azimuth(dir) * u.units.deg.coeff, 1), '%03d') + ' ' +
 				self.sub.pfor:make() + ' ' + self.sub.Number:make(u.adv_round(u.get_lengthZX(dir) * distanceUnit.coeff, 1))
 	end,
@@ -1153,7 +1157,7 @@ Altitude = {
 			end
 		end		
 		base.assert(alt > 0.0)
-		local altitudeUnit = unitSystemByCountry[country].altitude
+		local altitudeUnit = getUnitSystemByCountry(country).altitude
 		return self.sub.at:make() + ' ' + self.sub.Number:make(u.adv_round(alt * altitudeUnit.coeff, accuracy or 1.0))
 	end,
 	sub = {	at		= Phrase:new({_('at altitude'), 'at'}),
@@ -1164,7 +1168,7 @@ Altitude = {
 Velocity = {
 	make = function(self, vel, country, accuracy)
 		--base.assert(vel > 0.0)  --The aircraft can stand at the airfield. vel == 0
-		local velocityUnit = unitSystemByCountry[country].velocity		
+		local velocityUnit = getUnitSystemByCountry(country).velocity
 		return self.sub.at:make() + ' ' + self.sub.Digits:make(u.adv_round(vel * velocityUnit.coeff, accuracy or 1.0))
 	end,
 	sub = {	at		= Phrase:new({_('at velocity'), 'at'}),
@@ -1673,7 +1677,7 @@ handlersTable = {
 			local country = message.receiver:getUnit():getCountry()
 			local aircraftType = message.receiver:getUnit():getTypeName()
 						
-			local distanceUnit = unitSystemByCountry[country].distance
+			local distanceUnit = getUnitSystemByCountry(country).distance
 			local visibility_distD = base.math.max(1, base.math.floor(message.parameters.visibility * distanceUnit.coeff))			
 			if message.parameters.visibility > 19000 then
 				visibility_distD = 11
@@ -1686,7 +1690,7 @@ handlersTable = {
 				clouds_density = self.sub.solid_layer:make()
 			end
 			if  message.parameters.clouds_density > 2.0 then
-				local altitudeUnit = unitSystemByCountry[message.sender:getUnit():getCountry()].altitude
+				local altitudeUnit = getUnitSystemByCountry(message.sender:getUnit():getCountry()).altitude
 				local cloudAltIdx = u.adv_round(message.parameters.clouds_ceiling * altitudeUnit.coeff/1000, 1.0)
 				cloudAltIdx = math.min(11,cloudAltIdx)
 				clouds_density = clouds_density + space_ + self.sub.Altitude:make(cloudAltIdx)
@@ -1752,7 +1756,7 @@ handlersTable = {
 			local country = message.receiver:getUnit():getCountry()
 			local aircraftType = message.receiver:getUnit():getTypeName()
 						
-			local distanceUnit = unitSystemByCountry[country].distance
+			local distanceUnit = getUnitSystemByCountry(country).distance
 			local visibility_distD = base.math.max(1, base.math.floor(message.parameters.visibility * distanceUnit.coeff))			
 			if message.parameters.visibility > 19000 then
 				visibility_distD = 11
@@ -1765,7 +1769,7 @@ handlersTable = {
 				clouds_density = self.sub.solid_layer:make()
 			end
 			if  message.parameters.clouds_density > 2.0 then
-				local altitudeUnit = unitSystemByCountry[message.sender:getUnit():getCountry()].altitude				
+				local altitudeUnit = getUnitSystemByCountry(message.sender:getUnit():getCountry()).altitude
 				local cloudAltIdx = u.adv_round(message.parameters.clouds_ceiling * altitudeUnit.coeff/1000, 1.0)
 				cloudAltIdx = math.min(11,cloudAltIdx)
 				clouds_density = clouds_density + space_ + self.sub.Altitude:make(cloudAltIdx)
@@ -2119,7 +2123,7 @@ handlersTable = {
 			local res			
 			res = self.sub._start:make() + self.sub.Roger_ball:make() 
 			if (message.parameters.wind_speed) then
-				local velocityUnit = unitSystemByCountry[message.receiver:getUnit():getCountry()].velocity
+				local velocityUnit = getUnitSystemByCountry(message.receiver:getUnit():getCountry()).velocity
 				local windSpeed = base.math.ceil(message.parameters.wind_speed * velocityUnit.coeff) - 20
 				--res = res + comma_space_ + Digits:make(base.math.ceil(message.parameters.wind_speed * velocityUnit.coeff)) + space_ 
 				--res = res + self.sub.knots:make() 
@@ -2809,6 +2813,11 @@ rangeHandlersTable = {
 	{
 		range = {base.Message.wMsgGroundCrewNull,				base.Message.wMsgGroundCrewMaximum },
 		handler = SimpleHandler
+	},
+	-- MiG-29 VMS ("RITA")
+	{
+		range = {base.Message.wMsgMiG29_VMS_Null,				base.Message.wMsgMiG29_VMS_Maximum },
+		handler = SimpleHandler
 	}
 }
 
@@ -3020,6 +3029,11 @@ role = {
 						dir = 'Ground Crew',
 						range = { base.Message.wMsgGroundCrewNull,	base.Message.wMsgGroundCrewMaximum },
 						singletone = true
+					},
+	MiG29_RITA =	{
+						name = _("MiG-29 VMS"),
+						dir = 'RITA',
+						range = { base.Message.wMsgMiG29_VMS_Null,	base.Message.wMsgMiG29_VMS_Maximum },
 					}
 }
 
