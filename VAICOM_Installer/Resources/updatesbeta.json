@@ -8,10 +8,10 @@
       "isdev": false,
       "productid": 1,
       "releasedate": 20250927,
-      "version": 30515,
-      "versionstring": "3.0.5.15",
+      "version": 3060,
+      "versionstring": "3.0.6.0",
       "downloadurl": "https://raw.githubusercontent.com/Penecruz/VAICOM-Community/Development/VAICOM_Installer/Resources/VAICOMPRO.zip",
-      "releasenotes": "More changes to module detection, More Mig-29 changes and fix EKRAN, New lable PTT VOL knob to Chatter for clarity of function, Fix Vaicompro.exe not overwriting if running, Adds new option in VaicomPro.exe (Keeper/ Re-launcher App) to run as Administrator, Fix Kneeboard Time zones for Kola & Germany CW, Fix some theaters not showing UHF > VHF > VHF_LOW > HF on kneeboard. Add dual dsiplay of frequencies if avaialble on Kneeboard Pages. Fix module detection routine on some modules SRS settings, Adds MiG-29 Fulcrum reworked, please test"
+      "releasenotes": "Align version with release - No other changes"
     }
   ]
 }
