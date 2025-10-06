@@ -31,24 +31,39 @@ namespace VAICOM
             public static class SpeechTrainer
             {
                 public static SpeechRecognizer trainer;
+                private static bool usingVoiceAccess = false;
 
                 public static void Start()
                 {
                     try
                     {
-                        if (IsVoiceAccessAvailable())
+                        if (usingVoiceAccess)
                         {
-                            Log.Write("Voice Access is already running.", Colors.System);
-                            return; // No need to start anything if Voice Access is being used.
+                            Log.Write("Voice Access is running.", Colors.System);
+                        }
+                        else if (trainer != null)
+                        {
+                            Log.Write("Windows Speech Recognition is running.", Colors.System);
+                        }
+                        else
+                        {
+                            Log.Write("No speech recognition system is running.", Colors.Warning);
+                            return;
                         }
 
                         Playsound.Commandcomplete();
                         Log.Write("Offline keyword training initialized", Colors.System);
                         Log.Write("Ready for training.", Colors.Message);
+
+                        // Attach event handlers if using Windows Speech Recognition
+                        if (!usingVoiceAccess && trainer != null)
+                        {
+                            trainer.SpeechRecognized += rec_SpeechRecognized;
+                            trainer.SpeechRecognitionRejected += rec_SpeechRejected;
+                            trainer.StateChanged += rec_StateChanged;
+                        }
+
                         State.trainerrunning = true;
-                        trainer.SpeechRecognized += rec_SpeechRecognized;
-                        trainer.SpeechRecognitionRejected += rec_SpeechRejected;
-                        trainer.StateChanged += rec_StateChanged;
                     }
                     catch (Exception ex)
                     {
@@ -60,18 +75,35 @@ namespace VAICOM
                 {
                     try
                     {
-                        if (IsVoiceAccessAvailable())
+                        if (usingVoiceAccess)
                         {
-                            Log.Write("Voice Access does not require stopping.", Colors.System);
-                            return; // No need to stop anything if Voice Access is being used.
-                        }
+                            Log.Write("Voice Access is running. Attempting to stop it...", Colors.System);
 
-                        trainer.StateChanged -= rec_StateChanged;
-                        trainer.SpeechRecognitionRejected -= rec_SpeechRejected;
-                        trainer.SpeechRecognized -= rec_SpeechRecognized;
+                            // Find and stop the Voice Access process
+                            foreach (var process in Process.GetProcessesByName("VoiceAccess"))
+                            {
+                                try
+                                {
+                                    process.Kill();
+                                    Log.Write("Voice Access stopped successfully.", Colors.System);
+                                }
+                                catch (Exception ex)
+                                {
+                                    Log.Write($"Failed to stop Voice Access: {ex.Message}", Colors.Warning);
+                                }
+                            }
+                        }
+                        else if (trainer != null)
+                        {
+                            // Detach event handlers for Windows Speech Recognition
+                            trainer.SpeechRecognized -= rec_SpeechRecognized;
+                            trainer.SpeechRecognitionRejected -= rec_SpeechRejected;
+                            trainer.StateChanged -= rec_StateChanged;
+                        }
 
                         State.trainerrunning = false;
 
+                        // Log exit messages and reset PTT
                         Log.Write("Keyword training finished.", Colors.Message);
                         Log.Write("----------------------------------", Colors.Message);
                         PTT.PTT_Manage_Listen_VA(State.activeconfig.ReleaseHot);
@@ -144,13 +176,13 @@ namespace VAICOM
                             var grammarbuilder = new GrammarBuilder(State.trainerchoices);
                             var grammar = new Grammar(grammarbuilder);
                             trainer.LoadGrammar(grammar);
-                            PTT.PTT_Manage_Listen_VA(false);
-
-                            Log.Write("VAICOM PRO command phrases loaded", Colors.System);
                             trainer.Enabled = true;
 
-                            trainer.EmulateRecognize("Start listening");
+                            Log.Write("VAICOM PRO command phrases loaded", Colors.System);
+
+                            usingVoiceAccess = false; // Using Windows Speech Recognition
                             State.trainerrunning = true;
+                            Log.Write("SpeechTrainer is now running with Windows Speech Recognition.", Colors.System);
                             return; // Exit early since Windows Speech Recognition is being used
                         }
                         catch (Exception ex)
@@ -163,7 +195,10 @@ namespace VAICOM
                         {
                             Log.Write("Windows Speech Recognition not found. Voice Access detected. Launching Voice Access...", Colors.System);
                             LaunchVoiceAccess();
+
+                            usingVoiceAccess = true; // Using Voice Access
                             State.trainerrunning = true;
+                            Log.Write("SpeechTrainer is now running with Voice Access.", Colors.System);
                             return; // Exit early since Voice Access is being used
                         }
 
@@ -176,25 +211,25 @@ namespace VAICOM
                         Log.Write($"Error during initialization: {ex.Message}", Colors.Warning);
                     }
                 }
-            }
 
-            private static bool IsVoiceAccessAvailable()
-            {
-                string voiceAccessPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "VoiceAccess.exe");
-                return File.Exists(voiceAccessPath);
-            }
-
-            private static void LaunchVoiceAccess()
-            {
-                string voiceAccessPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "VoiceAccess.exe");
-                try
+                private static bool IsVoiceAccessAvailable()
                 {
-                    Process.Start(voiceAccessPath);
-                    Log.Write("Voice Access launched successfully.", Colors.System);
+                    string voiceAccessPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "VoiceAccess.exe");
+                    return File.Exists(voiceAccessPath);
                 }
-                catch (Exception ex)
+
+                private static void LaunchVoiceAccess()
                 {
-                    Log.Write($"Failed to launch Voice Access: {ex.Message}", Colors.Warning);
+                    string voiceAccessPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "VoiceAccess.exe");
+                    try
+                    {
+                        Process.Start(voiceAccessPath);
+                        Log.Write("Voice Access launched successfully.", Colors.System);
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Write($"Failed to launch Voice Access: {ex.Message}", Colors.Warning);
+                    }
                 }
             }
         }

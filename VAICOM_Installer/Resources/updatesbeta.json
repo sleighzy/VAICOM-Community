@@ -8,10 +8,10 @@
       "isdev": false,
       "productid": 1,
       "releasedate": 20251007,
-      "version": 3064,
-      "versionstring": "3.0.6.4",
+      "version": 3065,
+      "versionstring": "3.0.6.5",
       "downloadurl": "https://raw.githubusercontent.com/Penecruz/VAICOM-Community/Development/VAICOM_Installer/Resources/VAICOMPRO.zip",
-      "releasenotes": "SRS Intergration work for Hornet (WIP ignore UDP errors), Adds check for Voice Access when launching Keywords training "
+      "releasenotes": "Fix for Voice Access/Speech recognition determination, SRS Intergration work for Hornet (WIP ignore UDP errors), Adds check for Voice Access when launching Keywords training "
     }
   ]
 }
