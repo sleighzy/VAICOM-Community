@@ -172,8 +172,8 @@ namespace VAICOM
                     unitslist = new List<string>();
                     List<KneeboardUnitSummary> units = new List<KneeboardUnitSummary>();
 
-                    Log.Write($"Processing {State.currentstate.availablerecipients[cat].Count} {cat} units for kneeboard.", Colors.Text);
-                    Log.Write($"Current Theater: {State.currentstate.theatre}", Colors.Text);
+                    //Log.Write($"Processing {State.currentstate.availablerecipients[cat].Count} {cat} units for kneeboard.", Colors.Text);
+                    //Log.Write($"Current Theater: {State.currentstate.theatre}", Colors.Text);
 
                     foreach (Server.DcsUnit unit in State.currentstate.availablerecipients[cat])
                     {
@@ -281,8 +281,8 @@ namespace VAICOM
                                 descr.frq2 = secondaryFreq != null ? Helpers.Common.NormalizeFreqString(secondaryFreq) : null;
 
                                 // Log frequencies for debugging
-                                Log.Write($"Primary Frequency: {descr.frq}", Colors.Text);
-                                Log.Write($"Secondary Frequency: {descr.frq2}", Colors.Text);
+                                //Log.Write($"Primary Frequency: {descr.frq}", Colors.Text);
+                                //Log.Write($"Secondary Frequency: {descr.frq2}", Colors.Text);
                             }
                             else
                             {

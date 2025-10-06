@@ -17,7 +17,6 @@ namespace VAICOM
 
             public static void UDPsetup()
             {
-
                 try
                 {
                     // --------------------------------------------------------------------
@@ -65,6 +64,9 @@ namespace VAICOM
                     State.ReceiveIpEndPoint = new IPEndPoint(IPAddress.Any, State.activeconfig.ClientReceivePort);
 
 
+                    // Log final port allocations for DCS JSON I/O
+                    Log.Write($"DCS JSON I/O - Send IP: {State.activeconfig.ClientSendIP}, Send Port: {State.activeconfig.ClientSendPort}, Receive Port: {State.activeconfig.ClientReceivePort}", Colors.Text);
+
                     // --------------------------------------------------------------------
                 }
                 catch (Exception a)
@@ -92,13 +94,16 @@ namespace VAICOM
                     State.ReceivingUdpClientMessages = new UdpClient(State.activeconfig.ClientReceivePortMessages);
                     State.ReceiveIpEndPointMessages = new IPEndPoint(IPAddress.Any, State.activeconfig.ClientReceivePortMessages);
                     State.ReturnCallMessages = new AsyncCallback(UDPreceiveMessages);
+
+                    // Log final port allocation for receiving messages
+                    Log.Write($"Messages - Receive Port: {State.activeconfig.ClientReceivePortMessages}", Colors.Text);
+
                     // --------------------------------------------------------------------
                 }
                 catch (Exception a)
                 {
                     Log.Write("UDP message setup error " + a.StackTrace, Colors.Text);
                 }
-
 
                 // --------------------------------------------------------------------
                 // for receiving messages from tray icon
@@ -109,6 +114,10 @@ namespace VAICOM
                     State.ReceivingTrayMessages = new UdpClient(traymessagesport);
                     State.ReceiveIpTrayMessages = new IPEndPoint(IPAddress.Any, traymessagesport);
                     State.TrayMessages = new AsyncCallback(TrayReceiveMessages);
+
+                    // Log final port allocation for tray messages
+                    Log.Write($"Tray Messages - Receive Port: {traymessagesport}", Colors.Text);
+
                     // --------------------------------------------------------------------
                 }
                 catch (Exception a)
@@ -117,12 +126,16 @@ namespace VAICOM
                 }
 
                 // --------------------------------------------------------------------
-                // for sending messageg to tray icon
+                // for sending messages to tray icon
 
                 try
                 {
                     int traymessagessendport = 49303;
                     State.SendingIpTrayMessages = new IPEndPoint(IPAddress.Parse("127.0.0.1"), traymessagessendport);
+
+                    // Log final port allocation for sending tray messages
+                    Log.Write($"Tray Messages - Send Port: {traymessagessendport}", Colors.Text);
+
                     // --------------------------------------------------------------------
                 }
                 catch (Exception a)
@@ -130,13 +143,12 @@ namespace VAICOM
                     Log.Write("UDP Tray setup error (Send)" + a.Message, Colors.Text);
                 }
 
-
                 try
                 {
                     // --------------------------------------------------------------------
                     // SRS JSON I/O
 
-                    //failsafe
+                    // failsafe
                     try
                     {
                         if (State.activeconfig.SRS_ClientSendIP.Equals(null) || State.activeconfig.SRS_ClientSendIP.Equals(0))
@@ -177,6 +189,10 @@ namespace VAICOM
                     State.SRS_ReceivingUdpClient = new UdpClient(State.activeconfig.SRS_ClientReceivePort);
                     State.SRS_ReceiveIpEndPoint = new IPEndPoint(IPAddress.Any, State.activeconfig.SRS_ClientReceivePort);
                     State.SRS_ReturnCall = new AsyncCallback(SRS_UDPreceive);
+
+                    // Log final port allocations for SRS JSON I/O
+                    Log.Write($"SRS JSON I/O - Send IP: {State.activeconfig.SRS_ClientSendIP}, Send Port: {State.activeconfig.SRS_ClientSendPort}, Receive Port: {State.activeconfig.SRS_ClientReceivePort}", Colors.Text);
+
                     // --------------------------------------------------------------------
                 }
                 catch (Exception a)
@@ -194,6 +210,9 @@ namespace VAICOM
 
                     State.Kneeboard_SendSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
                     State.Kneeboard_SendIpEndPoint = new IPEndPoint(IPAddress.Parse(Kneeboard_SendIP), Kneeboard_SendPort);
+
+                    // Log final port allocation for Kneeboard
+                    Log.Write($"Kneeboard - Send IP: {Kneeboard_SendIP}, Send Port: {Kneeboard_SendPort}", Colors.Text);
 
                     // --------------------------------------------------------------------
                 }

@@ -459,8 +459,8 @@ namespace VAICOM
                                 State.radiocount = State.radiocount + 1;
                             }
 
-                            Log.Write($"Evaluating radio: {radiounit.displayName}, Device ID: {radiounit.deviceid}", Colors.Text);
-                            Log.Write($"Mapping_Ref TX1: {radiolist_Ref.Slot_map[0]}, TX2: {radiolist_Ref.Slot_map[1]}", Colors.Text);
+                            //Log.Write($"Evaluating radio: {radiounit.displayName}, Device ID: {radiounit.deviceid}", Colors.Text);
+                            //Log.Write($"Mapping_Ref TX1: {radiolist_Ref.Slot_map[0]}, TX2: {radiolist_Ref.Slot_map[1]}", Colors.Text);
 
                         }
 
