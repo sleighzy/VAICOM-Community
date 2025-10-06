@@ -121,50 +121,67 @@ namespace VAICOM
                         Log.Write("----------------------------------", Colors.Message);
                         Log.Write("Initializing Training Mode", Colors.Message);
 
+                        // Check for Windows Speech Recognition first
+                        try
+                        {
+                            trainer = new SpeechRecognizer(); // Attempt to initialize Windows Speech Recognition
+                            trainer.UnloadAllGrammars();
+                            trainer.MaxAlternates = 0;
+
+                            Log.Write("Windows Speech Recognition detected and initialized.", Colors.System);
+
+                            // Add all aliases to new grammar
+                            State.trainerchoices = new Choices();
+                            foreach (KeyValuePair<string, Dictionary<string, string>> set in Aliases.categories)
+                            {
+                                foreach (KeyValuePair<string, string> listing in set.Value)
+                                {
+                                    State.trainerchoices.Add(listing.Key.Replace("*", ""));
+                                }
+                            }
+
+                            // Load grammar and start
+                            var grammarbuilder = new GrammarBuilder(State.trainerchoices);
+                            var grammar = new Grammar(grammarbuilder);
+                            trainer.LoadGrammar(grammar);
+                            PTT.PTT_Manage_Listen_VA(false);
+
+                            Log.Write("VAICOM PRO command phrases loaded", Colors.System);
+                            trainer.Enabled = true;
+
+                            trainer.EmulateRecognize("Start listening");
+                            State.trainerrunning = true;
+                            return; // Exit early since Windows Speech Recognition is being used
+                        }
+                        catch (Exception ex)
+                        {
+                            Log.Write("Windows Speech Recognition not available: " + ex.Message, Colors.Warning);
+                        }
+
+                        // If Windows Speech Recognition is not available, check for Voice Access
                         if (IsVoiceAccessAvailable())
                         {
-                            Log.Write("Voice Access detected. Launching Voice Access...", Colors.System);
+                            Log.Write("Windows Speech Recognition not found. Voice Access detected. Launching Voice Access...", Colors.System);
                             LaunchVoiceAccess();
                             State.trainerrunning = true;
-                            return; // Exit early since Voice Access is being used.
+                            return; // Exit early since Voice Access is being used
                         }
 
-                        // Fallback to Windows Speech Recognition
-                        Log.Write("Voice Access not found. Falling back to Windows Speech Recognition.", Colors.System);
-                        State.trainerrunning = true;
-                        Log.Reset();
-                        trainer = new SpeechRecognizer();
-                        trainer.UnloadAllGrammars();
-                        trainer.MaxAlternates = 0;
-
-                        Log.Write(trainer.RecognizerInfo.Description, Colors.System); //type of recognizer
-
-                        // add all aliases to new grammar
-                        State.trainerchoices = new Choices();
-                        foreach (KeyValuePair<string, Dictionary<string, string>> set in Aliases.categories)
-                        {
-                            foreach (KeyValuePair<string, string> listing in set.Value)
-                            {
-                                State.trainerchoices.Add(listing.Key.Replace("*", ""));
-                            }
-                        }
-
-                        // load grammar and start
-                        var grammarbuilder = new GrammarBuilder(State.trainerchoices);
-                        var grammar = new Grammar(grammarbuilder);
-                        trainer.LoadGrammar(grammar);
-                        PTT.PTT_Manage_Listen_VA(false);
-
-                        Log.Write("VAICOM PRO command phrases loaded", Colors.System);
-                        trainer.Enabled = true;
-
-                        trainer.EmulateRecognize("Start listening");
+                        // If neither is available, log an error
+                        Log.Write("Neither Windows Speech Recognition nor Voice Access is available on this system.", Colors.Critical);
+                        State.trainerrunning = false;
                     }
                     catch (Exception ex)
                     {
                         Log.Write($"Error during initialization: {ex.Message}", Colors.Warning);
                     }
                 }
+            }
+
+            private static bool IsVoiceAccessAvailable()
+            {
+                string voiceAccessPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "VoiceAccess.exe");
+                return File.Exists(voiceAccessPath);
             }
 
             private static void LaunchVoiceAccess()
@@ -179,12 +196,6 @@ namespace VAICOM
                 {
                     Log.Write($"Failed to launch Voice Access: {ex.Message}", Colors.Warning);
                 }
-            }
-
-            private static bool IsVoiceAccessAvailable()
-            {
-                string voiceAccessPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), "VoiceAccess.exe");
-                return File.Exists(voiceAccessPath);
             }
         }
     }
