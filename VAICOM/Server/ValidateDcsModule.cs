@@ -243,14 +243,13 @@ namespace VAICOM
                     State.currentmodule = DCSmodules.LookupTable["AJS-37"];
                     return true;
                 }
-                //F-5E_FC Flaming Cliffs version
-                if ((State.currentstate.id.ToLower().Contains("f") & State.currentstate.id.ToLower().Contains("5E-3_FC"))) //|| (State.currentstate.id.ToLower().Contains("FC"))) //try removing the or statement on both versions??
+                // F-5E
+                if (State.currentstate.id.ToLower().Contains("f") && State.currentstate.id.ToLower().Contains("5e-3_fc"))
                 {
-                    State.currentmodule = DCSmodules.LookupTable["F-5E_FC"];
+                    State.currentmodule = DCSmodules.LookupTable["F-5E-3_FC"];
                     return true;
                 }
-                //F-5E
-                if ((State.currentstate.id.ToLower().Contains("f") & State.currentstate.id.ToLower().Contains("5E-3"))) //|| (State.currentstate.id.ToLower().Contains("tiger")))
+                if (State.currentstate.id.ToLower().Contains("f") && State.currentstate.id.ToLower().Contains("5e-3"))
                 {
                     State.currentmodule = DCSmodules.LookupTable["F-5E-3"];
                     return true;
