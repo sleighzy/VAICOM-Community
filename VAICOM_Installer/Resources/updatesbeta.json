@@ -7,11 +7,11 @@
       "isbeta": false,
       "isdev": false,
       "productid": 1,
-      "releasedate": 20251007,
-      "version": 3067,
-      "versionstring": "3.0.6.7",
+      "releasedate": 20251008,
+      "version": 3069,
+      "versionstring": "3.0.6.9",
       "downloadurl": "https://raw.githubusercontent.com/Penecruz/VAICOM-Community/Development/VAICOM_Installer/Resources/VAICOMPRO.zip",
-      "releasenotes": "Adds Vaicom UI preferences switch for Voice Access users, Fix for F-5E Falming Cliffs version crashing in DCS, Fix for Voice Access/Speech recognition determination, SRS Intergration work for Hornet (WIP ignore UDP errors), Adds check for Voice Access when launching Keywords training "
+      "releasenotes": "Change UI DIAG tab to Help tab and add enhanced functionality for new user support, Adds Vaicom UI preferences switch for Voice Access users (disabled), Fix for F-5E Falming Cliffs version crashing in DCS, Fix for Voice Access/Speech recognition determination, SRS Intergration changes and logging improved, "
     }
   ]
 }

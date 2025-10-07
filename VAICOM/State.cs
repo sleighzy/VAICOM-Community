@@ -42,7 +42,7 @@ namespace VAICOM
         public static bool requirecarrierregkey = false;
         public static bool installkneeboard = true;
         // Add a new property to control Voice Access priority
-        public static bool UseVoiceAccessPriority { get; set; } = true;
+        public static bool UseVoiceAccessPriority { get; set; } = false; // Default to unchecked
 
         public static bool deepdebugmode = true; //set to deepdebug mode
         public static bool databaseencrypted = false; //set to true if database is encrypted, false if not

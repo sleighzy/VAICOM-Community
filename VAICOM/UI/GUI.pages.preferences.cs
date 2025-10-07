@@ -160,7 +160,7 @@ namespace VAICOM
             // Set the current value of the checkbox
             private void SetCurrentValueVoiceAccessPriority(object sender, EventArgs e)
             {
-                UseVoiceAccessPriority.IsEnabled = true; // Enable the checkbox
+                UseVoiceAccessPriority.IsEnabled = false; // Temporarily disable until fully implemented
                 UseVoiceAccessPriority.IsChecked = State.UseVoiceAccessPriority; // Reflect the current state
             }  
 

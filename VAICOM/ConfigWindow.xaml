@@ -174,7 +174,7 @@
                     <CheckBox x:Name="ImportOtherMenu" Content="Import F10 Menu" Foreground="#D0D0D0" FontSize="12" HorizontalAlignment="Left" Margin="59,150,0,0" VerticalAlignment="Top" Checked="SetConfigEnableImportOtherMenu" Unchecked="SetConfigDisableImportOtherMenu" Click="ConfigUpdate" Initialized="SetCurrentValueImportOtherMenu" ToolTip="Collect F10 menu commands (updates database)" BorderThickness="2" Width="167" BorderBrush="#FF8C9AA4" Grid.ColumnSpan="2" Grid.Column="1"/>
                     <CheckBox x:Name="DisableSquelch" Content="Disable PTT Static Hint" Foreground="#D0D0D0" FontSize="12" HorizontalAlignment="Left" Margin="117,110,0,0" VerticalAlignment="Top" ToolTip="Disable PTT radio noise burst" Unchecked="DisableSquelchOff" Checked="DisableSquelchOn" Initialized="SetCurrentValueDisableSquelch" Click="UpdateSquelch" BorderThickness="2" BorderBrush="#FF8C9AA4" Grid.Column="2"/>
                     <CheckBox x:Name="HideOnScreenText" Content="Hide On-Screen Text" Foreground ="#D0D0D0" FontSize="12" HorizontalAlignment="Left" Margin="117,210,0,0" VerticalAlignment="Top" Checked="SetConfigEnableHideOnScreenText" Unchecked="SetConfigDisableHideOnScreenText" Initialized="SetCurrentValueHideOnScreenText" ToolTip="(requires DCS restart) Disable all on-screen text messages." Click="ConfigAndServerUpdate" BorderThickness="2" BorderBrush="#FF8C9AA4" Grid.Column="2"/>
-                    <CheckBox x:Name="UseVoiceAccessPriority" Content="Use Voice Access" Foreground="#D0D0D0" FontSize="12" HorizontalAlignment="Left" Margin="59,70,0,0" VerticalAlignment="Top" IsChecked="{Binding Path=UseVoiceAccessPriority, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="Enables cross-module commands not listed in menus" BorderThickness="2" BorderBrush="#FF8C9AA4" Grid.ColumnSpan="2" Grid.Column="1"/>
+                    <CheckBox x:Name="UseVoiceAccessPriority" Content="Use Voice Access" Foreground="#D0D0D0" FontSize="12" HorizontalAlignment="Left" Margin="59,70,0,0" VerticalAlignment="Top" IsChecked="{Binding Path=UseVoiceAccessPriority, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="Enables Windows Voice Access for Training Mode" BorderThickness="2" BorderBrush="#FF8C9AA4" Grid.ColumnSpan="2" Grid.Column="1" />
 
 
                 </Grid>
@@ -481,7 +481,7 @@
                 </Grid>
             </TabItem>
 
-            <TabItem x:Name="Helppage" Header="Diag" FontSize="13">
+            <TabItem x:Name="Helppage" Header="Help" FontSize="13">
                 <Grid Background="#333" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="357*"/>
@@ -496,10 +496,20 @@
                     <Image x:Name="prowarnpic4" HorizontalAlignment="Left" Height="24" Margin="98,216,0,0" VerticalAlignment="Top" Width="25" Source="Resources/Images/hazard-sign-images-general_warning.png" Initialized="ShowProWarnPic4"/>
                     <Image x:Name="Sidebar5" HorizontalAlignment="Left" Height="118" VerticalAlignment="Top" Width="42" Source="Resources/Images/Sidetitle-Help.png" Stretch="None" Margin="6,75,0,0"/>
                     <Image x:Name="test_button_bg" HorizontalAlignment="Left" Height="38" Margin="49,127,0,0" VerticalAlignment="Top" Width="38" Source="Resources/Images/Tacan-Test-Light-On.png" Stretch="None" RenderTransformOrigin="0.5,0.5" Panel.ZIndex="1"/>
-                    <TextBlock x:Name="labeltestabout" FontSize="11" Foreground="#FFDDDDDD" HorizontalAlignment="Left" Margin="48,113,0,0" TextWrapping="Wrap" Text="DIAG" VerticalAlignment="Top" Width="38" TextAlignment="Center" Height="16" FontWeight="Bold" Panel.ZIndex="2" />
+                    <TextBlock x:Name="labeltestabout" FontSize="11" Foreground="#FFDDDDDD" HorizontalAlignment="Left" Margin="88,115,0,0" TextWrapping="Wrap" Text="DIAGNOSTICS" VerticalAlignment="Top" Width="77" TextAlignment="Center" Height="16" FontWeight="Bold" Panel.ZIndex="2" />
                     <Image x:Name="Install_Test_Button" HorizontalAlignment="Left" Height="21" Margin="56,133,0,0" VerticalAlignment="Top" Width="21" Source="Resources/Images/SRS_Up.png" MouseDown="Test_Install" Cursor="Hand" Panel.ZIndex="2" ToolTip="Check Installation"/>
-                    <TextBlock x:Name="Diag_text" Foreground="#D0D0D0" FontSize="10" HorizontalAlignment="Left" Margin="88,137,0,0" VerticalAlignment="Top" TextAlignment="Center" Text="Press button for diagnostics" />
+                    <TextBlock x:Name="Diag_text" Foreground="#D0D0D0" FontSize="10" HorizontalAlignment="Left" Margin="88,137,0,0" VerticalAlignment="Top" TextAlignment="Center" Text="Press for diagnostics" />
                     <TextBlock x:Name="Diag_text_Copy" Foreground="#D0D0D0" FontSize="10" HorizontalAlignment="Left" Margin="130,68,0,0" VerticalAlignment="Top" TextAlignment="Center" Text="For support please join our Community Discord https://discord.gg/wMzjZcYN " Height="61" Width="220" TextWrapping="Wrap" />
+                    <Image x:Name="Vaicom_Log_Button" HorizontalAlignment="Left" Height="21" Margin="56,168,0,0" VerticalAlignment="Top" Width="21" Source="/VAICOMPRO;component/Resources/Images/SRS_Up.png" MouseDown="OpenVaicomLogFile" Cursor="Hand" Panel.ZIndex="2" ToolTip="Get the Vaicom Log File "/>
+                    <TextBlock x:Name="Log_text" Foreground="#D0D0D0" FontSize="10" HorizontalAlignment="Left" Margin="88,172,0,0" VerticalAlignment="Top" TextAlignment="Center" Text="Press for Vaicom Log File" />
+                    <Image x:Name="test_button_bg_Copy" HorizontalAlignment="Left" Height="38" Margin="49,161,0,0" VerticalAlignment="Top" Width="38" Source="/VAICOMPRO;component/Resources/Images/Tacan-Test-Light-On.png" Stretch="None" RenderTransformOrigin="0.5,0.5" Panel.ZIndex="1"/>
+                    <TextBlock x:Name="labeltestabout_Copy" FontSize="11" Foreground="#FFDDDDDD" HorizontalAlignment="Left" Margin="330,115,0,0" TextWrapping="Wrap" Text="INFORMATION" VerticalAlignment="Top" Width="87" TextAlignment="Center" Height="16" FontWeight="Bold" Panel.ZIndex="2" Grid.ColumnSpan="3" />
+                    <Image x:Name="PDF_button_bg" HorizontalAlignment="Left" Height="38" Margin="288,126,0,0" VerticalAlignment="Top" Width="38" Source="/VAICOMPRO;component/Resources/Images/Tacan-Test-Light-On.png" Stretch="None" RenderTransformOrigin="0.5,0.5" Panel.ZIndex="1"/>
+                    <Image x:Name="YouTube_button_bg" HorizontalAlignment="Left" Height="38" Margin="288,161,0,0" VerticalAlignment="Top" Width="38" Source="/VAICOMPRO;component/Resources/Images/Tacan-Test-Light-On.png" Stretch="None" RenderTransformOrigin="0.5,0.5" Panel.ZIndex="1"/>
+                    <Image x:Name="PDF_Button" HorizontalAlignment="Left" Height="22" Margin="294,132,0,0" VerticalAlignment="Top" Width="22" Source="/VAICOMPRO;component/Resources/Images/SRS_Up.png" MouseDown="OpenVaicomManual" Cursor="Hand" Panel.ZIndex="2" ToolTip="View the Vaicom manual"/>
+                    <Image x:Name="YouTube_Button" HorizontalAlignment="Left" Height="20" Margin="295,168,0,0" VerticalAlignment="Top" Width="22" Source="/VAICOMPRO;component/Resources/Images/SRS_Up.png" MouseDown="OpenYouTubeTutorials" Cursor="Hand" Panel.ZIndex="2" ToolTip="View the Video Tutorials"/>
+                    <TextBlock x:Name="Diag_Manual" Foreground="#D0D0D0" FontSize="10" HorizontalAlignment="Left" Margin="327,137,0,0" VerticalAlignment="Top" TextAlignment="Center" Text="Press for PDF Manual" Grid.ColumnSpan="3" />
+                    <TextBlock x:Name="Diag_Tutorials" Foreground="#D0D0D0" FontSize="10" HorizontalAlignment="Left" Margin="327,172,0,0" VerticalAlignment="Top" TextAlignment="Center" Text="Press for YouTube Tutorials" Grid.ColumnSpan="3" />
 
                 </Grid>
             </TabItem>
