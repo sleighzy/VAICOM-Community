@@ -153,7 +153,19 @@ namespace VAICOM
                         Log.Write("----------------------------------", Colors.Message);
                         Log.Write("Initializing Training Mode", Colors.Message);
 
-                        // Check for Windows Speech Recognition first
+                        // Check if Voice Access should take priority
+                        if (State.UseVoiceAccessPriority && IsVoiceAccessAvailable())
+                        {
+                            Log.Write("Voice Access priority enabled. Launching Voice Access...", Colors.System);
+                            LaunchVoiceAccess();
+
+                            usingVoiceAccess = true; // Using Voice Access
+                            State.trainerrunning = true;
+                            Log.Write("SpeechTrainer is now running with Voice Access.", Colors.System);
+                            return; // Exit early since Voice Access is being used
+                        }
+
+                        // Check for Windows Speech Recognition
                         try
                         {
                             trainer = new SpeechRecognizer(); // Attempt to initialize Windows Speech Recognition

@@ -39,6 +39,11 @@ namespace VAICOM
 
                 UpdateAllbugs();
 
+                // Hook up the Voice Access Priority checkbox
+                UseVoiceAccessPriority.Checked += EnableVoiceAccessPriority;
+                UseVoiceAccessPriority.Unchecked += DisableVoiceAccessPriority;
+                UseVoiceAccessPriority.Loaded += SetCurrentValueVoiceAccessPriority;
+
             }
 
             private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

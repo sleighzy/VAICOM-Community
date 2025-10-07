@@ -143,11 +143,29 @@ namespace VAICOM
             private void SetConfigDisableHideOnScreenText(object sender, RoutedEventArgs e) { State.activeconfig.HideOnScreenText = false; FileHandler.Lua.LuaFiles["2.8 gameMessages.lua"].reset = !State.activeconfig.HideOnScreenText; FileHandler.Lua.LuaFiles_Install(false, true); }
             private void SetCurrentValueHideOnScreenText(object sender, EventArgs e) { HideOnScreenText.IsEnabled = State.PRO; HideOnScreenText.IsChecked = State.activeconfig.HideOnScreenText; }
 
+            // Enable Voice Access Priority
+            private void EnableVoiceAccessPriority(object sender, RoutedEventArgs e)
+            {
+                State.UseVoiceAccessPriority = true;
+                Settings.ConfigFile.WriteConfigToFile(true); // Save the setting
+            }
+
+            // Disable Voice Access Priority
+            private void DisableVoiceAccessPriority(object sender, RoutedEventArgs e)
+            {
+                State.UseVoiceAccessPriority = false;
+                Settings.ConfigFile.WriteConfigToFile(true); // Save the setting
+            }
+
+            // Set the current value of the checkbox
+            private void SetCurrentValueVoiceAccessPriority(object sender, EventArgs e)
+            {
+                UseVoiceAccessPriority.IsEnabled = true; // Enable the checkbox
+                UseVoiceAccessPriority.IsChecked = State.UseVoiceAccessPriority; // Reflect the current state
+            }  
+
             // ------------------------------------------------------------
 
         }
     }
 }
-
-
-
