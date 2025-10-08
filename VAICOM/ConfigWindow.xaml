@@ -7,7 +7,7 @@
         xmlns:Properties="clr-namespace:VAICOM.Properties" 
         x:Class="VAICOM.UI.ConfigWindow"
         mc:Ignorable="d"
-        Title="VAICOM for DCS World - Community Edition " Height = "335" Width = "495" 
+        Title="VAICOM for DCS World - Community Edition " Height = "335" Width = "496" 
         Closing="Window_Closing" Closed="Window_Closed"
     >
 
@@ -25,7 +25,7 @@
             <ColumnDefinition Width="59*"/>
             <ColumnDefinition Width="106*"/>
         </Grid.ColumnDefinitions>
-        <TabControl x:Name="tabControl" Background="#EEE" HorizontalAlignment="Left" Height="295" Margin="5,10,0,0" VerticalAlignment="Top" Width="485" Grid.ColumnSpan="2">
+        <TabControl x:Name="tabControl" Background="#EEE" HorizontalAlignment="Left" Height="295" VerticalAlignment="Center" Width="485" Grid.ColumnSpan="2">
 
             <TabItem x:Name="PTTpage" Header="PTT" FontSize="13">
                 <Grid Background="#333" >
@@ -146,12 +146,7 @@
                     <Label x:Name="labelsub2" Content=""  HorizontalContentAlignment="Center" Foreground="#FF686868" FontStyle ="Normal" FontSize="10"  HorizontalAlignment="Left" Margin="0,231,0,0" VerticalAlignment="Top" Height="37" Width="479" Grid.ColumnSpan="3" Initialized="setversionnumber2"/>
                     <TextBlock x:Name="prowarning1" FontSize="10" Foreground="#999" HorizontalAlignment="Left" Margin="0,223,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="479" TextAlignment="Center" Initialized="ShowProWarning1" Grid.ColumnSpan="3"/>
                     <Image x:Name="prowarnpic1" HorizontalAlignment="Left" Height="24" Margin="15,0,0,0" VerticalAlignment="Center" Width="25" Source="Resources/Images/hazard-sign-images-general_warning.png" Initialized="ShowProWarnPic1" Panel.ZIndex="2" Grid.Column="1"/>
-
                     <CheckBox x:Name="NewRecognitionModel" Content="VSPX Processing" Foreground ="#D0D0D0" FontSize="12" HorizontalAlignment="Left" Margin="59,50,0,0" VerticalAlignment="Top" Checked="SetConfigEnableNewRecognitionModel" Unchecked="SetConfigDisableNewRecognitionModel" Initialized="SetCurrentValueNewRecognitionModel" ToolTip="Use fast speech processing model. Set VA Unrecognized Speech Delay: ON = 500-1000, OFF = 0." Click="ChangedRecognitionModel" BorderThickness="2" BorderBrush="#FF8C9AA4" Grid.ColumnSpan="2" Grid.Column="1"/>
-
-
-
-
                     <CheckBox x:Name="DisablePlayerVoice" Content="Disable Player Voice" Foreground ="#D0D0D0" FontSize="12" HorizontalAlignment="Left" Margin="117,90,0,0" VerticalAlignment="Top" Checked="SetConfigDisablePlayerVoice" Unchecked="SetConfigEnablePlayerVoice" Initialized="SetCurrentValueDisablePlayerVoice" ToolTip="Disable the in-game pilot voice." Click="ConfigAndServerUpdate" BorderThickness="2" BorderBrush="#FF8C9AA4" Grid.Column="2"/>
                     <CheckBox x:Name="DisableMenus" Content="Disable Menus" Foreground="#D0D0D0" FontSize="12" HorizontalAlignment="Left" Margin="117,170,0,0" VerticalAlignment="Top" Checked="SetConfigHideMenus" Unchecked="SetConfigShowMenus" Initialized="SetCurrentValueHideMenus" ToolTip="Disable the in-game communications menus." Click="ConfigAndServerUpdate" BorderThickness="2" BorderBrush="#FF8C9AA4" Grid.Column="2"/>
                     <CheckBox x:Name="EnforceATCProtocol" Content="Force ATC Names" Foreground="#D0D0D0" FontSize="12" HorizontalAlignment="Left" Margin="87,213,0,0" VerticalAlignment="Top" Checked="EnforceProtocolNATOOn" Initialized="SetCurrentValueProtocolNATO" Unchecked="EnforceProtocolNATOOff" ToolTip="Force NATO naming consistency for ATCs." Click="ConfigAndServerUpdate" BorderThickness="2" BorderBrush="#FF8C9AA4" Grid.ColumnSpan="2" Grid.Column="1"/>
@@ -163,11 +158,9 @@
                     <CheckBox x:Name="AllowRadioTuning" Content="Select Tunes Radio" Foreground="#D0D0D0" FontSize="12" HorizontalAlignment="Left" Margin="59,110,0,0" VerticalAlignment="Top" Checked="AllowRadioTuningOn" Unchecked="AllowRadioTuningOff" Initialized="SetCurrentValueAllowRadioTuning" ToolTip="(Easy Comms OFF:) Select command tunes radio." Click="ConfigUpdate" BorderThickness="2" BorderBrush="#FF8C9AA4" Grid.ColumnSpan="2" Grid.Column="1"/>
                     <CheckBox x:Name="ForceLanguage" Content="Force Speech" Foreground="#D0D0D0" FontSize="12" HorizontalAlignment="Left" Margin="87,172,0,0" VerticalAlignment="Top" Checked="ForceLanguageOn" Unchecked="ForceLanguageOff" Initialized="SetCurrentValueForceLanguage" ToolTip="Force speech language across all modules" Click="ConfigAndServerUpdate" BorderThickness="2" BorderBrush="#FF8C9AA4" Width="118" Grid.ColumnSpan="2" Grid.Column="1"/>
                     <Slider x:Name="ForcedLanguage" IsSnapToTickEnabled = "true" HorizontalAlignment="Left" Margin="62,169,0,0" VerticalAlignment="Top" Maximum="1" Width="23" Cursor="Hand" SmallChange="1" Initialized="SetCurrentValueForcedLanguage" ValueChanged="ForcedLanguage_Change" Grid.Column="1" />
-
                     <CheckBox x:Name="UIaddhints" Content="Use Audio Cues" Foreground="#D0D0D0" FontSize="12" HorizontalAlignment="Left" Margin="117,70,0,0" VerticalAlignment="Top" Checked="UIaddhintsOn" Initialized="SetCurrentValueUIaddhints" Unchecked="UIaddhintsOff" ToolTip="Get additional audio feedback" Click="ConfigUpdate" BorderThickness="2" BorderBrush="#FF8C9AA4" Grid.Column="2"/>
                     <CheckBox x:Name="AllowAddCommands" Content="Extended Command Set" Foreground="#D0D0D0" FontSize="12" HorizontalAlignment="Left" Margin="59,90,0,0" VerticalAlignment="Top" Click="ConfigUpdate" Checked="AllowAddCommandsOn" Unchecked="AllowAddCommandsOff" Initialized="SetCurrentValueAllowAddCommands" ToolTip="Enables cross-module commands not listed in menus" BorderThickness="2" BorderBrush="#FF8C9AA4" Grid.ColumnSpan="2" Grid.Column="1"/>
                     <CheckBox x:Name="AllowOptions" Content="Allow Options" Foreground="#D0D0D0" FontSize="12" HorizontalAlignment="Left" Margin="117,190,0,0" VerticalAlignment="Top" Checked="AllowOptionsOn" Click="ConfigUpdate" Initialized="SetCurrentValueAllowOptions" Unchecked="AllowOptionsOff" ToolTip="Allows glancing at on-screen menu for recipients" BorderThickness="2" BorderBrush="#FF8C9AA4" Grid.Column="2"/>
-
                     <CheckBox x:Name="RequireCues" Content="Require Engage Cue" Foreground="#D0D0D0" FontSize="12" HorizontalAlignment="Left" Margin="117,150,0,0" VerticalAlignment="Top" Initialized="SetCurrentValueEngageCueRequired" Checked="EngageCueRequiredOn" Unchecked="EngageCueRequiredOff" Click="ConfigUpdate" ToolTip="When selected, a cue like 'Attack' must be used to issue an Engage command." IsEnabled="False" BorderThickness="2" BorderBrush="#FF8C9AA4" Grid.Column="2"/>
                     <CheckBox x:Name="UIsounds" Content="UI Sounds" Foreground="#D0D0D0" FontSize="12" HorizontalAlignment="Left" Margin="117,50,0,0" VerticalAlignment="Top" ToolTip="Switch UI feedback sounds on or off" Unchecked="UIsoundsOff" Checked="UIsoundsOn" Initialized="SetCurrentValueUIsounds" Click="ConfigUpdate" BorderThickness="2" BorderBrush="#FF8C9AA4" Grid.Column="2"/>
                     <CheckBox x:Name="AllowAppendices" Content="Use Appendices" Foreground="#D0D0D0" FontSize="12" HorizontalAlignment="Left" Margin="117,130,0,0" VerticalAlignment="Top" Initialized="SetCurrentValueAllowAppendices" Checked="AllowAppendicesOn" Unchecked="AllowAppendicesOff" Click="ConfigUpdate" ToolTip="(for specific modules) Make use of weapons / direction directives for Engage command." BorderThickness="2" BorderBrush="#FF8C9AA4" Grid.Column="2"/>
