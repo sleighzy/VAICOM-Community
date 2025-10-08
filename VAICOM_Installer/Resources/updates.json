@@ -7,11 +7,11 @@
       "isbeta": false,
       "isdev": false,
       "productid": 1,
-      "releasedate": 20250927,
-      "version": 3060,
-      "versionstring": "3.0.6.0",
-      "downloadurl": "https://github.com/Penecruz/VAICOM-Community/releases/download/v3.0.6.0/VAICOMPRO.zip",
-      "releasenotes": "Release 3.0.6.0 - Adds MiG-29A Fulcrum, Fixes detection of modules by adding a two stage process for known modules, Fixes Kneeboard in Caucasus, Kola and Germany CW only showing VHF-LOW Frequencies,Fixes Kneeboard time zones for Kola and Germany CW, Kneeboard frequency list now displays UHF and VHF if available,  Kneeboard Flight Tab now shows what frequency wingmen are using, Chatter Volume knob now labelled Chatter for clarity, Vaicompro.exe the Watch Dog/voice Attack launcher now has option to run as Administrator,  Vaicompro.exe is now built by the main dll. on Voice Attack startup also removed from installation Zip folder "
+      "releasedate": 20251009,
+      "version": 3069,
+      "versionstring": "3.0.6.9",
+      "downloadurl": "https://github.com/Penecruz/VAICOM-Community/releases/download/v3.0.6.9/VAICOMPRO.zip",
+      "releasenotes": "Release 3.0.6.9 - Fixes DCS crash with F-5E-3 Flaming Cliffs version, Adds keyword training mode Windows Speech Recognition detection and logging enhanced, Add option for Voice Access use with keyword training (disabled for now) ,Change DIAG tab on Vaicom UI to Help tab,  Add Help tab button for direct log file access, Add Help tab button for direct Vaicom PDF manual access, Add Help tab button for direct YouTube tutorial access,  Other minor bug fixes with UI and module database"
     }
   ]
 }
