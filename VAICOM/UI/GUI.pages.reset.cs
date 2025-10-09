@@ -261,11 +261,11 @@ namespace VAICOM
 
             private void Test_Install(object sender, MouseButtonEventArgs e)
             {
-                string caption = "VAICOM PRO Community Edition Installation info";
+                string caption = "VAICOM Community Edition Installation Details";
                 string message = "";
                 MessageBoxImage BoxImage = new MessageBoxImage();
 
-                message += "---- DIAGNOSTICS SUMMARY ---- \n\n";
+                message += "---- VAICOM DIAGNOSTICS SUMMARY ---- \n\n";
 
                 message += "VoiceAttack and plugin files\n\n";
 
@@ -344,7 +344,7 @@ namespace VAICOM
 
                 message += "\n";
 
-                message += "If some of these files are not up to date, get the latest versions from the website for manual install.\n";
+                message += "If some of these files are not up to date, get the latest versions from GitHub for manual install.\n";
 
                 message += "\n";
 
@@ -388,6 +388,7 @@ namespace VAICOM
                     message += "   " + pathsteam + "\n";
 
                     message += "If some of these paths are not correct, use Custom Path option (Config page). ";
+                    message += "Path should only go as far as /Eagle Dynamics/DCS folder, NOT to the .exe ";
                     message += "Optionally select Fix Registry for permanent correction." + "\n";
 
                 }

@@ -39,6 +39,7 @@ namespace VAICOM
             public static readonly string Alert = "yellow";
             public static readonly string Text = "black";
             public static readonly string Notification = "grey";
+            public static readonly string Debug = "orange";
 
             // deep debug
             public static readonly string Inline = "blank";

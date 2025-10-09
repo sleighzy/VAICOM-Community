@@ -311,6 +311,7 @@ namespace VAICOM_App
         public class CustomApplicationContext : ApplicationContext
         {
             public NotifyIcon trayIcon;
+            private MenuItem runAsAdminMenuItem;
 
             public static bool blink = false;
 
@@ -347,13 +348,26 @@ namespace VAICOM_App
 
             public CustomApplicationContext()
             {
+                runasadmin = LoadRunAsAdminPreference(); // Load preference at startup
+                SaveRunAsAdminPreference(runasadmin); // Save preference
+
+                // Initialize the "Run as Administrator" menu item
+                runAsAdminMenuItem = new MenuItem("Run as Administrator", ToggleRunAsAdministrator)
+                {
+                    Checked = runasadmin // Reflect the loaded state
+                };
 
                 trayIcon = new NotifyIcon()
                 {
                     Icon = Properties.Resources.Tray_icon_64,
-                    ContextMenu = new ContextMenu(new MenuItem[] { new MenuItem("Restart", ForceVARestart), new MenuItem("Reset Window", ResetWindow), new MenuItem("Exit", Exit) }), //new MenuItem("API Test", APITest),
+                    ContextMenu = new ContextMenu(new MenuItem[]
+                    {
+                        new MenuItem("Restart", ForceVARestart),
+                        new MenuItem("Reset Window", ResetWindow),
+                        runAsAdminMenuItem, // Add the checkbox menu item
+                        new MenuItem("Exit", Exit)
+                    }),
                     Visible = true,
-
                 };
 
                 trayIcon.DoubleClick += trayIcon_DoubleClick;
@@ -370,7 +384,6 @@ namespace VAICOM_App
 
                 TrayBlinkTimer.Elapsed += TrayBlink_Elapsed_Handler;
                 TrayBlinkTimer.Start();
-
             }
 
             void Exit(object sender, EventArgs e)
@@ -390,11 +403,14 @@ namespace VAICOM_App
                 SendUDPMessage(jsonstring);
             }
 
-            void APITest(object sender, EventArgs e)
+            void ToggleRunAsAdministrator(object sender, EventArgs e)
             {
-                //API_Test();
+                runasadmin = !runasadmin; // Toggle the state
+                runAsAdminMenuItem.Checked = runasadmin; // Update the checkbox state
+                SaveRunAsAdminPreference(runasadmin); // Save preference
+                TerminateProcess("voiceattack");
+                KickStartVA();
             }
-
         }
 
         //public class TrayMessage
@@ -422,6 +438,39 @@ namespace VAICOM_App
             catch
             {
             }
+        }
+
+        static void SaveRunAsAdminPreference(bool value)
+        {
+            try
+            {
+                RegistryKey key = Registry.CurrentUser.CreateSubKey("Software\\VAICOM_App");
+                key.SetValue("RunAsAdmin", value ? 1 : 0);
+                key.Close();
+            }
+            catch
+            {
+                // Handle exceptions if needed
+            }
+        }
+
+        static bool LoadRunAsAdminPreference()
+        {
+            try
+            {
+                RegistryKey key = Registry.CurrentUser.OpenSubKey("Software\\VAICOM_App");
+                if (key != null)
+                {
+                    int value = (int)key.GetValue("RunAsAdmin", 0); // Default to false
+                    key.Close();
+                    return value == 1;
+                }
+            }
+            catch
+            {
+                // Handle exceptions if needed
+            }
+            return false; // Default to false
         }
     }
 }

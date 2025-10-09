@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.IO;
 using System.Windows;
 using System.Windows.Input;
 using VAICOM.Client;
@@ -38,6 +40,11 @@ namespace VAICOM
                 //this.Opacity = 1.0;
 
                 UpdateAllbugs();
+
+                // Hook up the Voice Access Priority checkbox
+                UseVoiceAccessPriority.Checked += EnableVoiceAccessPriority;
+                UseVoiceAccessPriority.Unchecked += DisableVoiceAccessPriority;
+                UseVoiceAccessPriority.Loaded += SetCurrentValueVoiceAccessPriority;
 
             }
 
@@ -243,6 +250,76 @@ namespace VAICOM
                 Servers.Server.DumpStateToLog();
             }
 
+            private void OpenVaicomLogFile(object sender, MouseButtonEventArgs e)
+            {
+                try
+                {
+                    // Construct the path to the VaicomPro.log file
+                    string logFilePath = Path.Combine(State.VA_APPS, "VAICOMPRO", "logs", "VAICOMPRO.log");
+
+                    // Ensure the directory exists
+                    if (File.Exists(logFilePath))
+                    {
+                        // Open the file location in File Explorer and select the log file
+                        Process.Start("explorer.exe", $"/select,\"{logFilePath}\"");
+                    }
+                    else
+                    {
+                        MessageBox.Show("The VaicomPro.log file does not exist.", "File Not Found", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("An error occurred while trying to open the log file location.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+
+            private void OpenVaicomManual(object sender, MouseButtonEventArgs e)
+            {
+                try
+                {
+                    // Construct the path to the VaicomPro manual
+                    string manualPath = Path.Combine(State.VA_APPS, "VAICOMPRO", "Documentation", "VAICOM PRO Community User Manual.pdf");
+
+                    // Ensure the file exists
+                    if (File.Exists(manualPath))
+                    {
+                        // Use ProcessStartInfo to open the PDF file
+                        ProcessStartInfo startInfo = new ProcessStartInfo
+                        {
+                            FileName = manualPath,
+                            UseShellExecute = true // Ensures the default PDF viewer is used
+                        };
+
+                        Process.Start(startInfo);
+                    }
+                    else
+                    {
+                        MessageBox.Show("The VaicomPro manual does not exist.", "File Not Found", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"An error occurred while trying to open the manual: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+
+            private void OpenYouTubeTutorials(object sender, MouseButtonEventArgs e)
+            {
+                try
+                {
+                    // Open the YouTube tutorials link in the default browser
+                    Process.Start(new ProcessStartInfo
+                    {
+                        FileName = "https://www.youtube.com/playlist?list=PLLkY2GByvtC2JxgURCFnobqz8iz3Vqooe",
+                        UseShellExecute = true
+                    });
+                }
+                catch
+                {
+                    MessageBox.Show("An error occurred while trying to open the YouTube tutorials.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
 
     }

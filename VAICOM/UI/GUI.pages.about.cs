@@ -81,6 +81,7 @@ namespace VAICOM
                 CallsignsLanguage.IsEnabled = State.PRO;
                 EnforceATCProtocol.IsEnabled = State.PRO;
                 ATCProtocol.IsEnabled = State.PRO;
+                UseVoiceAccessPriority.IsEnabled = false; // Temporarily disable the checkbox until Voice Access is fully supported.
 
                 // right column
                 UIaddhints.IsEnabled = State.PRO;
@@ -217,7 +218,7 @@ namespace VAICOM
                 KeywordsExport.IsEnabled = State.PRO;
                 Cancel.IsEnabled = State.PRO;
                 ImportCSVbutton_Add.IsEnabled = true;
-
+               
             }
 
             private void ShowLicenses(object sender, MouseButtonEventArgs e)
@@ -416,6 +417,7 @@ namespace VAICOM
         }
     }
 }
+
 
 
 

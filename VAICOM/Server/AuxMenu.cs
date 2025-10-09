@@ -50,8 +50,8 @@ namespace VAICOM
                             {
                                 if (!Aliases.importedmenus.ContainsKey(identifier))
                                 {
-                                    Log.Write("Importing new menu item: " + identifier, Colors.Text);
-                                    Log.Write("Action index = " + menuitem.command.actionIndex.ToString(), Colors.Text);
+                                    //Log.Write("Importing new menu item: " + identifier, Colors.Text);
+                                    //Log.Write("Action index = " + menuitem.command.actionIndex.ToString(), Colors.Text);
                                     Aliases.importedmenus.Add(identifier, identifier);
 
                                     MenuItem item = new MenuItem() { menuname = State.menuauxname, itemname = identifier, actionIndex = (int)menuitem.command.actionIndex, server = State.menuauxserver };
@@ -64,7 +64,7 @@ namespace VAICOM
                                 try
                                 {
                                     Commands.Table[identifier].actionIndex = (int)menuitem.command.actionIndex;
-                                    Log.Write("F10 entry " + identifier + ": action index updated to value " + menuitem.command.actionIndex.ToString(), Colors.Text);
+                                    //Log.Write("F10 entry " + identifier + ": action index updated to value " + menuitem.command.actionIndex.ToString(), Colors.Text);
                                 }
                                 catch (Exception e)
                                 {
@@ -176,7 +176,7 @@ namespace VAICOM
                         {
                             Labels.importedmenus.Add(menuitem.Value, menuitem.Value);
                             Commands.Table.Add(menuitem.Value, new Command { actionIndex = auxmenuitems[menuitem.Value].actionIndex, menuitemname = auxmenuitems[menuitem.Value].itemname, servername = auxmenuitems[menuitem.Value].server, category = CommandCategories.auxmenu, uniqueid = id, dcsid = menuitem.Value, displayname = menuitem.Value });
-                            Log.Write("Setting menu F10 item " + menuitem.Key + " with actionIndex " + auxmenuitems[menuitem.Value].actionIndex + " as command " + id.ToString() + " " + menuitem.Value, Colors.Text);
+                            //Log.Write("Setting menu F10 item " + menuitem.Key + " with actionIndex " + auxmenuitems[menuitem.Value].actionIndex + " as command " + id.ToString() + " " + menuitem.Value, Colors.Text);
                         }
                     }
                 }

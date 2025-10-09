@@ -713,7 +713,8 @@ namespace VAICOM
                 { "Cargo",                  "cargo"                  },
                 { "Descent",                "descent"                },
 
-                { "Kneeboard",              "kneeboard"              },
+                { "Knee board",             "kneeboard"              },
+                { "Show Kneeboard",         "kneeboard"              },
 
             };
 
