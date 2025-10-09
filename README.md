@@ -74,30 +74,24 @@ Flashing Comms Menu after DCS World update is a known issue and can be resolved 
 ## Patch Notes
 
 
-**VAICOM plugin 3.0.5.3**
+**VAICOM plugin 3.0.6.9**
 
-This update adds a new hooking method for DCS and a major lua optimization, which brings a faster communication rate between Vaicom and DCS, along with better logging of message construction and message passing when set to debug. It also adds a new file handling routine.
+This update fixes a major bug with the F-5E-3 Flaming Cliffs module and adds a new approach for community support via the new more expansive Help tab in the Vaicom UI.
+It also sets the frameworks for future proofing the pending removal of Windows Speech Recognition from Windows 11.
 
-The import part for the end user, It also makes many fixes, brings better Kneeboard data management and stops the phantom Scripts file that was being generated in the root directory during file writing.
-
--	Fixes the rearming command to ensure the Mission Resources dialog pops up.
--	Fixes NVG, HMD, Inertial starter commands and other special commands.
--	Fixes “request taxi for takeoff” bug
--	Fixes Supercarrier verification bug
--	Fixes lua code reset behavior and expands to cleanup legacy export.lua hook if present.
--	New Kneeboard frequency priority for recipients UHF>VHF>FM.
--	New faster two-way communications rate between DCS and Vaicom.
--	New safe handling of export.lua and better logging.
--	New lua code optimization for many appended files.
--	New Vaicom UI window handling now will not remain on top of other windows.
-
-ALL USERS NEED TO DO A RESET OF THEIR LUA CODE USING THE RESET TAB OF THE VAICOM UI.
-If you do not perform this reset the legacy entry will remain and Vaicom will not connect to DCS
+-	Fixes DCS crash with F-5E-3 Flaming Cliffs version.
+-	Add keyword training mode Windows Speech Recognition detection and logging enhancements.
+-	Add option for Voice Access use with keyword training (disabled for now).
+-	Change DIAG tab on Vaicom UI to Help tab.
+-	Add Help tab button for direct log file access.
+-	Add Help tab button for direct Vaicom PDF manual access.
+-	Add Help tab button for direct YouTube tutorial access.
+-	Other minor bug fixes with UI and module database.
 
 
 Known Issues
 
-- None 
+-	None
 
 ## Community Team
 
