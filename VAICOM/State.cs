@@ -36,11 +36,13 @@ namespace VAICOM
         public static string clientmode = ClientModes.Normal; //set to Normal for release, Debug for development
 
         public static string versionstring = "";
-        public static string pluginversionnumber = "3.0.5"; // used by Theme (Special page)
+        public static string pluginversionnumber = "3.0.6"; // used by Theme (Special page)
         public static string vaminversion = "1.16";
         public static string defProfileName = "VAICOM for DCS World";
         public static bool requirecarrierregkey = false;
         public static bool installkneeboard = true;
+        // Add a new property to control Voice Access priority
+        public static bool UseVoiceAccessPriority { get; set; } = false; // Default to unchecked
 
         public static bool deepdebugmode = false; //set to deepdebug mode
         public static bool databaseencrypted = true; //set to true if database is encrypted, false if not

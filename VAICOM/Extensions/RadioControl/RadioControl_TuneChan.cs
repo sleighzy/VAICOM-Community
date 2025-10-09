@@ -24,11 +24,18 @@ namespace VAICOM
 
                         int chan = 0;
                         string header = State.Proxy.Utility.ParseTokens("{CMDSEGMENT:0}");
-                        Int32.TryParse(State.Proxy.Utility.ParseTokens("{CMDSEGMENT:1}"), out chan);
+                        string rawChan = State.Proxy.Utility.ParseTokens("{CMDSEGMENT:1}");
+                        if (!Int32.TryParse(rawChan, out chan)) // fails if not an integer and log it
+                        {
+                            Log.Write($"Invalid channel input: {rawChan}", Colors.Warning);
+                            return;
+                        }
 
                         int chnoffset = State.currentmodule.chnoffset; // 1 for A10C, varies per module
 
                         SendMessage.tunechn = (chan - chnoffset).ToString();
+                        //Log to try and find out why this is failing.
+                        Log.Write($"Parsed Channel: {chan}, Offset: {chnoffset}, Final Channel: {SendMessage.tunechn}", Colors.Text);
 
                         SendRadioControlMessage(SendMessage);
 
@@ -49,6 +56,8 @@ namespace VAICOM
         }
     }
 }
+
+
 
 
 

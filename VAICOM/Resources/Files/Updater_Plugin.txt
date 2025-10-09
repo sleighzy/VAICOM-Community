@@ -1,8 +1,9 @@
 @ECHO OFF
-ECHO VAICOM PRO 2.9
+ECHO VAICOM PRO 3.0 Plugin Updater
 ECHO Plugin Updater running...
 ECHO Closing VoiceAttack...
 TASKKILL /F /IM VoiceAttack.exe
+TASKKILL /F /IM VAICOMPRO.exe
 TIMEOUT /T 2
 ECHO Updating files...
 COPY /Y "Updates\Package\VAICOMPRO\Documentation\VAICOM Pro Community User Manual.pdf" "Documentation\VAICOM Pro Community User Manual.pdf" 

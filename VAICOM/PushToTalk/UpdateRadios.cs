@@ -42,14 +42,15 @@ namespace VAICOM
 
                         State.radiocount = 0;
 
-                        // business logic to assign the aircraft radios (TX1-3 + TX5)
+                        // logic to assign the aircraft radios (TX1-3 + TX5)
 
                         bool harrier = State.currentmodule.Equals(DCSmodules.LookupTable["AV-8B"]);
                         bool viper = State.currentstate.id.Contains("F-16");
                         bool tomcat = State.currentstate.id.Contains("F-14");
                         bool strike = State.currentmodule.Equals(DCSmodules.LookupTable["F-15ESE"]);
                         bool viggen = State.currentstate.id.Contains("AJS37");
-                        bool tigerFC = State.currentmodule.Equals(DCSmodules.LookupTable["F-5E_FC"]);
+                        //bool tigerFC = State.currentmodule.Equals(DCSmodules.LookupTable["F-5E_FC"]);
+                        bool fulcrum = State.currentstate.id.Contains("MiG-29");
 
                         foreach (Server.RadioDevice radiounit in State.currentstate.radios)
                         {
@@ -70,7 +71,10 @@ namespace VAICOM
                             bool viggenfr24 = (viggen & radiounit.deviceid.Equals(30));//AM radio in testradio folder //maybe change radiounit.displayname here?
                             bool viggenfr22 = (viggen & radiounit.deviceid.Equals(31));//AM radio in testradio2 folder
 
-                            bool tigerFCcomm1 = (tigerFC && radiounit.deviceid.Equals(22)); //try adding device ID for F-5E flamming cliis radio
+                            bool fulcrum855 = (viper & radiounit.deviceid.Equals(52));
+                            bool fulcrum862 = (viper & radiounit.deviceid.Equals(51));
+
+                            //bool tigerFCcomm1 = (tigerFC && radiounit.deviceid.Equals(22)); //try adding device ID for F-5E flamming cliis radio
 
                             bool deviceallocated = false;
 
@@ -96,7 +100,7 @@ namespace VAICOM
                                 // int is not part of radio count
                             }
 
-                            bool uhfcandidate = tomcat182 || vipervhf || harriercomm2 || strikecomm2 || viggenfr22 || (!viperuhf && !harriercomm1 && !viggenfr24 && (!tomcat && (radiounit.displayName.ToLower().Contains("uhf") || radiounit.AM & !radiounit.displayName.ToLower().Contains("vhf"))));
+                            bool uhfcandidate = tomcat182 || vipervhf || harriercomm2 || strikecomm2 || viggenfr22 || fulcrum855 || (!viperuhf && !harriercomm1 && !viggenfr24 && !fulcrum862 &&(!tomcat && (radiounit.displayName.ToLower().Contains("uhf") || radiounit.AM & !radiounit.displayName.ToLower().Contains("vhf"))));
                             // UHF -> TX2
                             if (!deviceallocated && !allocatedUHF && uhfcandidate)
                             {
@@ -126,7 +130,7 @@ namespace VAICOM
                                 State.radiocount = State.radiocount + 1;
                             }
 
-                            bool amcandidate = tomcat159 || viperuhf || harriercomm1 || strikecomm1 || tigerFCcomm1 || viggenfr24 || (!harrier & radiounit.AM);
+                            bool amcandidate = tomcat159 || viperuhf || harriercomm1 || strikecomm1 || fulcrum862 || viggenfr24 || (!harrier & radiounit.AM);
                             // VHF AM -> TX1 
                             if (!deviceallocated & !allocatedAM & amcandidate)
                             {

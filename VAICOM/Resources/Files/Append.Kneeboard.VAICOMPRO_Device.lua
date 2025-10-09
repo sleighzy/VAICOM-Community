@@ -401,18 +401,26 @@ function update_contents()
 	end
 end
 
+local last_update_time = 0
+
 function update()
-	dev_timer = dev_timer + update_time_step
-	local datareadout = receiver and receiver:receive()
-	receiveddata = datareadout or false
-	if receiveddata then
-		receivedmsg = DecodeMessage(receiveddata)
-		process_message(receivedmsg or "")
-		update_contents()
-	end
-	update_Layers()
-	update_Header_TopMid()
-	update_Header_TopRight()	
+    dev_timer = dev_timer + update_time_step
+    local datareadout = receiver and receiver:receive()
+    receiveddata = datareadout or false
+    if receiveddata then
+        receivedmsg = DecodeMessage(receiveddata)
+        process_message(receivedmsg or "")
+    end
+
+    -- Add a 1-second delay before calling update_contents
+    if dev_timer - last_update_time >= 1 then
+        update_contents()
+        last_update_time = dev_timer
+    end
+
+    update_Layers()
+    update_Header_TopMid()
+    update_Header_TopRight()
 end
 
 function DecodeMessage(rawdata)

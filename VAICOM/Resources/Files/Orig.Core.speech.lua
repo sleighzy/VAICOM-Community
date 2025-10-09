@@ -54,27 +54,28 @@ protocols = {
 
 --Aircraft native country used to select VMS language and unit system
 aircraftNativeCountry = {
-	['Ka-50']	  = nations.RUSSIA,
-	['Ka-50_3']	  = nations.RUSSIA,
-	['Su-27']	  = nations.RUSSIA,
-	['Su-33']	  = nations.RUSSIA,
-	['MiG-29A']   = nations.RUSSIA,
-	['MiG-29S']   = nations.RUSSIA,
-	['MiG-29G']   = nations.GERMANY,
-	['Su-25'] 	  = nations.RUSSIA,
-	['Su-25T']	  = nations.RUSSIA,
-	['Mi-8MT']	  = nations.RUSSIA,
-	['L-39C'] 	  = nations.RUSSIA,
-	['L-39ZA'] 	  = nations.RUSSIA,
-	['MiG-15bis'] = nations.RUSSIA,
-	['MiG-21Bis'] = nations.RUSSIA,
-	['Bf-109K-4'] = nations.GERMANY,
-	['FW-190D9']  = nations.GERMANY,
-	['MiG-19P']   = nations.RUSSIA,
-	['I-16']   	  = nations.RUSSIA,
-	['Yak-52']    = nations.RUSSIA,
-	['J-11A'] 	  = nations.CHINA,
-	['Mi-24P'] 	  = nations.RUSSIA,
+	['Ka-50']			= nations.RUSSIA,
+	['Ka-50_3']			= nations.RUSSIA,
+	['Su-27']			= nations.RUSSIA,
+	['Su-33']			= nations.RUSSIA,
+	['MiG-29A']			= nations.RUSSIA,
+	['MiG-29S']			= nations.RUSSIA,
+	['MiG-29G']			= nations.GERMANY,
+	['Su-25']			= nations.RUSSIA,
+	['Su-25T']			= nations.RUSSIA,
+	['Mi-8MT']			= nations.RUSSIA,
+	['L-39C']			= nations.RUSSIA,
+	['L-39ZA']			= nations.RUSSIA,
+	['MiG-15bis']		= nations.RUSSIA,
+	['MiG-21Bis']		= nations.RUSSIA,
+	['Bf-109K-4']		= nations.GERMANY,
+	['FW-190D9']		= nations.GERMANY,
+	['MiG-19P']			= nations.RUSSIA,
+	['I-16']			= nations.RUSSIA,
+	['Yak-52']			= nations.RUSSIA,
+	['J-11A']			= nations.CHINA,
+	['Mi-24P']			= nations.RUSSIA,
+	['MiG-29 Fulcrum']	= nations.RUSSIA,
 }
 
 if not ED_FINAL_VERSION then
@@ -94,22 +95,28 @@ local dummySound-- = 'BlaBlaBla.ogg'
 
 --Returns country for the message. The country will be used to select protocol
 local function getCountry(message)
-	if message.event > base.Message.wMsgATCNull and message.event < base.Message.wMsgATCMaximum then		
+	if message.event > base.Message.wMsgATCNull and message.event < base.Message.wMsgATCMaximum then
 		return message.receiver:getUnit():getCountry()
 	elseif message.event > base.Message.wMsgGroundCrewNull and message.event < base.Message.wMsgGroundCrewMaximum then
 		local player = base.world.getPlayer()
 		return player ~= nil and player:getCountry() or message.sender:getUnit():getCountry()
 	elseif message.event > base.Message.wMsgLeaderToATCNull and message.event < base.Message.wMsgLeaderToATCMaximum then
-		return message.sender:getUnit():getCountry()		
+		return message.sender:getUnit():getCountry()
 	elseif message.event > base.Message.wMsgLeaderToServiceNull and message.event < base.Message.wMsgLeaderToFACMaximum then
 		return message.receiver:getUnit():getCountry()
 	elseif message.event > base.Message.wMsgAutopilotAdjustment_Null and message.event < base.Message.wMsgAutopilotAdjustment_Maximum then
 		return message.sender:getUnit():getCountry()
 	elseif message.event > base.Message.wMsgExternalCargo_Null and message.event < base.Message.wMsgExternalCargo_Maximum then
-		return message.sender:getUnit():getCountry()	
+		return message.sender:getUnit():getCountry()
 	elseif message.event > base.Message.wMsgBettyNull and message.event < base.Message.wMsgA10_VMU_Maximum then
 		if nativeCockpitLanguage then
 			return aircraftNativeCountry[message.sender:getUnit():getTypeName()] or nations.USA
+		else
+			return nations.USA
+		end
+	elseif message.event > base.Message.wMsgMiG29_VMS_Null and message.event < base.Message.wMsgMiG29_VMS_Maximum then
+		if nativeCockpitLanguage then
+			return aircraftNativeCountry[message.sender:getUnit():getTypeName()] or nations.RUSSIA
 		else
 			return nations.USA
 		end
@@ -127,16 +134,16 @@ local finalPause = 1.0
 
 --The function is to be called from wMessage::buildContent_()
 function make(message)
-	
+
 	if message.type == base.Message.type.TYPE_MORZE then
 		--Morze string
 		return p.morze(message.string, message.parameters.type)
 	else
 		--Message for speech construction
-		
+
 		base.assert(message.sender ~= nil)
 		local country = getCountry(message)
-		
+
 		--Protocols
 		local stateProtocol = nil
 		if country then
@@ -144,11 +151,11 @@ function make(message)
 		else
 			stateProtocol = 'common'
 		end
-		
+
 		local protocol = protocols[stateProtocol]
 		base.assert(protocol ~= nil)
 		local result = protocol:make(message)
-		if  result then 
+		if  result then
 			result.duration = result.duration + finalPause
 			if dummySound ~= nil then
 				if not morze then

@@ -40,14 +40,33 @@ namespace VAICOM
 
                     foreach (KeyValuePair<string, DCSmodule> mod in DCSmodules.LookupTable)
                     {
-                        if (State.currentstate.id.ToLower().Contains(mod.Key.ToLower()))
+                        if (State.currentstate.id.Equals(mod.Key, StringComparison.OrdinalIgnoreCase)) // Exact match
                         {
                             if (!silent)
                             {
-                                Log.Write("Found module " + State.currentstate.id, Colors.Text);
+                                Log.Write("Found exact module match: " + State.currentstate.id, Colors.Text);
                             }
                             State.currentmodule = mod.Value;
                             moduleresolved = true;
+                            break; // Stop further checks
+                        }
+                    }
+
+                    // If no exact match, fallback to substring matching
+                    if (!moduleresolved)
+                    {
+                        foreach (KeyValuePair<string, DCSmodule> mod in DCSmodules.LookupTable)
+                        {
+                            if (State.currentstate.id.ToLower().Contains(mod.Key.ToLower())) // Substring match
+                            {
+                                if (!silent)
+                                {
+                                    Log.Write("Found module by substring: " + State.currentstate.id, Colors.Text);
+                                }
+                                State.currentmodule = mod.Value;
+                                moduleresolved = true;
+                                break;
+                            }
                         }
                     }
 
@@ -184,7 +203,12 @@ namespace VAICOM
                     return true;
                 }
                 // Mig-29
-                if (State.currentstate.id.ToLower().Contains("-29") || (State.currentstate.id.ToLower().Contains("fulcrum")))
+                if (State.currentstate.id.ToLower().Contains("fulcrum"))
+                {
+                    State.currentmodule = DCSmodules.LookupTable["MiG-29 Fulcrum"];
+                    return true;
+                }
+                if (State.currentstate.id.ToLower().Contains("-29"))
                 {
                     State.currentmodule = DCSmodules.LookupTable["MiG-29"];
                     return true;
@@ -219,19 +243,18 @@ namespace VAICOM
                     State.currentmodule = DCSmodules.LookupTable["AJS-37"];
                     return true;
                 }
-                //F-5E_FC Flaming Cliffs version
-                if ((State.currentstate.id.ToLower().Contains("f") & State.currentstate.id.ToLower().Contains("5E-3_FC"))) //|| (State.currentstate.id.ToLower().Contains("FC"))) //try removing the or statement on both versions??
+                // F-5E
+                if (State.currentstate.id.ToLower().Contains("f") && State.currentstate.id.ToLower().Contains("5e-3_fc"))
                 {
-                    State.currentmodule = DCSmodules.LookupTable["F-5E_FC"];
+                    State.currentmodule = DCSmodules.LookupTable["F-5E-3_FC"];
                     return true;
                 }
-                //F-5E
-                if ((State.currentstate.id.ToLower().Contains("f") & State.currentstate.id.ToLower().Contains("5E-3"))) //|| (State.currentstate.id.ToLower().Contains("tiger")))
+                if (State.currentstate.id.ToLower().Contains("f") && State.currentstate.id.ToLower().Contains("5e-3"))
                 {
                     State.currentmodule = DCSmodules.LookupTable["F-5E-3"];
                     return true;
                 }
-                
+
                 //Aviojet
                 if (State.currentstate.id.ToLower().Contains("101") || (State.currentstate.id.ToLower().Contains("avio")))
                 {
@@ -319,4 +342,3 @@ namespace VAICOM
     }
 
 }
-

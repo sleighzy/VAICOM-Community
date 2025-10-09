@@ -54,6 +54,12 @@ namespace VAICOM
                             case "iraq":
                                 returnstring += "IRAQ";
                                 break;
+                            case "germanycw":
+                                returnstring += "GRMY";
+                                break;
+                            case "kola":
+                                returnstring += "KOLA";
+                                break;
                             default:
                                 returnstring += "THTR";
                                 break;
@@ -104,6 +110,12 @@ namespace VAICOM
                                 break;
                             case "iraq":
                                 returnstring += "AST(Z+3)";
+                                break;
+                            case "germanycw":
+                                returnstring += "CET(Z+1)";
+                                break;
+                            case "kola":
+                                returnstring += "MSK(Z+3)";
                                 break;
                             default:
                                 returnstring += "Z";
