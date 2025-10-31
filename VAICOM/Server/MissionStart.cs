@@ -19,12 +19,17 @@ namespace VAICOM
 
             public static bool DetectNewMission()
             {
+                bool newmissiondetect = ((State.previousstate.id != State.currentstate.id) || 
+                                         (State.previousstate.playerunitid != State.currentstate.playerunitid) || 
+                                         (State.previousstate.missiontitle != State.currentstate.missiontitle) || 
+                                         (State.previousstate.easycomms != State.currentstate.easycomms));
 
-                bool newmissiondetect = ((State.previousstate.id != State.currentstate.id) || (State.previousstate.playerunitid != State.currentstate.playerunitid) || (State.previousstate.missiontitle != State.currentstate.missiontitle) || (State.previousstate.easycomms != State.currentstate.easycomms));
                 if (!newmissionflag && newmissiondetect)
                 {
                     Log.Write("------------------------------------------", Colors.Message);
                     Log.Write("DCS mission | " + State.currentstate.missiontitle, Colors.Message);
+                    Log.Write($"Mission restart detected. Previous State: {State.previousstate.id}, Current State: {State.currentstate.id}", Colors.Debug);
+
                     State.dcsrunning = true;
                     newmissionflag = true;
                     return true;
@@ -51,6 +56,7 @@ namespace VAICOM
 
             public static void InitNewMission()
             {
+                Log.Write("Initializing new mission...", Colors.Debug);
 
                 State.allowairioswitching = false;
                 State.beaconlocked = State.oneradioactive;
@@ -69,30 +75,28 @@ namespace VAICOM
                 tables.resetriomenustate();
                 helper.getAGweaponsstate();
 
-                // set homebase pos for AOCS
+                Log.Write("Resetting home base location.", Colors.Debug);
                 homebaselocation = new Vector();
                 try
                 {
                     homebaselocation = State.currentstate.availablerecipients["ATC"][0].pos;
                 }
-                catch
+                catch (Exception ex)
                 {
+                    Log.Write($"Failed to set home base location: {ex.Message}", Colors.Warning);
                 }
 
-                // reset listen states
                 PTT.PTT_Manage_Listen_States_OnPressRelease(false, false);
 
-                // Chatter Init
                 try
                 {
                     Extensions.Chatter.AudioTimer.Chatter_Initialize();
                 }
-                catch
+                catch (Exception ex)
                 {
-                    Log.Write("Chatter theme could not be initialized.", Colors.Text);
+                    Log.Write($"Chatter theme initialization failed: {ex.Message}", Colors.Warning);
                 }
 
-                // AOCS auto brief
                 try
                 {
                     if (State.PRO && State.activeconfig.AutoBrief)
@@ -100,33 +104,34 @@ namespace VAICOM
                         Extensions.AOCS.AOCSProvider.AOCS_ReadBriefing(true);
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
-                    Log.Write("Briefing readout could not be initialized.", Colors.Text);
+                    Log.Write($"Briefing readout initialization failed: {ex.Message}", Colors.Warning);
                 }
 
-                // GUI update
                 GUI_InitNewMission();
 
                 try
                 {
                     Client.DcsClient.UpdateRIOState();
                 }
-                catch
+                catch (Exception ex)
                 {
+                    Log.Write($"Failed to update RIO state: {ex.Message}", Colors.Warning);
                 }
 
-                // reset kneeboard contents
                 try
                 {
                     State.KneeboardState = new KneeboardState();
                     State.kneeboardcurrentbuffer = "";
-                    State.Proxy.Dictation.ClearBuffer(false, out String Message2);
+                    State.Proxy.Dictation.ClearBuffer(false, out string Message2);
                 }
-                catch
+                catch (Exception ex)
                 {
-
+                    Log.Write($"Failed to reset kneeboard contents: {ex.Message}", Colors.Warning);
                 }
+
+                Log.Write("New mission initialization complete.", Colors.Debug);
             }
         }
     }

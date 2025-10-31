@@ -205,8 +205,8 @@ namespace VAICOM
 
             public static void ProcessServerData()
             {
+                Log.Write("Processing server data...", Colors.Debug);
 
-                // first set deep debug mode if special user:
                 State.deepdebugmode = State.clientmode.Equals(ClientModes.Debug) || State.currentstate.playerusername.Equals(State.debuguser);
 
                 if (State.currentstate.playerusername.Equals(State.debuguser))
@@ -226,28 +226,21 @@ namespace VAICOM
                     });
                 }
 
-                // received something;
                 State.dcsrunning = true;
 
-                // set new beacon state
                 State.oneradioactive = AtLeastOneRadioCount();
                 State.beaconlocked = State.oneradioactive;
 
-                // always check module first
-                ValidateDcsModule(true); // true = silent
-                PTT.PTT_ApplyNewConfig();
-                State.AIRIOactive = State.jesteractivated && State.dll_installed_rio && State.activeconfig.RIO_Enabled && State.currentmodule.Equals(Products.DCSmodules.LookupTable[State.riomod]);
+                ValidateDcsModule(true);
 
-                // new mission?
                 if (DetectNewMission())
                 {
+                    Log.Write("New mission detected. Initializing...", Colors.Debug);
                     InitNewMission();
                 }
 
-                // insert AOCS
                 AOCSProvider.AddAOCSUnit();
 
-                // for AIRIO: update state
                 if (State.AIRIOactive)
                 {
                     try
@@ -256,8 +249,9 @@ namespace VAICOM
                         CreateListTACAN();
                         CreateListDL();
                     }
-                    catch
+                    catch (Exception ex)
                     {
+                        Log.Write($"Failed to update AIRIO state: {ex.Message}", Colors.Warning);
                     }
                 }
 
@@ -286,9 +280,7 @@ namespace VAICOM
 
                 State.Stopwatch.Stop();
 
-                Log.Write("Server update processed.", Colors.Inline);
-
-
+                Log.Write("Server update processed successfully.", Colors.Debug);
             }
 
         }

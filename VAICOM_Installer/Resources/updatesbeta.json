@@ -7,11 +7,11 @@
       "isbeta": false,
       "isdev": false,
       "productid": 1,
-      "releasedate": 20251008,
-      "version": 3069,
-      "versionstring": "3.0.6.9",
+      "releasedate": 20251131,
+      "version": 3071,
+      "versionstring": "3.0.7.1",
       "downloadurl": "https://raw.githubusercontent.com/Penecruz/VAICOM-Community/Development/VAICOM_Installer/Resources/VAICOMPRO.zip",
-      "releasenotes": "Change UI DIAG tab to Help tab and add enhanced functionality for new user support, Adds Vaicom UI preferences switch for Voice Access users (disabled), Fix for F-5E Falming Cliffs version crashing in DCS, Fix for Voice Access/Speech recognition determination, SRS Intergration changes and logging improved, "
+      "releasenotes": "More enhanced logging, Addition of Hold Ai Transmissions for use in Broadcast Parallel. "
     }
   ]
 }

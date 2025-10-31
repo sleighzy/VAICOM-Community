@@ -529,7 +529,7 @@ namespace VAICOM
 
                 public static void SwapSRSListeningStates()
                 {
-                    if (State.activeconfig.MP_VoIPUseSwitch)
+                    if (State.activeconfig.MP_VoIPUseSwitch || State.activeconfig.MP_VoIPParallel)
                     {
                         PTT.PTT_Manage_Listen_States_OnSwitch();
                     }
@@ -683,7 +683,8 @@ namespace VAICOM
                         }
                         else
                         {
-                            if (riocommand || selectcommand || optionscommand || menucommand || !(State.activeconfig.MP_VoIPUseSwitch && State.activeconfig.MP_DelayTransmit)) //  || !State.currentTXnode.tunedforhuman 
+                            if (riocommand || selectcommand || optionscommand || menucommand || 
+                                !((State.activeconfig.MP_VoIPUseSwitch || State.activeconfig.MP_VoIPParallel) && State.activeconfig.MP_DelayTransmit)) //  || !State.currentTXnode.tunedforhuman 
                             {
                                 sendmessage();
                             }
@@ -734,6 +735,3 @@ namespace VAICOM
         }
     }
 }
-
-
-
