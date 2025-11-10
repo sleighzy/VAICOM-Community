@@ -327,6 +327,17 @@ namespace VAICOM
                     State.currentmodule = DCSmodules.LookupTable["F4U-1D"];
                     return true;
                 }
+                // C-130 Hercules
+                if (State.currentstate.id.ToLower().Contains("Hercules")) // community Mod Hercules
+                {
+                    State.currentmodule = DCSmodules.LookupTable["Hercules"];
+                    return true;
+                }
+                if (State.currentstate.id.ToLower().Contains("C-130J")) // ASC C-130J
+                {
+                    State.currentmodule = DCSmodules.LookupTable["C-130J"];
+                    return true;
+                }
                 //Goshawk
                 // if (State.currentstate.id.ToLower().Contains("t") & (State.currentstate.id.ToLower().Contains("45")))
                 //{

@@ -93,6 +93,7 @@ namespace VAICOM
                     {"CH-47F" ,             new radioslotdevicelist() { Slot_map_INT = {0,0,0}, Slot_map_SRS = {0,0,0}, Slot_map_CUS = {0,0,0} } },
                     {"F4U-1D" ,             new radioslotdevicelist() { Slot_map_INT = {0,0,0}, Slot_map_SRS = {0,0,0}, Slot_map_CUS = {0,0,0} } },
                     {"MiG-29 Fulcrum" ,     new radioslotdevicelist() { Slot_map_INT = {0,0,0}, Slot_map_SRS = {0,0,0}, Slot_map_CUS = {0,0,0} } },
+                    {"C-130J" ,             new radioslotdevicelist() { Slot_map_INT = {0,0,0}, Slot_map_SRS = {0,0,0}, Slot_map_CUS = {0,0,0} } },
                     {"F-22A" ,              new radioslotdevicelist() { Slot_map_INT = {0,0,0}, Slot_map_SRS = {0,0,0}, Slot_map_CUS = {0,0,0} } },
 
                 };
@@ -175,6 +176,7 @@ namespace VAICOM
                     {"EA-18G",      new radioslotlist() { Slot_map = { "COMM1: ARC-210", "COMM2: ARC-210", ""} } },
                     {"F4U-1D" ,     new radioslotlist() { Slot_map = { "R-ARC5", "", ""} } },
                     {"MiG-29 Fulcrum" ,     new radioslotlist() { Slot_map = { "VHF/UHF R-862", "VHF R-855UM", "" } } },
+                    {"C-130J" ,     new radioslotlist() { Slot_map = { "VHF-1", "UHF-1", "VHF-2" } } },
                     {"F-22A" ,      new radioslotlist() { Slot_map = { "VHF AM", "UHF", "VHF FM" } } }, //Pene WIP
 
                 };
@@ -257,6 +259,7 @@ namespace VAICOM
                     {"EA-18G",      new radioslotlist() { Slot_map = { "AN/ARC-210 G5 V/UHF", "AN/ARC-210 V/UHF G5", "" } } },
                     {"F4U-1D" ,     new radioslotlist() { Slot_map = { "ARC-5", "", ""} } },
                     {"MiG-29 Fulcrum" ,     new radioslotlist() { Slot_map = { "VHF/UHF R-862", "", "" } } },
+                    {"C-130J" ,     new radioslotlist() { Slot_map = { "VHF-1 (ARC-210)", "UHF-1 (ARC-210)", "VHF-2 (ARC-210)" } } },
                     {"F-22A" ,      new radioslotlist() { Slot_map = { "AN/ARC-210 G5 V/UHF", "AN/ARC-210 V/UHF G5", "VHF FM" } } }, //Pene WIP
                 };
             }
