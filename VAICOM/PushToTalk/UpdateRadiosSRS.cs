@@ -259,7 +259,7 @@ namespace VAICOM
                     {"EA-18G",      new radioslotlist() { Slot_map = { "AN/ARC-210 G5 V/UHF", "AN/ARC-210 V/UHF G5", "" } } },
                     {"F4U-1D" ,     new radioslotlist() { Slot_map = { "ARC-5", "", ""} } },
                     {"MiG-29 Fulcrum" ,     new radioslotlist() { Slot_map = { "VHF/UHF R-862", "", "" } } },
-                    {"C-130J" ,     new radioslotlist() { Slot_map = { "VHF-1 (ARC-210)", "UHF-1 (ARC-210)", "VHF-2 (ARC-210)" } } },
+                    {"C-130J" ,     new radioslotlist() { Slot_map = { "ARC-210 V-1", "ARC-210 U-1", "ARC-210 V-2" } } },
                     {"F-22A" ,      new radioslotlist() { Slot_map = { "AN/ARC-210 G5 V/UHF", "AN/ARC-210 V/UHF G5", "VHF FM" } } }, //Pene WIP
                 };
             }
