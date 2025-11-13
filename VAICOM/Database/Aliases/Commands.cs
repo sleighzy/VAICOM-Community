@@ -637,14 +637,15 @@ namespace VAICOM
                      //Tower Landing Sub Menu
                 { "Request Straight In",            "Action Straight In"                              },
                 { "Request Overhead",               "Action Overhead"                                 },
-                { "Request S F O",                  "Action SFO"                                      },// Simulated Flameout 
-                { "Request P A R",                  "Action PAR"                                      },// Precision Approach Radar
-                { "Request I L S",                  "Action ILS"                                      },
+                { "Simulated Flame Out",            "Action SFO"                                      },// Simulated Flameout 
+                { "P A R Rollout",                  "Action PAR"                                      },// Precision Approach Radar
+                { "I L S Final",                  "Action ILS"                                      },
+                    //Tower Options Sub Menu
                 { "Request Low Approach",           "Action Low Approach"                             },
                 { "Request back to departure",      "Action Request Departure"                        },
                 { "Request Back to Radar",          "Action Request Back to Radar"                    },
                 { "Request Instrument Final",       "Action Instrument Straight In"                   },
-                    //Tower Report Initial
+                    //Tower Report responses
                 { "Five Miles To land",             "Action Full Stop"                                },
                 { "Five Miles Touch and Go",        "Action Touch and Go"                             },
                 { "Five Miles Request low approach","Action Low Approach"                             },
@@ -673,15 +674,15 @@ namespace VAICOM
 
                     //Approach
                        //Check In
-                { "Check In V F R",                 "Action VFR"                                      },
-                { "Check In I F R",                 "Action IFR"                                      },
-                       //IFR Sub Menu                
+                { "Checking In V F R",                 "Action VFR"                                   },
+                { "Checking In I F R",                 "Action IFR"                                   },
+                { "Checking In Again",                 "Action Check In"                              },//Back to radar after tower
+                       //IFR Sub Menu
                 { "Request Hi TACAN Zulu",          "Action HI-TAC Z"                                 },
                 { "Request TACAN Two One left",     "Action TAC21L"                                   },
                 { "Request I L S Approach",         "Action ILS\\LOC"                                 },
                 { "Request Localizer Approach",     "Action ILS\\LOC"                                 },
                 { "Request Hi TACAN Yankee",        "Action HI-TAC Y"                                 },
-                { "Request I F R Pickup",           "Action Request IFR Pickup"                       },
                 { "Cancel I F R",                   "Action Cancel IFR"                               },
                 { "Request G C A",                  "Action Request GCA"                              },// for PAR
     
@@ -696,11 +697,11 @@ namespace VAICOM
                 { "Vector for ACTON",                "Action Vector for ACTON"                         },
                 { "Vector for ARCOE",                "Action Vector for ARCOE"                         },
                 { "Vector for FLEX",                 "Action Vector for FLEX"                          },
-                { "Vector for DRY_LAKE",             "Action Vector for DRY_LAKE"                      },
-                { "Vector for NORTH_GAP",            "Action Vector for NORTH_GAP"                     },
-                { "Vector for SAND_DUNES",           "Action Vector for SAND_DUNES"                    },
+                { "Vector for DRY LAKE",             "Action Vector for DRY_LAKE"                      },
+                { "Vector for NORTH GAP",            "Action Vector for NORTH_GAP"                     },
+                { "Vector for SAND DUNES",           "Action Vector for SAND_DUNES"                    },
                 { "Vector for I Fifteen",            "Action Vector for I Fifteen"                     },
-                { "Vector for SOUTH_GAP",            "Action Vector for SOUTH_GAP"                     },
+                { "Vector for SOUTH GAP",            "Action Vector for SOUTH_GAP"                     },
                 { "Vector for FYTTR",                "Action Vector for FYTTR"                         },
                 { "Vector for DREAM",                "Action Vector for DREAM"                         },
                 { "Vector for MMM",                  "Action Vector for MMM"                           },
@@ -710,7 +711,7 @@ namespace VAICOM
                 { "Passing ACTON",                  "Action Report ACTON"                             },
                 { "Passing ARCOE",                  "Action Report ARCOE"                             },
                 { "Passing DUDBE",                  "Action Report DUDBE"                             },
-                { "Passing GASS_PEAK",              "Action Report GASS_PEAK"                         },
+                { "Passing GASS PEAK",              "Action Report GASS_PEAK"                         },
                 { "Passing Dry Lake",               "Action Report DRY_LAKE"                          },
                 { "Passing Red Horse",              "Action Report RED_HORSE"                         },
                 { "Passing Sunrise",                "Action Report SUNRISE"                           },
@@ -719,7 +720,7 @@ namespace VAICOM
                 { "Passing DREAM",                  "Action Report DREAM"                             },
                 { "Passing MMM",                    "Action Report MMM"                               },
                 { "Passing Three Mike",             "Action Report MMM"                               },
-                { "Passing SAND_DUNES",             "Action Report SAND_DUNES"                        },
+                { "Passing SAND DUNES",             "Action Report SAND_DUNES"                        },
 
                     // IFR Nav points
                 { "Vectors for ACTON",               "Action Vectors for ACTON"                        },
@@ -782,12 +783,12 @@ namespace VAICOM
                 { "Blackjack exit NIXON",           "Action Check Out NIXON"                          },
                 { "Blackjack exit SARAH",           "Action Check Out SARAH"                          },
                    // Request vectors from Blackjack
-                { "Blackjack vector to gate one",   "Action Gate 1"                                   },
-                { "Blackjack vector to gate two",   "Action Gate 2"                                   },
-                { "Blackjack vector to NIXON",      "Action NIXON"                                    },
-                { "Blackjack vector to SARAH",      "Action SARAH"                                    },
-                { "Blackjack vector to gate three", "Action Gate 3"                                   },
-                { "Blackjack vector to gate four",  "Action Gate 4"                                   },
+                { "Blackjack vector to gate one",   "Action Vector to Gate 1"                         },
+                { "Blackjack vector to gate two",   "Action Vector to Gate 2"                         },
+                { "Blackjack vector to NIXON",      "Action Vector to NIXON"                          },
+                { "Blackjack vector to SARAH",      "Action Vector to SARAH"                          },
+                { "Blackjack vector to gate three", "Action Vector to Gate 3"                         },
+                { "Blackjack vector to gate four",  "Action Vector to Gate 4"                         },
 
 
                    //NATCF
@@ -819,7 +820,7 @@ namespace VAICOM
                 { "Vector to MOOSE",                "Action Vector to MOOSE"                          },
                 { "Vector to ACTON",                "Action Vector to ACTON"                          },
                 { "Vector to SARAH",                "Action Vector to SARAH"                          },
-                { "Vector to GASS_PEAK",            "Action Vector to GASS_PEAK"                      },
+                { "Vector to GASS PEAK",            "Action Vector to GASS_PEAK"                      },
                 { "Vector to NIXON",                "Action Vector to NIXON"                          },
                 { "Vector to BLANK",                "Action Vector to BLANK"                          },
             //};
