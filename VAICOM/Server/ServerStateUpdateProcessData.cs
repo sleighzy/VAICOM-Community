@@ -205,7 +205,7 @@ namespace VAICOM
 
             public static void ProcessServerData()
             {
-                Log.Write("Processing server data...", Colors.Debug);
+                Log.Write("Processing server data...", Colors.Text);
 
                 State.deepdebugmode = State.clientmode.Equals(ClientModes.Debug) || State.currentstate.playerusername.Equals(State.debuguser);
 
@@ -235,7 +235,7 @@ namespace VAICOM
 
                 if (DetectNewMission())
                 {
-                    Log.Write("New mission detected. Initializing...", Colors.Debug);
+                    Log.Write("New mission detected. Initializing...", Colors.Text);
                     InitNewMission();
                 }
 
@@ -280,7 +280,7 @@ namespace VAICOM
 
                 State.Stopwatch.Stop();
 
-                Log.Write("Server update processed successfully.", Colors.Debug);
+                Log.Write("Server update processed successfully.", Colors.Text);
             }
 
         }

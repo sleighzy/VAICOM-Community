@@ -1,6 +1,6 @@
-﻿using System;
+﻿using VAICOM.Static;
+using System;
 using System.Timers;
-using VAICOM.Static;
 
 
 namespace VAICOM
@@ -66,7 +66,6 @@ namespace VAICOM
                     SRS_Timer.Start();
                     SRS_Timer.Elapsed += SRS_Timer_Elapsed_Handler;
                     SRSTimerActive = true;
-                    Log.Write($"SRS_Timer_Start called for module {State.currentstate.id}. Timer active: {SRSTimerActive}", Colors.Inline);
                 }
                 catch (Exception e)
                 {
@@ -83,7 +82,6 @@ namespace VAICOM
                     SRS_Timer.Elapsed -= SRS_Timer_Elapsed_Handler;
                     SRS_Timer.Stop();
                     SRSTimerActive = false;
-                    Log.Write($"SRS_Timer_Stop called for module {State.currentstate.id}. Timer active: {SRSTimerActive}", Colors.Inline);
                 }
                 catch (Exception e)
                 {
@@ -96,8 +94,6 @@ namespace VAICOM
                 try
                 {
                     PushToTalk.PTT.PTT_Manage_Listen_SRS(false); // stop listen i.e. inhibit
-                    Log.Write($"PTT_SetConfigMulti_SRS called for module {State.currentstate.id}. Radios mapped: {State.radiocount}", Colors.Inline);
-                    Log.Write($"SRS_Timer_Elapsed_Handler triggered for module {State.currentstate.id}.", Colors.Inline);
                 }
                 catch (Exception a)
                 {

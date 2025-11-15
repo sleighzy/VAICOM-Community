@@ -166,11 +166,16 @@ namespace VAICOM
                 {
                     try
                     {
-
                         foreach (KeyValuePair<string, Dictionary<string, string>> category in Aliases.inputscancats)
                         {
                             if (!State.have[category.Key])
                             {
+                                // Skip sender identification if Kneeboard is recognized
+                                if (category.Key == "sender" && State.have["recipient"] && State.currentkey["recipient"].Equals("kneeboard", StringComparison.OrdinalIgnoreCase))
+                                {
+                                    continue;
+                                }
+
                                 State.have[category.Key] = scanfor(category.Key);
                             }
                         }
@@ -188,37 +193,36 @@ namespace VAICOM
                     }
                     else
                     {
-                        if (State.activeconfig.UIaddhints)
-                        {
-                            UI.Playsound.Proceed();
-                        }
-                        Log.Write("(awaiting additional input)", Colors.Message);
-
-                        // show kneeboard (if "kneeboard" command used)
+                        // Handle Kneeboard recipient
                         try
                         {
                             if (Database.Recipients.Table[State.currentkey["recipient"]].name.Equals("wAIUnitKneeboard"))
                             {
-                                if (State.kneeboardactivated && State.activeconfig.Kneeboard_Enabled) // Pene Playing
+                                // Handle Kneeboard recipient
+                                try
                                 {
-                                    KneeboardToggle();
+                                    if (State.kneeboardactivated && State.activeconfig.Kneeboard_Enabled)
+                                    {
+                                        KneeboardToggle();
+                                    }
+                                    else
+                                    {
+                                        Log.Write("Interactive Kneeboard is disabled.", Colors.Warning);
+                                        UI.Playsound.Error();
+                                    }
                                 }
-                                else
+                                catch (Exception ex)
                                 {
-                                    Log.Write("Interactive Kneeboard is disabled.", Colors.Warning);
-                                    UI.Playsound.Error();
+                                    Log.Write($"Error handling Kneeboard command: {ex.Message}", Colors.Warning);
                                 }
                             }
                             else
                             {
-                                string cat = Database.Recipients.Table[State.currentkey["recipient"]].RecipientClass().Name;
-                                if (State.activeconfig.KneeboardlinkPTT)
+                                if (State.activeconfig.UIaddhints)
                                 {
-                                    if (State.kneeboardactivated)
-                                    {
-                                        KneeboardUpdater.SwitchPage(cat);
-                                    }
+                                    UI.Playsound.Proceed();
                                 }
+                                Log.Write("(awaiting additional input)", Colors.Message);
                             }
                         }
                         catch

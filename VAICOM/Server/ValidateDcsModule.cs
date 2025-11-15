@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Threading;
 using VAICOM.FileManager;
 using VAICOM.Products;
 using VAICOM.Static;
@@ -8,11 +9,8 @@ namespace VAICOM
 {
     namespace Servers
     {
-
-
         public static partial class Server
         {
-
             public static void DisplayCurrentModule()
             {
                 Log.Write("Player " + State.currentstate.playerusername + " entered module " + State.currentmodule.Name + " " + State.currentmodule.Alias + ", unit callsign " + State.currentstate.playercallsign, Colors.Message);
@@ -27,17 +25,13 @@ namespace VAICOM
 
             public static void ValidateDcsModule(bool silent)
             {
-
                 try
                 {
-
-                    // reset to unknown
-
+                    // Reset to unknown
                     bool moduleresolved = false;
                     State.currentmodule = DCSmodules.LookupTable["----"];
 
-                    // check for existing modules
-
+                    // Check for existing modules
                     foreach (KeyValuePair<string, DCSmodule> mod in DCSmodules.LookupTable)
                     {
                         if (State.currentstate.id.Equals(mod.Key, StringComparison.OrdinalIgnoreCase)) // Exact match
@@ -70,40 +64,44 @@ namespace VAICOM
                         }
                     }
 
-                    // guess any unknowns
-
+                    // Guess any unknowns
                     if (!moduleresolved)
                     {
                         moduleresolved = SetKnownModule();
                     }
 
-                    // still not resolved? import to table as new and store
-
+                    // Still not resolved? Import to table as new and store
                     if (!moduleresolved & State.activeconfig.AutoImportModules)
                     {
-
                         string id = State.currentstate.id;
                         string cat = State.currentstate.playerunitcat;
-                        DCSmodule newmod = new DCSmodule() { Name = id, Alias = "", ProOnly = true, IsFC = false, ApxWpn = true, ApxDir = true, IsHelo = (cat == "Helicopters"), Singlehotkey = (cat == "Helicopters") };
+                        DCSmodule newmod = new DCSmodule()
+                        {
+                            Name = id,
+                            Alias = "",
+                            ProOnly = true,
+                            IsFC = false,
+                            ApxWpn = true,
+                            ApxDir = true,
+                            IsHelo = (cat == "Helicopters"),
+                            Singlehotkey = (cat == "Helicopters")
+                        };
                         DCSmodules.LookupTable.Add(id, newmod);
                         State.importeddcsmodules.Add(newmod);
                         if (!silent)
                         {
                             Log.Write("Adding new " + cat.ToLower() + " module " + id + " to database.", Colors.Text);
-
                         }
                         FileHandler.Database.WriteModulesToFile(true);
                         State.currentmodule = DCSmodules.LookupTable[id];
                     }
 
-                    // module is resolved, check if allowed
-
+                    // Module is resolved, check if allowed
                     if (!State.PRO & State.currentmodule.ProOnly)
                     {
                         if (!silent)
                         {
                             Log.Write("DCS module " + State.currentmodule.Name + " is available with PRO license only.", Colors.Warning);
-
                         }
                         State.blockedmodule = false;
                         UI.Playsound.Sorry();
@@ -117,10 +115,21 @@ namespace VAICOM
                         State.blockedmodule = false;
                     }
 
-                }
+                    // Refresh the radios (PTT and SRS) after module detection
+                    PushToTalk.PTT.PTT_SetConfigMulti_SRS();
 
-                catch (Exception) // when error revert to default
+                    // Always update the UI after module detection
+                    if (State.configwindowopen && State.configurationwindow != null)
+                    {
+                        State.configurationwindow.Dispatcher.BeginInvoke((Action)delegate
+                        {
+                            State.configurationwindow.updatepttinfo();
+                        });
+                    }
+                }
+                catch (Exception)
                 {
+                    // When error, revert to default
                     if (State.PRO)
                     {
                         State.currentmodule = DCSmodules.LookupTable["Module Error"];
@@ -129,7 +138,6 @@ namespace VAICOM
                             DisplayCurrentModule();
                         }
                     }
-
                 }
             }
 
@@ -338,18 +346,8 @@ namespace VAICOM
                     State.currentmodule = DCSmodules.LookupTable["C-130J"];
                     return true;
                 }
-                //Goshawk
-                // if (State.currentstate.id.ToLower().Contains("t") & (State.currentstate.id.ToLower().Contains("45")))
-                //{
-                // State.currentmodule = DCSmodules.LookupTable["T-45"];
-                // return true;     
-                //}
-
                 return false;
-
             }
-
         }
     }
-
 }

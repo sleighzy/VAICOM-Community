@@ -44,7 +44,7 @@ namespace VAICOM
         // Add a new property to control Voice Access priority
         public static bool UseVoiceAccessPriority { get; set; } = false; // Default to unchecked
 
-        public static bool deepdebugmode = true; //set to deepdebug mode
+        public static bool deepdebugmode = false; //set to deepdebug mode
         public static bool databaseencrypted = false; //set to true if database is encrypted, false if not
         public static bool luahardreset = true;
         public static bool exitapp = false;

@@ -329,7 +329,7 @@ namespace VAICOM
 
             public static void StartNetwork(dynamic vaProxy)
             {
-                Log.Write("Starting network setup...", Colors.Message);
+                Log.Write("Starting network setup...", Colors.System);
 
                 try
                 {

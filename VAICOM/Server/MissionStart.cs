@@ -28,7 +28,7 @@ namespace VAICOM
                 {
                     Log.Write("------------------------------------------", Colors.Message);
                     Log.Write("DCS mission | " + State.currentstate.missiontitle, Colors.Message);
-                    Log.Write($"Mission restart detected. Previous State: {State.previousstate.id}, Current State: {State.currentstate.id}", Colors.Debug);
+                    //Log.Write($"Mission restart detected. Previous State: {State.previousstate.id}, Current State: {State.currentstate.id}", Colors.Debug);
 
                     State.dcsrunning = true;
                     newmissionflag = true;
@@ -56,7 +56,7 @@ namespace VAICOM
 
             public static void InitNewMission()
             {
-                Log.Write("Initializing new mission...", Colors.Debug);
+                Log.Write("Initializing new mission...", Colors.Text);
 
                 State.allowairioswitching = false;
                 State.beaconlocked = State.oneradioactive;
@@ -75,7 +75,7 @@ namespace VAICOM
                 tables.resetriomenustate();
                 helper.getAGweaponsstate();
 
-                Log.Write("Resetting home base location.", Colors.Debug);
+                Log.Write("Resetting home base location.", Colors.Text);
                 homebaselocation = new Vector();
                 try
                 {
@@ -131,7 +131,7 @@ namespace VAICOM
                     Log.Write($"Failed to reset kneeboard contents: {ex.Message}", Colors.Warning);
                 }
 
-                Log.Write("New mission initialization complete.", Colors.Debug);
+                Log.Write("New mission initialization complete.", Colors.Text);
             }
         }
     }
