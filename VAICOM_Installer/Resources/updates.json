@@ -7,11 +7,11 @@
       "isbeta": false,
       "isdev": false,
       "productid": 1,
-      "releasedate": 20251009,
-      "version": 3069,
-      "versionstring": "3.0.6.9",
-      "downloadurl": "https://github.com/Penecruz/VAICOM-Community/releases/download/v3.0.6.9/VAICOMPRO.zip",
-      "releasenotes": "Release 3.0.6.9 - Fixes DCS crash with F-5E-3 Flaming Cliffs version, Adds keyword training mode Windows Speech Recognition detection and logging enhanced, Add option for Voice Access use with keyword training (disabled for now) ,Change DIAG tab on Vaicom UI to Help tab,  Add Help tab button for direct log file access, Add Help tab button for direct Vaicom PDF manual access, Add Help tab button for direct YouTube tutorial access,  Other minor bug fixes with UI and module database"
+      "releasedate": 20251116,
+      "version": 3076,
+      "versionstring": "3.0.7.6",
+      "downloadurl": "https://github.com/Penecruz/VAICOM-Community/releases/download/v3.0.7.6/VAICOMPRO.zip",
+      "releasenotes": "Release 3.0.7.6 - -\tFixes awaiting additional input bug when using Kneeboard command,\tFixes detection of player callsign “Boar” when using kneeboard command. Adds the option to use Hold Ai Transmission when using Broadcast Parallel VOIP mode.Adds additional logging in the Voice Attack window when running debug.Adds new logging with System action and response standards. Fix to ensure debug logging is only present when debug is checked.\tNew handling of UI refresh on module detection, faster and more accurate.\tAdd support for AI_ATC V2.0 (keywords have changed, Keyword and imported reset required). Adds C-130J by ASC to the list of supported modules."
     }
   ]
 }
