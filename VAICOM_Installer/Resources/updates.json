@@ -1,17 +1,16 @@
 {
-  "updates":
-  [
+  "updates": [
     {
       "title": "VAICOM Community Edition for DCS World",
       "isrelease": true,
       "isbeta": false,
       "isdev": false,
       "productid": 1,
-      "releasedate": 20251116,
-      "version": 3076,
-      "versionstring": "3.0.7.6",
+      "releasedate": 20251117,
+      "version": 3077,
+      "versionstring": "3.0.7.7",
       "downloadurl": "https://github.com/Penecruz/VAICOM-Community/releases/download/v3.0.7.6/VAICOMPRO.zip",
-      "releasenotes": "Release 3.0.7.6 - -\tFixes awaiting additional input bug when using Kneeboard command,\tFixes detection of player callsign “Boar” when using kneeboard command. Adds the option to use Hold Ai Transmission when using Broadcast Parallel VOIP mode.Adds additional logging in the Voice Attack window when running debug.Adds new logging with System action and response standards. Fix to ensure debug logging is only present when debug is checked.\tNew handling of UI refresh on module detection, faster and more accurate.\tAdd support for AI_ATC V2.0 (keywords have changed, Keyword and imported reset required). Adds C-130J by ASC to the list of supported modules."
+      "releasenotes": "Hotfix 3.0.7.7 Fixes AIRIO not functioning with F-14A/B module detection"
     }
   ]
 }
