@@ -533,7 +533,7 @@ namespace VAICOM
 
                 public static void SwapSRSListeningStates()
                 {
-                    if (State.activeconfig.MP_VoIPUseSwitch || State.activeconfig.MP_VoIPParallel)
+                    if (State.activeconfig.MP_VoIPUseSwitch)
                     {
                         PTT.PTT_Manage_Listen_States_OnSwitch();
                     }

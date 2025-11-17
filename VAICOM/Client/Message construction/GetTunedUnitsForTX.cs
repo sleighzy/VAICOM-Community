@@ -87,8 +87,8 @@ namespace VAICOM
 
                 List<Server.DcsUnit> tunedforTX = new List<Server.DcsUnit>();
 
-                if (!TX.enabled || (TX.name.Contains("TX5") && !State.activeconfig.MP_VoIPParallel) || (TX.name.Contains("TX6") && !State.activeconfig.MP_VoIPParallel))
-                {
+                if (!TX.enabled || TX.name.Contains("TX5") || TX.name.Contains("TX6"))
+                    {
 
                     TX.tunedforai = TX.name.Contains("TX5");
                     TX.tunedforhuman = false;

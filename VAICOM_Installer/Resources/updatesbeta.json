@@ -7,11 +7,11 @@
       "isbeta": false,
       "isdev": false,
       "productid": 1,
-      "releasedate": 20251116,
-      "version": 3076,
-      "versionstring": "3.0.7.6",
+      "releasedate": 20251117,
+      "version": 3077,
+      "versionstring": "3.0.7.7",
       "downloadurl": "https://raw.githubusercontent.com/Penecruz/VAICOM-Community/Development/VAICOM_Installer/Resources/VAICOMPRO.zip",
-      "releasenotes": "Add direct call for Vaicom PTT UI refresh on module detection for Module ID and Radio state, Logging changes so Voice Attack categories and colours make more sense, Fix for Kneeboard command awaiting additional input, Fixes for AI_ATC Keywords, Adds support for AI_ATC V2.0, Fix for C-130J radios SRS, Adds C-130J by ASC, More logging when in debug, Addition of Hold Ai Transmissions for use in Broadcast Parallel. "
+      "releasenotes": "Hotfix AIRIO not working"
     }
   ]
 }

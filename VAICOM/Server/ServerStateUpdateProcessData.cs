@@ -231,7 +231,10 @@ namespace VAICOM
                 State.oneradioactive = AtLeastOneRadioCount();
                 State.beaconlocked = State.oneradioactive;
 
-                ValidateDcsModule(true);
+                // always check module first AIRio flag will not be set without this check!
+                ValidateDcsModule(true); // true = silent
+                PTT.PTT_ApplyNewConfig();
+                State.AIRIOactive = State.jesteractivated && State.dll_installed_rio && State.activeconfig.RIO_Enabled && State.currentmodule.Equals(Products.DCSmodules.LookupTable[State.riomod]);
 
                 if (DetectNewMission())
                 {
