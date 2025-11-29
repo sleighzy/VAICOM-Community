@@ -118,7 +118,7 @@ namespace VAICOM
                         case "wMsgLeaderGroundToggleWheelChocks":
                             Log.Write("Setting parameters for Ground Toggle Wheel Chocks", Colors.Inline);
                             EnsureParametersIsList();
-                            ((List<object>)State.currentmessage.parameters).Add(State.currentcommand.on); // F-14 try leaving state null?
+                            ((List<object>)State.currentmessage.parameters).Add(State.currentcommand.on);
                             break;
 
                         case "wMsgLeaderGroundToggleCanopy":
@@ -170,7 +170,3 @@ namespace VAICOM
         }
     }
 }
-
-
-
-

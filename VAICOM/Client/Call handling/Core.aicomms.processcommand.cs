@@ -465,6 +465,8 @@ namespace VAICOM
                                         State.kneeboardcurrentbuffer = "";
                                         UI.Playsound.Commandcomplete();
                                         KneeboardUpdater.SwitchPage("NOTES");
+                                        KneeboardUpdater.RefreshCurrentPage(); // Force immediate refresh
+                                        KneeboardUpdater.SendHeartBeatCycle(); 
                                         break;
                                     case "wMsgKneeboardShowNotes":
                                         KneeboardUpdater.SwitchPage("NOTES");

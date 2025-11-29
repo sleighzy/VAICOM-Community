@@ -260,17 +260,19 @@ namespace VAICOM
                     // Ensure the directory exists
                     if (File.Exists(logFilePath))
                     {
+                        Log.Write($"Opening log file at: {logFilePath}", Static.Colors.Message);
+
                         // Open the file location in File Explorer and select the log file
                         Process.Start("explorer.exe", $"/select,\"{logFilePath}\"");
                     }
                     else
                     {
-                        MessageBox.Show("The VaicomPro.log file does not exist.", "File Not Found", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        Log.Write("The VaicomPro.log file does not exist.", Static.Colors.Warning);
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
-                    MessageBox.Show("An error occurred while trying to open the log file location.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Log.Write($"Error while opening log file: {ex.Message}", Static.Colors.Warning);
                 }
             }
 
@@ -281,26 +283,37 @@ namespace VAICOM
                     // Construct the path to the VaicomPro manual
                     string manualPath = Path.Combine(State.VA_APPS, "VAICOMPRO", "Documentation", "VAICOM PRO Community User Manual.pdf");
 
+                    Log.Write($"Opening Vaicom manual at: {manualPath}", Static.Colors.Message);
+
                     // Ensure the file exists
                     if (File.Exists(manualPath))
                     {
-                        // Use ProcessStartInfo to open the PDF file
-                        ProcessStartInfo startInfo = new ProcessStartInfo
+                        try
                         {
-                            FileName = manualPath,
-                            UseShellExecute = true // Ensures the default PDF viewer is used
-                        };
+                            // Use ProcessStartInfo to open the PDF file
+                            ProcessStartInfo startInfo = new ProcessStartInfo
+                            {
+                                FileName = manualPath,
+                                UseShellExecute = true, // Ensures the default PDF viewer is used
+                                Verb = "open" // Explicitly instructs the OS to open the file
+                            };
 
-                        Process.Start(startInfo);
+                            Process.Start(startInfo);
+                            Log.Write("Manual opened successfully.", Static.Colors.Text);
+                        }
+                        catch (Exception ex)
+                        {
+                            Log.Write($"Failed to open manual. Possible issue with default PDF viewer. Error: {ex.Message}", Static.Colors.Warning);
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("The VaicomPro manual does not exist.", "File Not Found", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        Log.Write("The VaicomPro manual does not exist.", Static.Colors.Warning);
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"An error occurred while trying to open the manual: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Log.Write($"Unexpected error while attempting to open manual: {ex.Message}", Static.Colors.Warning);
                 }
             }
 
@@ -308,6 +321,8 @@ namespace VAICOM
             {
                 try
                 {
+                    Log.Write("Opening YouTube tutorials playlist.", Static.Colors.Message);
+
                     // Open the YouTube tutorials link in the default browser
                     Process.Start(new ProcessStartInfo
                     {
@@ -315,12 +330,13 @@ namespace VAICOM
                         UseShellExecute = true
                     });
                 }
-                catch
+                catch (Exception ex)
                 {
-                    MessageBox.Show("An error occurred while trying to open the YouTube tutorials.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    Log.Write($"Error while opening YouTube tutorials: {ex.Message}", Static.Colors.Warning);
                 }
             }
         }
 
     }
 }
+
