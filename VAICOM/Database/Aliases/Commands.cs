@@ -543,6 +543,12 @@ namespace VAICOM
                 //{ "Place Holder",                    "Place Holder"                                  }, //Hound is tricky due to the number of dynamic commands what is important?
                 //{ "Place Holder",                    "Place Holder"                                  },
 
+                // Foothold Mission set
+                //{ "Place Holder",                    "Place Holder"                                  }, //used in Imported script Dynamic F10 menu Commands for the Foothold Script
+                //{ "Place Holder",                    "Place Holder"                                  }, //These aliases must be unique and different from the standard DCS aliases!!
+                //{ "Place Holder",                    "Place Holder"                                  }, 
+                //{ "Place Holder",                    "Place Holder"                                  },
+
                 // AI_ATC
                         // Transition Repeat Last
                                                                                                           //used in Imported script Dynamic F10 menu Commands for the AI_ATC project

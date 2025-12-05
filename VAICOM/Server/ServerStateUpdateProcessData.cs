@@ -168,19 +168,25 @@ namespace VAICOM
                 {
                     if (!State.activeconfig.ImportOtherMenu || State.menuauximported)
                     {
+                        Log.Write("Skipping F10 menu processing due to ImportOtherMenu setting or already imported.", Colors.Text);
                     }
                     else
                     {
                         try
                         {
+                            Log.Write("Processing F10 menu items...", Colors.Text);
                             ImportAuxMenu();
                         }
-                        catch
+                        catch (Exception ex)
                         {
-                            Log.Write("There was a problem importing F10 menu items.", Colors.Text);
+                            Log.Write($"There was a problem importing F10 menu items: {ex.Message}", Colors.Text);
                             State.menuauximported = false;
                         }
                     }
+                }
+                else
+                {
+                    Log.Write("No F10 menu data available to process.", Colors.Text);
                 }
             }
 
@@ -231,8 +237,10 @@ namespace VAICOM
                 State.oneradioactive = AtLeastOneRadioCount();
                 State.beaconlocked = State.oneradioactive;
 
-                // always check module first AIRio flag will not be set without this check!
+                // Validate module first
                 ValidateDcsModule(true); // true = silent
+                State.moduleDetected = true; // Set flag after module validation
+
                 PTT.PTT_ApplyNewConfig();
                 State.AIRIOactive = State.jesteractivated && State.dll_installed_rio && State.activeconfig.RIO_Enabled && State.currentmodule.Equals(Products.DCSmodules.LookupTable[State.riomod]);
 
@@ -277,7 +285,11 @@ namespace VAICOM
                     PTT.PTT_Manage_Listen_States_OnPressRelease(false, false);
                 }
 
-                GetAuxMenu();
+                // Delay F10 menu processing until after module detection and other tasks
+                if (State.moduleDetected)
+                {
+                    GetAuxMenu();
+                }
 
                 VAICOM.Interfaces.VA_Plugin.VA_ExposeVariables(State.Proxy);
 

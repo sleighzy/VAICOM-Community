@@ -291,7 +291,7 @@ namespace VAICOM
         public static string lastmessagelog;
         public static string nineline;
         public static string kneeboardcurrentbuffer = "";
-
+        public static bool moduleDetected;
         // -----------------------------------------------------------------------------------------------------------
         // call flow management tables
 

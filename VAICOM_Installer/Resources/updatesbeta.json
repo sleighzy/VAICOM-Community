@@ -7,11 +7,11 @@
       "isbeta": false,
       "isdev": false,
       "productid": 1,
-      "releasedate": 20251129,
-      "version": 30711,
-      "versionstring": "3.0.7.11",
+      "releasedate": 20251206,
+      "version": 30714,
+      "versionstring": "3.0.7.14",
       "downloadurl": "https://raw.githubusercontent.com/Penecruz/VAICOM-Community/Development/VAICOM_Installer/Resources/VAICOMPRO.zip",
-      "releasenotes": "Fix for DCS side Core lua files changes, Kneeboard changes for refresh"
+      "releasenotes": "Adds new iterative scan and stack traversal for F10 menu items, Fix for DCS side Core lua files changes, Kneeboard changes for refresh"
     }
   ]
 }
