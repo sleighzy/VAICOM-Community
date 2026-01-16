@@ -406,7 +406,9 @@ namespace VAICOM
                 { "Platform" ,                 "wMsgLeaderPlatform"                    },// CASE III
 
                 { "Needles" ,                  "wMsgLeaderSayNeedle"                   }, // forced add
-
+                { "Up and On" ,                "wMsgLeaderSayNeedle"                   },
+                { "Up and Right" ,             "wMsgLeaderSayNeedle"                   },
+                { "Up and Left" ,              "wMsgLeaderSayNeedle"                   },
 
                 { "Meatball" ,                 "wMsgLeaderBall"                        },// CASE I //forced
 
@@ -484,6 +486,7 @@ namespace VAICOM
                 { "Inbound Mother Request Marshal",  "Action Request Marshal"                          },
                 { "Airboss Commencing",              "Action Request Commence"                         },
                 { "Proceeding Initial",              "Action Request Commence"                         },
+                { "Passing Platform",                "Action Request Commence"                         },
                 { "Airboss Request the tanker",      "Action Request Refueling"                        },
                 { "Request To Hit the tanker",       "Action Request Refueling"                        },
                 { "Airboss Spinning",                "Action Spinning"                                 },
@@ -509,6 +512,7 @@ namespace VAICOM
                 { "Airboss Information",             "Action Carrier Info"                             },
                 { "Airboss Weather",                 "Action Weather Report"                           },
                 { "Airboss Set our Group ",          "Action Set Section"                              },
+                { "Airboss Set our Section",         "Action Set Section"                              },
                 { "Airboss Display Marshal Queue",   "Action Marshal Queue"                            },
                 { "Airboss Display Pattern Queue",   "Action Pattern Queue"                            },
                 { "Airboss Display Waiting Queue",   "Action Waiting Queue"                            },

@@ -7,11 +7,11 @@
       "isbeta": false,
       "isdev": false,
       "productid": 1,
-      "releasedate": 20251206,
-      "version": 30714,
-      "versionstring": "3.0.7.14",
+      "releasedate": 20260117,
+      "version": 30715,
+      "versionstring": "3.0.7.15",
       "downloadurl": "https://raw.githubusercontent.com/Penecruz/VAICOM-Community/Development/VAICOM_Installer/Resources/VAICOMPRO.zip",
-      "releasenotes": "Adds new iterative scan and stack traversal for F10 menu items, Fix for DCS side Core lua files changes, Kneeboard changes for refresh"
+      "releasenotes": "Adds additional Moose Airboss and carrier command aliases, Adds new iterative scan and stack traversal for F10 menu items, Fix for DCS side Core lua files changes, Kneeboard changes for refresh"
     }
   ]
 }
