@@ -9,7 +9,7 @@
       "productid": 1,
       "releasedate": 20260118,
       "version": 30716,
-      "versionstring": "3.0.7.15",
+      "versionstring": "3.0.7.16",
       "downloadurl": "https://raw.githubusercontent.com/Penecruz/VAICOM-Community/Development/VAICOM_Installer/Resources/VAICOMPRO.zip",
       "releasenotes": "Remove additional checks for PTT in detect modules (testing), Adds additional Moose Airboss and carrier command aliases, Adds new iterative scan and stack traversal for F10 menu items, Fix for DCS side Core lua files changes, Kneeboard changes for refresh"
     }
