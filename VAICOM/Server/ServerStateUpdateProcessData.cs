@@ -239,10 +239,10 @@ namespace VAICOM
 
                 // Validate module first
                 ValidateDcsModule(true); // true = silent
-                State.moduleDetected = true; // Set flag after module validation
+                //State.moduleDetected = true; // Set flag after module validation (removed due to issues detecting modules on servers with complex menu trees e.g Foothold)
 
-                PTT.PTT_ApplyNewConfig();
-                State.AIRIOactive = State.jesteractivated && State.dll_installed_rio && State.activeconfig.RIO_Enabled && State.currentmodule.Equals(Products.DCSmodules.LookupTable[State.riomod]);
+                //PTT.PTT_ApplyNewConfig();
+                //State.AIRIOactive = State.jesteractivated && State.dll_installed_rio && State.activeconfig.RIO_Enabled && State.currentmodule.Equals(Products.DCSmodules.LookupTable[State.riomod]);
 
                 if (DetectNewMission())
                 {
