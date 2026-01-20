@@ -239,10 +239,7 @@ namespace VAICOM
 
                 // Validate module first
                 ValidateDcsModule(true); // true = silent
-                //State.moduleDetected = true; // Set flag after module validation (removed due to issues detecting modules on servers with complex menu trees e.g Foothold)
-
-                //PTT.PTT_ApplyNewConfig();
-                //State.AIRIOactive = State.jesteractivated && State.dll_installed_rio && State.activeconfig.RIO_Enabled && State.currentmodule.Equals(Products.DCSmodules.LookupTable[State.riomod]);
+                State.moduleConnected = true; // Set flag after module validation
 
                 if (DetectNewMission())
                 {
@@ -286,9 +283,15 @@ namespace VAICOM
                 }
 
                 // Delay F10 menu processing until after module detection and other tasks
-                if (State.moduleDetected)
+                if (State.moduleConnected)
                 {
+                    Log.Write("Module connected. Processing F10 menu data...", Colors.Text);
                     GetAuxMenu();
+                }
+                else
+                {
+                    Log.Write("Module not connected yet. Retrying F10 menu processing in 1 second...", Colors.Warning);
+                    System.Threading.Tasks.Task.Delay(1000).ContinueWith(_ => ProcessServerData());
                 }
 
                 VAICOM.Interfaces.VA_Plugin.VA_ExposeVariables(State.Proxy);

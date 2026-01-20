@@ -292,6 +292,7 @@ namespace VAICOM
         public static string nineline;
         public static string kneeboardcurrentbuffer = "";
         public static bool moduleDetected;
+        public static bool moduleConnected = false; // Tracks if the module is connected
         // -----------------------------------------------------------------------------------------------------------
         // call flow management tables
 
