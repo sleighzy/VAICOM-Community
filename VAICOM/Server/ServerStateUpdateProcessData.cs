@@ -262,6 +262,13 @@ namespace VAICOM
                     return; // Exit early if module validation fails
                 }
 
+                // PTT configuration and activate AIRIO if conditions are met
+                PTT.PTT_ApplyNewConfig();
+                State.AIRIOactive = State.jesteractivated && 
+                                    State.dll_installed_rio && 
+                                    State.activeconfig.RIO_Enabled && 
+                                    State.currentmodule.Equals(Products.DCSmodules.LookupTable[State.riomod]);
+
                 if (DetectNewMission())
                 {
                     Log.Write("New mission detected. Initializing...", Colors.Text);
