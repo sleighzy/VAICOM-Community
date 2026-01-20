@@ -7,11 +7,11 @@
       "isbeta": false,
       "isdev": false,
       "productid": 1,
-      "releasedate": 20260120,
-      "version": 30717,
-      "versionstring": "3.0.7.17",
+      "releasedate": 20260121,
+      "version": 30718,
+      "versionstring": "3.0.7.18",
       "downloadurl": "https://raw.githubusercontent.com/Penecruz/VAICOM-Community/Development/VAICOM_Installer/Resources/VAICOMPRO.zip",
-      "releasenotes": "Add Flag to wait for module detection befor processing F10 Menu items, Reinstate additional checks for PTT in detect modules (testing), Adds additional Moose Airboss and carrier command aliases, Adds new iterative scan and stack traversal for F10 menu items, Fix for DCS side Core lua files changes, Kneeboard changes for refresh"
+      "releasenotes": "Add New S3 Tankers Callsigns to Tanker, AOCS and Tacan lists, New debug logging for server processing, Add flag to wait for module detection befor processing F10 Menu items, Reinstate additional checks for PTT in detect modules (testing), Adds additional Moose Airboss and carrier command aliases, Adds new iterative scan and stack traversal for F10 menu items, Fix for DCS side Core lua files changes, Kneeboard changes for refresh"
     }
   ]
 }

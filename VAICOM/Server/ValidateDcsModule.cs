@@ -30,6 +30,7 @@ namespace VAICOM
                     // Reset to unknown
                     bool moduleresolved = false;
                     State.currentmodule = DCSmodules.LookupTable["----"];
+                    State.moduleConnected = false; // Reset module connection state
 
                     // Check for existing modules
                     foreach (KeyValuePair<string, DCSmodule> mod in DCSmodules.LookupTable)
@@ -113,6 +114,12 @@ namespace VAICOM
                             DisplayCurrentModule();
                         }
                         State.blockedmodule = false;
+                    }
+
+                    // If module is resolved, set moduleConnected to true
+                    if (moduleresolved)
+                    {
+                        State.moduleConnected = true;
                     }
 
                     // Refresh the radios (PTT and SRS) after module detection
