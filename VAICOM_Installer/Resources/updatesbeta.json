@@ -8,10 +8,10 @@
       "isdev": false,
       "productid": 1,
       "releasedate": 20260122,
-      "version": 30720,
-      "versionstring": "3.0.7.20",
+      "version": 30721,
+      "versionstring": "3.0.7.21",
       "downloadurl": "https://raw.githubusercontent.com/Penecruz/VAICOM-Community/Development/VAICOM_Installer/Resources/VAICOMPRO.zip",
-      "releasenotes": "Chatter Logic changes require power and Freq (281.000) if checked WIP, AIRio Fix for awaiting additional command, Add New S3 Tankers Callsigns to Tanker, AOCS and Tacan lists, New debug logging for server processing, Add flag to wait for module detection befor processing F10 Menu items, Reinstate additional checks for PTT in detect modules (testing), Adds additional Moose Airboss and carrier command aliases, Adds new iterative scan and stack traversal for F10 menu items, Fix for DCS side Core lua files changes, Kneeboard changes for refresh"
+      "releasenotes": "Fix Chatter EX check box alignment, Chatter Logic changes require power and Freq (281.000) if checked WIP, AIRio Fix for awaiting additional command, Add New S3 Tankers Callsigns to Tanker, AOCS and Tacan lists, New debug logging for server processing, Add flag to wait for module detection befor processing F10 Menu items, Reinstate additional checks for PTT in detect modules (testing), Adds additional Moose Airboss and carrier command aliases, Adds new iterative scan and stack traversal for F10 menu items, Fix for DCS side Core lua files changes, Kneeboard changes for refresh"
     }
   ]
 }

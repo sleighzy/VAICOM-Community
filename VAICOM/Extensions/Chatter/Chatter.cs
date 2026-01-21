@@ -21,8 +21,10 @@ namespace VAICOM
 
                 public static Dictionary<string, ResourceManager> ChatterCollection;
                 public static System.Timers.Timer PlaybackTimer { get; set; }
+                public static System.Timers.Timer FrequencyMonitorTimer { get; set; }
                 public static bool Created { get; set; }
                 public static bool CurrentPlayStatus { get; set; }
+                public static bool ManuallyStopped { get; set; } = false; // Tracks if chatter was manually stopped
 
                 public static void Chatter_Initialize()
                 {
@@ -87,6 +89,8 @@ namespace VAICOM
                         Log.Write("Resources added. ", Colors.Text);
 
                         // initialize ready.
+                        InitializeFrequencyMonitor(); // Initialize the frequency monitor timer
+
                         Log.Write("Chatter initialized. ", Colors.Text);
                         State.chatterinitalized = true;
                     }
@@ -105,16 +109,22 @@ namespace VAICOM
                         {
                             Chatter_Initialize();
                         }
+
                         if (CurrentPlayStatus == false)
                         {
                             Log.Write("Chatter start.", Colors.Text);
                             Chatter_TimerStart();
+                            FrequencyMonitorTimer.Start(); // Start frequency monitoring
+                            ManuallyStopped = false; // Reset manual stop flag
                         }
                         else
                         {
                             Log.Write("Chatter stop.", Colors.Text);
                             Chatter_TimerStop();
+                            FrequencyMonitorTimer.Stop(); // Stop frequency monitoring
+                            ManuallyStopped = true; // Set manual stop flag
                         }
+
                         if (State.configwindowopen && (State.configurationwindow != null))
                         {
                             State.configurationwindow.Dispatcher.BeginInvoke((MethodInvoker)delegate
@@ -276,6 +286,20 @@ namespace VAICOM
                     }
                 }
 
+                public static void InitializeFrequencyMonitor()
+                {
+                    try
+                    {
+                        FrequencyMonitorTimer = new System.Timers.Timer(2000); // Check every 2 seconds
+                        FrequencyMonitorTimer.Elapsed += FrequencyMonitor_Elapsed_Handler;
+                        Log.Write("Frequency Monitor Timer initialized.", Colors.Text);
+                    }
+                    catch (Exception e)
+                    {
+                        Log.Write("Frequency Monitor Timer init: " + e.Message, Colors.Text);
+                    }
+                }
+
                 // Local frequency normalization function
                 private static string NormalizeFrequency(string inputFrequency)
                 {
@@ -301,6 +325,56 @@ namespace VAICOM
                     }
 
                     return sanitizedInput;
+                }
+
+                private static void FrequencyMonitor_Elapsed_Handler(object sender, ElapsedEventArgs e)
+                {
+                    try
+                    {
+                        if (!State.activeconfig.RequireFrequency281000 || ManuallyStopped)
+                        {
+                            return; // Skip monitoring if frequency requirement is disabled or chatter was manually stopped
+                        }
+
+                        string targetFrequency = "281000"; // 281.000 MHz in 6-digit format
+                        bool isFrequencyMatched = false;
+
+                        foreach (var radio in State.currentstate.radios)
+                        {
+                            if (radio.on)
+                            {
+                                string normalizedFrequency = NormalizeFrequency(radio.frequency);
+                                Log.Write($"DEBUG: Monitoring radio {radio.deviceid} with frequency {normalizedFrequency}", Colors.Text);
+
+                                if (normalizedFrequency == targetFrequency)
+                                {
+                                    isFrequencyMatched = true;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (isFrequencyMatched)
+                        {
+                            if (!State.chatteractive && !ManuallyStopped)
+                            {
+                                Log.Write("Frequency matched: Starting chatter.", Colors.Text);
+                                Chatter_TimerStart();
+                            }
+                        }
+                        else
+                        {
+                            if (State.chatteractive)
+                            {
+                                Log.Write("Frequency mismatch: Stopping chatter.", Colors.Text);
+                                Chatter_TimerStop();
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Write("Error in Frequency Monitor Timer: " + ex.Message, Colors.Inline);
+                    }
                 }
             }
         }
