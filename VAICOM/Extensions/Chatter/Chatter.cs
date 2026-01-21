@@ -169,17 +169,50 @@ namespace VAICOM
                 {
                     try
                     {
-
                         Random randomsoundfile = new Random();
                         int filenumber = randomsoundfile.Next(State.chattersoundfiles.Count);
                         double currentduration = 0; // default if nothing there
 
                         bool chatterextviewblocked = State.currentstate.viewexternal && !State.currentstate.soundsallowexternal;
 
-                        if (!chatterextviewblocked && ((State.dcsrunning || !State.activeconfig.ChatterSilentOffline) && ((State.chattersoundfiles.Count > 0) & State.oneradioactive)))
-                        {
+                        // Check if any radio is tuned to 281.000 MHz
+                        string targetFrequency = "281000"; // 281.000 MHz in 6-digit format
+                        bool isFrequencyMatched = false;
 
+                        if (State.activeconfig.RequireFrequency281000) // Check if frequency requirement is enabled
+                        {
+                            foreach (var radio in State.currentstate.radios)
+                            {
+                                if (radio.on)
+                                {
+                                    string normalizedFrequency = NormalizeFrequency(radio.frequency);
+                                    Log.Write($"DEBUG: Checking radio {radio.deviceid} with frequency {normalizedFrequency}", Colors.Text);
+
+                                    if (normalizedFrequency == targetFrequency)
+                                    {
+                                        isFrequencyMatched = true;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            isFrequencyMatched = true; // If frequency requirement is disabled, always match
+                        }
+
+                        if (!chatterextviewblocked &&
+                            (State.dcsrunning || !State.activeconfig.ChatterSilentOffline) &&
+                            (State.chattersoundfiles.Count > 0 && State.oneradioactive) &&
+                            isFrequencyMatched)
+                        {
                             object playbackfile = State.chatterresources.GetObject(State.chattersoundfiles[filenumber]);
+                            if (playbackfile == null)
+                            {
+                                Log.Write("DEBUG: playbackfile is null. Unable to play chatter.", Colors.Text);
+                                return;
+                            }
+
                             Stream fragment = (Stream)playbackfile;
                             currentduration = (fragment.Length / 8); // for 8 bit 8khz mono
 
@@ -188,7 +221,6 @@ namespace VAICOM
                             var upsampler = new WaveFormatConversionStream(new WaveFormat(22050, 16, 1), reader); // was 8000
 
                             var volumeSampleProvider = new NAudio.Wave.SampleProviders.VolumeSampleProvider(upsampler.ToSampleProvider());
-
                             volumeSampleProvider.Volume = 3 * State.activeconfig.ChatterVolume;
 
                             var panningSampleProvider = new NAudio.Wave.SampleProviders.PanningSampleProvider(volumeSampleProvider);
@@ -226,7 +258,10 @@ namespace VAICOM
                                 State.chatteroutput.Init(panningSampleProvider);
                                 State.chatteroutput.Play();
                             }
-
+                        }
+                        else
+                        {
+                            Log.Write("DEBUG: Conditions not met for playing chatter.", Colors.Text);
                         }
 
                         // ...set new random interval for next snippet event.
@@ -234,7 +269,6 @@ namespace VAICOM
                         double newinterval = randompausetime.Next(State.chatterintervalmin, State.chatterintervalmax);
                         PlaybackTimer.Interval = currentduration + newinterval;
                         PlaybackTimer.Start();
-
                     }
                     catch (Exception a)
                     {
@@ -242,10 +276,33 @@ namespace VAICOM
                     }
                 }
 
+                // Local frequency normalization function
+                private static string NormalizeFrequency(string inputFrequency)
+                {
+                    if (string.IsNullOrWhiteSpace(inputFrequency))
+                    {
+                        return string.Empty;
+                    }
 
+                    // Remove any non-numeric characters
+                    string sanitizedInput = System.Text.RegularExpressions.Regex.Replace(inputFrequency, @"[^\d]", "");
+
+                    // Check if the input is a valid number
+                    if (!long.TryParse(sanitizedInput, out long frequency))
+                    {
+                        Log.Write($"Invalid frequency format: {inputFrequency}", Colors.Inline);
+                        return string.Empty;
+                    }
+
+                    // Truncate to 6 digits if the frequency is too long
+                    if (sanitizedInput.Length > 6)
+                    {
+                        sanitizedInput = sanitizedInput.Substring(0, 6);
+                    }
+
+                    return sanitizedInput;
+                }
             }
         }
     }
 }
-
-
