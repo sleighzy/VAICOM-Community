@@ -30,12 +30,11 @@ namespace VAICOM
                 {
                     try
                     {
-
-                        // default values (if load based on theme fails)
+                        // Default values (if load based on theme fails)
                         State.chatterintervalmin = 4000;
                         State.chatterintervalmax = 22000;
 
-                        // get themepack resource managers table
+                        // Get themepack resource managers table
                         Log.Write("Adding themepack collections", Colors.Text);
                         ChatterCollection = new Dictionary<string, ResourceManager>();
                         ChatterCollection.Add("Default", Themepack.RedFlag.ResourceManager);
@@ -52,7 +51,7 @@ namespace VAICOM
                             State.chatterthemes.Add(theme.Key);
                         }
 
-                        // set the name of the current collection (from config setting)
+                        // Set the name of the current collection (from config setting)
                         string currenttheme;
                         if (State.activeconfig.ChatterFolder.Equals("(AUTO)"))
                         {
@@ -63,7 +62,7 @@ namespace VAICOM
                             currenttheme = State.activeconfig.ChatterFolder;
                         }
 
-                        // catch if somehow there was a change
+                        // Catch if somehow there was a change
                         if (!State.chatterthemes.Contains(currenttheme))
                         {
                             Log.Write("Chatter theme mismatch for " + currenttheme, Colors.Text);
@@ -76,20 +75,28 @@ namespace VAICOM
                             Log.Write("Chatter theme set to " + currenttheme, Colors.Text);
                         }
 
-                        // create list of resource names,
+                        // Create list of resource names
                         Log.Write("Adding chatter resources.. " + currenttheme, Colors.Text);
                         State.chatterresources = ChatterCollection[currenttheme].GetResourceSet(CultureInfo.CurrentUICulture, true, true);
                         State.chattersoundfiles = new List<string>();
 
-                        //..add them to soundfiles table.
+                        // Add them to soundfiles table
                         foreach (DictionaryEntry entry in State.chatterresources)
                         {
                             State.chattersoundfiles.Add(entry.Key.ToString());
                         }
                         Log.Write("Resources added. ", Colors.Text);
 
-                        // initialize ready.
-                        InitializeFrequencyMonitor(); // Initialize the frequency monitor timer
+                        // Initialize frequency monitor
+                        InitializeFrequencyMonitor();
+
+                        // Auto start chatter if enabled
+                        if (State.activeconfig.ChatterAutostart)
+                        {
+                            Log.Write("Chatter auto-start enabled. Starting chatter...", Colors.Text);
+                            Chatter_TimerStart();
+                            FrequencyMonitorTimer.Start(); // Start frequency monitoring
+                        }
 
                         Log.Write("Chatter initialized. ", Colors.Text);
                         State.chatterinitalized = true;
@@ -114,14 +121,14 @@ namespace VAICOM
                         {
                             Log.Write("Chatter start.", Colors.Text);
                             Chatter_TimerStart();
-                            FrequencyMonitorTimer.Start(); // Start frequency monitoring
+                            FrequencyMonitorTimer.Start(); // Ensure frequency monitoring starts
                             ManuallyStopped = false; // Reset manual stop flag
                         }
                         else
                         {
                             Log.Write("Chatter stop.", Colors.Text);
                             Chatter_TimerStop();
-                            FrequencyMonitorTimer.Stop(); // Stop frequency monitoring
+                            FrequencyMonitorTimer.Stop(); // Ensure frequency monitoring stops
                             ManuallyStopped = true; // Set manual stop flag
                         }
 
@@ -193,7 +200,7 @@ namespace VAICOM
                         {
                             foreach (var radio in State.currentstate.radios)
                             {
-                                if (radio.on)
+                                if (radio.on || !State.activeconfig.ChatterSilentOffline) // Ignore radio power if "Req Radio on & Freq" is unchecked
                                 {
                                     string normalizedFrequency = NormalizeFrequency(radio.frequency);
                                     Log.Write($"DEBUG: Checking radio {radio.deviceid} with frequency {normalizedFrequency}", Colors.Text);
@@ -213,7 +220,7 @@ namespace VAICOM
 
                         if (!chatterextviewblocked &&
                             (State.dcsrunning || !State.activeconfig.ChatterSilentOffline) &&
-                            (State.chattersoundfiles.Count > 0 && State.oneradioactive) &&
+                            (State.chattersoundfiles.Count > 0 && (State.oneradioactive || !State.activeconfig.ChatterSilentOffline)) &&
                             isFrequencyMatched)
                         {
                             object playbackfile = State.chatterresources.GetObject(State.chattersoundfiles[filenumber]);
@@ -341,7 +348,7 @@ namespace VAICOM
 
                         foreach (var radio in State.currentstate.radios)
                         {
-                            if (radio.on)
+                            if (radio.on || !State.activeconfig.ChatterSilentOffline) // Ignore radio power if "Req Radio on & Freq" is unchecked
                             {
                                 string normalizedFrequency = NormalizeFrequency(radio.frequency);
                                 Log.Write($"DEBUG: Monitoring radio {radio.deviceid} with frequency {normalizedFrequency}", Colors.Text);

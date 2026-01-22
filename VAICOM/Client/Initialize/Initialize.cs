@@ -378,7 +378,10 @@ namespace VAICOM
                 {
                     Extensions.Chatter.AudioTimer.Chatter_Initialize();
                     if (State.activeconfig.ChatterAutostart)
-                    { Extensions.Chatter.AudioTimer.Chatter_TimerPlayToggle(); }
+                    {
+                        Log.Write("Chatter auto-start triggered on module connection.", Colors.Text);
+                        Extensions.Chatter.AudioTimer.Chatter_TimerPlayToggle();
+                    }
                 }
                 catch (Exception ex)
                 {
