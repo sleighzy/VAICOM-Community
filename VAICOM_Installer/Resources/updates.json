@@ -6,11 +6,11 @@
       "isbeta": false,
       "isdev": false,
       "productid": 1,
-      "releasedate": 20251117,
-      "version": 3078,
-      "versionstring": "3.0.7.8",
-      "downloadurl": "https://github.com/Penecruz/VAICOM-Community/releases/download/v3.0.7.8/VAICOMPRO.zip",
-      "releasenotes": "Hotfix 3.0.7.8 Fixes AIRIO not functioning with F-14A/B module detection and Single PTT hotkey handling"
+      "releasedate": 20260124,
+      "version": 3081,
+      "versionstring": "3.0.8.1",
+      "downloadurl": "https://github.com/Penecruz/VAICOM-Community/releases/download/v3.0.8.1/VAICOMPRO.zip",
+      "releasenotes": "Release 3.0.8.1 Update core DCS swap files, Add new iterative scan and stack traversal for Import F10 Menu, Process server checks added on module connection, Add additional CASE III carrier communications aliases, New Chatter logic and frequency monitor, New Chatter Auto Start logic, New Kneeboard refresh routine to improve performance."
     }
   ]
 }
