@@ -182,116 +182,132 @@ namespace VAICOM
                     }
                 }
 
-                private static void Chatter_Timer_Elapsed_Handler(object sender, ElapsedEventArgs e)
+                private static bool hasLoggedChatterCondition = false; // Flag to track if the "conditions not met" message has been logged
+                private static bool hasLoggedChatterPlaying = false;   // Flag to track if the "conditions met" message has been logged
+
+private static void Chatter_Timer_Elapsed_Handler(object sender, ElapsedEventArgs e)
+{
+    try
+    {
+        Random randomsoundfile = new Random();
+        int filenumber = randomsoundfile.Next(State.chattersoundfiles.Count);
+        double currentduration = 0; // default if nothing there
+
+        bool chatterextviewblocked = State.currentstate.viewexternal && !State.currentstate.soundsallowexternal;
+
+        // Check if any radio is tuned to 281.000 MHz
+        string targetFrequency = "281000"; // 281.000 MHz in 6-digit format
+        bool isFrequencyMatched = false;
+
+        if (State.activeconfig.RequireFrequency281000) // Check if frequency requirement is enabled
+        {
+            foreach (var radio in State.currentstate.radios)
+            {
+                if (radio.on || !State.activeconfig.ChatterSilentOffline) // Ignore radio power if "Req Radio on & Freq" is unchecked
                 {
-                    try
+                    string normalizedFrequency = NormalizeFrequency(radio.frequency);
+
+                    if (normalizedFrequency == targetFrequency)
                     {
-                        Random randomsoundfile = new Random();
-                        int filenumber = randomsoundfile.Next(State.chattersoundfiles.Count);
-                        double currentduration = 0; // default if nothing there
-
-                        bool chatterextviewblocked = State.currentstate.viewexternal && !State.currentstate.soundsallowexternal;
-
-                        // Check if any radio is tuned to 281.000 MHz
-                        string targetFrequency = "281000"; // 281.000 MHz in 6-digit format
-                        bool isFrequencyMatched = false;
-
-                        if (State.activeconfig.RequireFrequency281000) // Check if frequency requirement is enabled
-                        {
-                            foreach (var radio in State.currentstate.radios)
-                            {
-                                if (radio.on || !State.activeconfig.ChatterSilentOffline) // Ignore radio power if "Req Radio on & Freq" is unchecked
-                                {
-                                    string normalizedFrequency = NormalizeFrequency(radio.frequency);
-                                    Log.Write($"DEBUG: Checking radio {radio.deviceid} with frequency {normalizedFrequency}", Colors.Text);
-
-                                    if (normalizedFrequency == targetFrequency)
-                                    {
-                                        isFrequencyMatched = true;
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                        else
-                        {
-                            isFrequencyMatched = true; // If frequency requirement is disabled, always match
-                        }
-
-                        if (!chatterextviewblocked &&
-                            (State.dcsrunning || !State.activeconfig.ChatterSilentOffline) &&
-                            (State.chattersoundfiles.Count > 0 && (State.oneradioactive || !State.activeconfig.ChatterSilentOffline)) &&
-                            isFrequencyMatched)
-                        {
-                            object playbackfile = State.chatterresources.GetObject(State.chattersoundfiles[filenumber]);
-                            if (playbackfile == null)
-                            {
-                                Log.Write("DEBUG: playbackfile is null. Unable to play chatter.", Colors.Text);
-                                return;
-                            }
-
-                            Stream fragment = (Stream)playbackfile;
-                            currentduration = (fragment.Length / 8); // for 8 bit 8khz mono
-
-                            fragment.Seek(0, SeekOrigin.Begin);
-                            WaveFileReader reader = new WaveFileReader(fragment);
-                            var upsampler = new WaveFormatConversionStream(new WaveFormat(22050, 16, 1), reader); // was 8000
-
-                            var volumeSampleProvider = new NAudio.Wave.SampleProviders.VolumeSampleProvider(upsampler.ToSampleProvider());
-                            volumeSampleProvider.Volume = 3 * State.activeconfig.ChatterVolume;
-
-                            var panningSampleProvider = new NAudio.Wave.SampleProviders.PanningSampleProvider(volumeSampleProvider);
-
-                            int pan = 0;
-
-                            switch (State.activeconfig.ChatterPanSetting)
-                            {
-                                case 2:
-                                    Random rnd = new Random();
-                                    int dice = rnd.Next(1, 2 + 1);
-                                    switch (dice)
-                                    {
-                                        case 1:
-                                            pan = -1;
-                                            break;
-                                        case 2:
-                                            pan = +1;
-                                            break;
-                                    }
-                                    break;
-                                default:
-                                    pan = State.activeconfig.ChatterPanSetting;
-                                    break;
-                            }
-
-                            panningSampleProvider.Pan = pan;
-
-                            if (State.activeconfig.Redirect_World_Speech)
-                            {
-                                State.ttsmixer.AddMixerInput(panningSampleProvider);
-                            }
-                            else
-                            {
-                                State.chatteroutput.Init(panningSampleProvider);
-                                State.chatteroutput.Play();
-                            }
-                        }
-                        else
-                        {
-                            Log.Write("DEBUG: Conditions not met for playing chatter.", Colors.Text);
-                        }
-
-                        // ...set new random interval for next snippet event.
-                        Random randompausetime = new Random();
-                        double newinterval = randompausetime.Next(State.chatterintervalmin, State.chatterintervalmax);
-                        PlaybackTimer.Interval = currentduration + newinterval;
-                        PlaybackTimer.Start();
-                    }
-                    catch (Exception a)
-                    {
-                        Log.Write("Problems were reported with the Chatter timer handler. " + a.Message, Colors.Inline);
+                        isFrequencyMatched = true;
+                        break;
                     }
                 }
+            }
+        }
+        else
+        {
+            isFrequencyMatched = true; // If frequency requirement is disabled, always match
+        }
+
+        if (!chatterextviewblocked &&
+            (State.dcsrunning || !State.activeconfig.ChatterSilentOffline) &&
+            (State.chattersoundfiles.Count > 0 && (State.oneradioactive || !State.activeconfig.ChatterSilentOffline)) &&
+            isFrequencyMatched)
+        {
+            if (!hasLoggedChatterPlaying) // Log only if the message hasn't been logged yet
+            {
+                Log.Write("Conditions met for playing chatter. Starting playback.", Colors.Text);
+                hasLoggedChatterPlaying = true; // Set the flag to true after logging
+            }
+
+            hasLoggedChatterCondition = false; // Reset the "conditions not met" flag
+
+            object playbackfile = State.chatterresources.GetObject(State.chattersoundfiles[filenumber]);
+            if (playbackfile == null)
+            {
+                Log.Write("DEBUG: playbackfile is null. Unable to play chatter.", Colors.Text);
+                return;
+            }
+
+            Stream fragment = (Stream)playbackfile;
+            currentduration = (fragment.Length / 8); // for 8 bit 8khz mono
+
+            fragment.Seek(0, SeekOrigin.Begin);
+            WaveFileReader reader = new WaveFileReader(fragment);
+            var upsampler = new WaveFormatConversionStream(new WaveFormat(22050, 16, 1), reader); // was 8000
+
+            var volumeSampleProvider = new NAudio.Wave.SampleProviders.VolumeSampleProvider(upsampler.ToSampleProvider());
+            volumeSampleProvider.Volume = 3 * State.activeconfig.ChatterVolume;
+
+            var panningSampleProvider = new NAudio.Wave.SampleProviders.PanningSampleProvider(volumeSampleProvider);
+
+            int pan = 0;
+
+            switch (State.activeconfig.ChatterPanSetting)
+            {
+                case 2:
+                    Random rnd = new Random();
+                    int dice = rnd.Next(1, 2 + 1);
+                    switch (dice)
+                    {
+                        case 1:
+                            pan = -1;
+                            break;
+                        case 2:
+                            pan = +1;
+                            break;
+                    }
+                    break;
+                default:
+                    pan = State.activeconfig.ChatterPanSetting;
+                    break;
+            }
+
+            panningSampleProvider.Pan = pan;
+
+            if (State.activeconfig.Redirect_World_Speech)
+            {
+                State.ttsmixer.AddMixerInput(panningSampleProvider);
+            }
+            else
+            {
+                State.chatteroutput.Init(panningSampleProvider);
+                State.chatteroutput.Play();
+            }
+        }
+        else
+        {
+            if (!hasLoggedChatterCondition) // Log only if the message hasn't been logged yet
+            {
+                Log.Write("Conditions not met for playing chatter. Check Radio on and Frequency", Colors.Text);
+                hasLoggedChatterCondition = true; // Set the flag to true after logging
+            }
+
+            hasLoggedChatterPlaying = false; // Reset the "conditions met" flag
+        }
+
+        // ...set new random interval for next snippet event.
+        Random randompausetime = new Random();
+        double newinterval = randompausetime.Next(State.chatterintervalmin, State.chatterintervalmax);
+        PlaybackTimer.Interval = currentduration + newinterval;
+        PlaybackTimer.Start();
+    }
+    catch (Exception a)
+    {
+        Log.Write("Problems were reported with the Chatter timer handler. " + a.Message, Colors.Inline);
+    }
+}
 
                 public static void InitializeFrequencyMonitor()
                 {
@@ -351,7 +367,8 @@ namespace VAICOM
                             if (radio.on || !State.activeconfig.ChatterSilentOffline) // Ignore radio power if "Req Radio on & Freq" is unchecked
                             {
                                 string normalizedFrequency = NormalizeFrequency(radio.frequency);
-                                Log.Write($"DEBUG: Monitoring radio {radio.deviceid} with frequency {normalizedFrequency}", Colors.Text);
+                                // Commenting out the debug log to reduce logging clutter
+                                // Log.Write($"DEBUG: Monitoring radio {radio.deviceid} with frequency {normalizedFrequency}", Colors.Text);
 
                                 if (normalizedFrequency == targetFrequency)
                                 {
