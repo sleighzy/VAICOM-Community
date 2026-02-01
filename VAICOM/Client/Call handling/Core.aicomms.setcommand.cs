@@ -1,4 +1,5 @@
-﻿using VAICOM.Database;
+﻿using System;
+using VAICOM.Database;
 using VAICOM.Static;
 
 namespace VAICOM
@@ -21,7 +22,7 @@ namespace VAICOM
                     }
                     else
                     {
-                        // set State.currentcommand:
+                        // Set State.currentcommand:
                         if (!Commands.Table.ContainsKey(State.currentkey["command"])) // some internal error, default to void command
                         {
                             State.currentkey["command"] = "wMsgNull";
@@ -30,7 +31,14 @@ namespace VAICOM
                         State.currentcommand = Commands.Table[State.currentkey["command"]]; // normal, have command
                         result = true;
 
-                        // catch exceptional cases:
+                        // Handle Kneeboard recipient no need to wait for additional input
+                        if (State.have["recipient"] && State.currentkey["recipient"].Equals("kneeboard", StringComparison.OrdinalIgnoreCase))
+                        {
+                            State.haveinputscomplete = true;
+                            return true;
+                        }
+
+                        // Catch exceptional cases:
                         if (State.currentcommand.blockedforFree)
                         {
                             if (!State.PRO)
@@ -62,7 +70,7 @@ namespace VAICOM
                             return false;
                         }
 
-                        // reject if AIRIO but not in F14.
+                        // Reject if AIRIO but not in F14.
                         if (State.currentcommand.isRIO() && !State.AIRIOactive)
                         {
                             Log.Write("AIRIO commands are not available.", Colors.Warning);
@@ -140,6 +148,3 @@ namespace VAICOM
         }
     }
 }
-
-
-

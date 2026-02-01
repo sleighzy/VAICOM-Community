@@ -1823,29 +1823,17 @@ function onMsgStart(pMessage, pRecepient, text)
 	local pMsgReceiver	= pMessage:getReceiver()
 	local event			= pMessage:getEvent()
 
-	base.assert(pMsgSender.id_ ~= nil)
-	local ttt = { id_ = pMsgSender.id_ }
-	base.setmetatable(ttt, base.getmetatable(pMsgSender) )
-	base.assert(pMsgSender == ttt)
-	if pMsgSender ~= nil then
+	if pMsgSender then
 		commById[pMsgSender:tonumber()] = pMsgSender
 	end
-	if pMsgReceiver ~= nil then
+	if pMsgReceiver then
 		commById[pMsgReceiver:tonumber()] = pMsgReceiver
 	end	
-	
-	--base.print('RadioCommandDialogsPanel:onMsgStart()')
-	--base.print('data.pComm = '..base.tostring(data.pComm))
-	--base.print('pMsgSender = '..base.tostring(pMsgSender))
-	--base.print('pMsgReceiver = '..base.tostring(pMsgReceiver))
-	--base.print('pRecepient = '..base.tostring(pRecepient))
-	--base.print('event = '..base.tostring(event))
-	if 	data.pComm == nil or
-		pRecepient ~= data.pComm then
+	if data.pComm == nil or pRecepient ~= data.pComm then
 		return
 	end
 	local textColor = getMessageColor(pMsgSender, pMsgReceiver, event)
-	if pMsgReceiver == data.pComm or pMsgSender == data.pComm then
+	if pMsgReceiver == data.pComm or (pMsgSender and  pMsgSender == data.pComm) then
 		--Checking if message induces internal event(s)
 		for msgHandlerIndex, msgHandler in base.pairs(data.msgHandlers) do
 			local internalEvent, receiverAsRecepient = msgHandler:onMsg(pMessage, pRecepient)
@@ -1855,10 +1843,8 @@ function onMsgStart(pMessage, pRecepient, text)
 		end
 		--Processing message by dialog(s) FSM
 		self:onEvent(event, pMsgSender and pMsgSender:tonumber(), pMsgReceiver and pMsgReceiver:tonumber())
-	end
-	--Processing message by GUI
-	if pMsgReceiver == data.pComm or pMsgSender == data.pComm then
-		commandDialogsPanel.onMsgStart(self, pMsgSender:tonumber(), pMsgReceiver and pMsgReceiver:tonumber(), text, textColor)
+		--Processing message by GUI
+		commandDialogsPanel.onMsgStart(self, pMsgSender and pMsgSender:tonumber() , pMsgReceiver and pMsgReceiver:tonumber(), text, textColor)
 	end
 end
 
@@ -1868,14 +1854,14 @@ function onMsgFinish(pMessage, pRecepient, text)
 	end
 	local pMsgSender	= pMessage:getSender()
 	local pMsgReceiver	= pMessage:getReceiver()
-	if pMsgSender ~= nil then
+	if pMsgSender then
 		commById[pMsgSender:tonumber()] = pMsgSender
 	end
-	if pMsgReceiver ~= nil then
+	if pMsgReceiver then
 		commById[pMsgReceiver:tonumber()] = pMsgReceiver
 	end	
-	if pMsgReceiver == data.pComm or pMsgSender == data.pComm then
-		commandDialogsPanel.onMsgFinish(self, pMsgSender:tonumber(), pMsgReceiver and pMsgReceiver:tonumber(), text)
+	if pMsgReceiver == data.pComm or (pMsgSender and pMsgSender == data.pComm) then
+		commandDialogsPanel.onMsgFinish(self, pMsgSender and pMsgSender:tonumber(), pMsgReceiver and pMsgReceiver:tonumber(), text)
 	end
 end
 
@@ -1883,7 +1869,7 @@ end
 --Generates event.
 function onMsgEvent(event, pMsgSender) 
 	base.assert(pMsgSender ~= nil)
-	if pMsgSender ~= nil then
+	if pMsgSender then
 		commById[pMsgSender:tonumber()] = pMsgSender
 	end	
 	--checking if message induces internal event(s)

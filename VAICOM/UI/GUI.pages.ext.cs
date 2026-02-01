@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using VAICOM.FileManager;
+using VAICOM.Static;
 
 namespace VAICOM
 {
@@ -243,8 +244,20 @@ namespace VAICOM
 
             // chatter
 
-            private void ChatterSilentOfflineOn(object sender, RoutedEventArgs e) { State.activeconfig.ChatterSilentOffline = true; }
-            private void ChatterSilentOfflineOff(object sender, RoutedEventArgs e) { State.activeconfig.ChatterSilentOffline = false; }
+            private void ChatterSilentOfflineOn(object sender, RoutedEventArgs e)
+            {
+                State.activeconfig.ChatterSilentOffline = true;
+                State.activeconfig.RequireFrequency281000 = true; // Enable frequency requirement
+                Log.Write("Radio Power and frequency 281.000 requirement enabled for Chatter.", Colors.Text);
+            }
+
+            private void ChatterSilentOfflineOff(object sender, RoutedEventArgs e)
+            {
+                State.activeconfig.ChatterSilentOffline = false;
+                State.activeconfig.RequireFrequency281000 = false; // Disable frequency requirement
+                Log.Write("Radio Power and frequency 281.000 requirement disabled for Chatter.", Colors.Text);
+            }
+
             private void SetCurrentValueChatterSilentOffline(object sender, EventArgs e)
             {
                 ChatterSilentOffline.IsEnabled = State.chatterthemesactivated && State.dll_installed_chatter;
@@ -318,6 +331,3 @@ namespace VAICOM
         }
     }
 }
-
-
-

@@ -179,6 +179,7 @@ namespace VAICOM
             public string SRS_ClientReceiveIP;
             public int SRS_ClientReceivePort;
 
+            public bool RequireFrequency281000 { get; set; } // New property
         }
 
         public static class Configs
@@ -355,13 +356,10 @@ namespace VAICOM
                 SRS_ClientReceiveIP = "*",
                 SRS_ClientReceivePort = 33502,
 
+                //Chatter
+                RequireFrequency281000 = false, // Default value
             };
 
         }
     }
 }
-
-
-
-
-

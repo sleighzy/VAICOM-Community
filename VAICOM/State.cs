@@ -36,7 +36,7 @@ namespace VAICOM
         public static string clientmode = ClientModes.Normal; //set to Normal for release, Debug for development
 
         public static string versionstring = "";
-        public static string pluginversionnumber = "3.0.6"; // used by Theme (Special page)
+        public static string pluginversionnumber = "3.0.8"; // used by Theme (Special page)
         public static string vaminversion = "1.16";
         public static string defProfileName = "VAICOM for DCS World";
         public static bool requirecarrierregkey = false;
@@ -291,7 +291,8 @@ namespace VAICOM
         public static string lastmessagelog;
         public static string nineline;
         public static string kneeboardcurrentbuffer = "";
-
+        public static bool moduleDetected;
+        public static bool moduleConnected = false; // Tracks if the module is connected
         // -----------------------------------------------------------------------------------------------------------
         // call flow management tables
 

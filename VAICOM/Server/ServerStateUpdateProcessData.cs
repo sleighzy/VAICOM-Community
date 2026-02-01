@@ -92,6 +92,18 @@ namespace VAICOM
                         {
                             TACANunits.Add(unit);
                         }
+                        if (unit.callsign.Contains("Navy One") || unit.fullname.Contains("Navy One")) //Add New S3 Tanker Callsigns
+                        {
+                            TACANunits.Add(unit);
+                        }
+                        if (unit.callsign.Contains("Bloodhound") || unit.fullname.Contains("Bloodhound"))
+                        {
+                            TACANunits.Add(unit);
+                        }
+                        if (unit.callsign.Contains("Mauler") || unit.fullname.Contains("Mauler"))
+                        {
+                            TACANunits.Add(unit);
+                        }
                     }
                     foreach (DcsUnit unit in State.currentstate.availablerecipients["ATC"])
                     {
@@ -147,13 +159,13 @@ namespace VAICOM
                     }
                     foreach (DcsUnit unit in State.currentstate.availablerecipients["ATC"])
                     {
-                        if (unit.fullname.ToLower().Contains("ticonderoga") || unit.callsign.ToLower().Contains("ticonderoga") || (CheckSuperCarrier(unit.callsign + unit.fullname) && !(unit.callsign + unit.fullname).ToLower().Contains("kuznetsov") && !(unit.callsign + unit.fullname).ToLower().Contains("vinson")))
+                        if (unit.fullname.ToLower().Contains("ticonderoga") || unit.callsign.ToLower().Contains("ticonderoga") || unit.fullname.ToLower().Contains("arleigh burke") || unit.callsign.ToLower().Contains("arleigh burke") || (CheckSuperCarrier(unit.callsign + unit.fullname) && !(unit.callsign + unit.fullname).ToLower().Contains("kuznetsov") && !(unit.callsign + unit.fullname).ToLower().Contains("vinson")))
                         {
                             DLunits.Add(unit);
                         }
 
                     }
-                    State.currentstate.DLunits = DLunits.OrderBy(o => o.range).ToList(); //pene what's going on here??
+                    State.currentstate.DLunits = DLunits.OrderBy(o => o.range).ToList(); //Closest DLink units add Arleigh Burke class destroyers
                     helper.getDLstate();
                 }
                 catch
@@ -164,23 +176,34 @@ namespace VAICOM
 
             public static void GetAuxMenu()
             {
-                if (State.currentstate.menuaux != null)
+                if (!State.activeconfig.ImportOtherMenu)
                 {
-                    if (!State.activeconfig.ImportOtherMenu || State.menuauximported)
-                    {
-                    }
-                    else
-                    {
-                        try
-                        {
-                            ImportAuxMenu();
-                        }
-                        catch
-                        {
-                            Log.Write("There was a problem importing F10 menu items.", Colors.Text);
-                            State.menuauximported = false;
-                        }
-                    }
+                    Log.Write("Skipping F10 menu processing due to Import F10 Menu setting being disabled in Preferences.", Colors.Text);
+                    return;
+                }
+
+                if (State.currentstate.menuaux == null)
+                {
+                    Log.Write("No F10 menu data available to process. Ensure the module is connected and try again.", Colors.Text);
+                    return;
+                }
+
+                if (State.menuauximported)
+                {
+                    Log.Write("F10 menu items already imported. Skipping processing.", Colors.Text);
+                    return;
+                }
+
+                try
+                {
+                    Log.Write("Processing F10 menu items...", Colors.Text);
+                    ImportAuxMenu();
+                    State.menuauximported = true; // Mark as imported
+                }
+                catch (Exception ex)
+                {
+                    Log.Write($"There was a problem importing F10 menu items: {ex.Message}", Colors.Text);
+                    State.menuauximported = false;
                 }
             }
 
@@ -205,8 +228,8 @@ namespace VAICOM
 
             public static void ProcessServerData()
             {
+                Log.Write("Processing server data...", Colors.Text);
 
-                // first set deep debug mode if special user:
                 State.deepdebugmode = State.clientmode.Equals(ClientModes.Debug) || State.currentstate.playerusername.Equals(State.debuguser);
 
                 if (State.currentstate.playerusername.Equals(State.debuguser))
@@ -226,28 +249,34 @@ namespace VAICOM
                     });
                 }
 
-                // received something;
                 State.dcsrunning = true;
 
-                // set new beacon state
                 State.oneradioactive = AtLeastOneRadioCount();
                 State.beaconlocked = State.oneradioactive;
 
-                // always check module first
+                // Validate module first
                 ValidateDcsModule(true); // true = silent
-                PTT.PTT_ApplyNewConfig();
-                State.AIRIOactive = State.jesteractivated && State.dll_installed_rio && State.activeconfig.RIO_Enabled && State.currentmodule.Equals(Products.DCSmodules.LookupTable[State.riomod]);
+                if (!State.moduleConnected)
+                {
+                    Log.Write("Module validation failed. Unable to connect to module.", Colors.Warning);
+                    return; // Exit early if module validation fails
+                }
 
-                // new mission?
+                // PTT configuration and activate AIRIO if conditions are met
+                PTT.PTT_ApplyNewConfig();
+                State.AIRIOactive = State.jesteractivated && 
+                                    State.dll_installed_rio && 
+                                    State.activeconfig.RIO_Enabled && 
+                                    State.currentmodule.Equals(Products.DCSmodules.LookupTable[State.riomod]);
+
                 if (DetectNewMission())
                 {
+                    Log.Write("New mission detected. Initializing...", Colors.Text);
                     InitNewMission();
                 }
 
-                // insert AOCS
                 AOCSProvider.AddAOCSUnit();
 
-                // for AIRIO: update state
                 if (State.AIRIOactive)
                 {
                     try
@@ -256,8 +285,9 @@ namespace VAICOM
                         CreateListTACAN();
                         CreateListDL();
                     }
-                    catch
+                    catch (Exception ex)
                     {
+                        Log.Write($"Failed to update AIRIO state: {ex.Message}", Colors.Warning);
                     }
                 }
 
@@ -280,15 +310,33 @@ namespace VAICOM
                     PTT.PTT_Manage_Listen_States_OnPressRelease(false, false);
                 }
 
-                GetAuxMenu();
+                // Process F10 menu after module validation
+                EnsureModuleConnectedAndProcessF10Menu();
 
                 VAICOM.Interfaces.VA_Plugin.VA_ExposeVariables(State.Proxy);
 
                 State.Stopwatch.Stop();
 
-                Log.Write("Server update processed.", Colors.Inline);
+                Log.Write("Server update processed successfully.", Colors.Text);
+            }
 
-
+            private static void EnsureModuleConnectedAndProcessF10Menu()
+            {
+                if (State.moduleConnected)
+                {
+                    Log.Write("Module connected. Processing F10 menu data...", Colors.Text);
+                    GetAuxMenu();
+                }
+                else
+                {
+                    Log.Write("Module not connected yet. Retrying F10 menu processing in 5 seconds...", Colors.Warning);
+                    System.Threading.Tasks.Task.Delay(5000).ContinueWith(_ =>
+                    {
+                        ValidateDcsModule(true); // Revalidate module connection
+                        State.moduleConnected = true; // Update connection state
+                        EnsureModuleConnectedAndProcessF10Menu(); // Retry F10 menu processing
+                    });
+                }
             }
 
         }

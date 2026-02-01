@@ -1,17 +1,16 @@
 {
-  "updates":
-  [
+  "updates": [
     {
       "title": "VAICOM Community Edition for DCS World",
       "isrelease": true,
       "isbeta": false,
       "isdev": false,
       "productid": 1,
-      "releasedate": 20251009,
-      "version": 3069,
-      "versionstring": "3.0.6.9",
-      "downloadurl": "https://github.com/Penecruz/VAICOM-Community/releases/download/v3.0.6.9/VAICOMPRO.zip",
-      "releasenotes": "Release 3.0.6.9 - Fixes DCS crash with F-5E-3 Flaming Cliffs version, Adds keyword training mode Windows Speech Recognition detection and logging enhanced, Add option for Voice Access use with keyword training (disabled for now) ,Change DIAG tab on Vaicom UI to Help tab,  Add Help tab button for direct log file access, Add Help tab button for direct Vaicom PDF manual access, Add Help tab button for direct YouTube tutorial access,  Other minor bug fixes with UI and module database"
+      "releasedate": 20260127,
+      "version": 3081,
+      "versionstring": "3.0.8.1",
+      "downloadurl": "https://github.com/Penecruz/VAICOM-Community/releases/download/v3.0.8.1/VAICOMPRO.zip",
+      "releasenotes": "Release3.0.8.1 Update core DCS files, Adds new iterative scan and stack traversal for F10 menu importing to improve performance, Add a check to wait for module connection before processing F10 menu items, Add additional aliases for CASE III carrier communications to respond to Say Needles request, Adds new Chatter logic to include check for frequency 281.0 and radio power, Add Frequency monitor and new Chatter Auto Start logic, New Kneeboard refresh routine to improve performance.  "
     }
   ]
 }
