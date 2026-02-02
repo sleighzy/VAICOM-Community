@@ -135,7 +135,7 @@ namespace VAICOM
                         TimeSpan elapsed = State.Stopwatch.Elapsed;
                         Log.Write("PTT release: Elapsed = " + elapsed.Seconds + "." + elapsed.Milliseconds + "s", Colors.Inline);
 
-                        if (State.activeconfig.MP_VoIPUseSwitch && State.activeconfig.MP_DelayTransmit && DcsClient.Message.havedelayedmessage)
+                        if ((State.activeconfig.MP_VoIPUseSwitch || State.activeconfig.MP_VoIPParallel) && State.activeconfig.MP_DelayTransmit && DcsClient.Message.havedelayedmessage)
                         {
                             DcsClient.Message.sendmessage();
                             DcsClient.Message.havedelayedmessage = false;

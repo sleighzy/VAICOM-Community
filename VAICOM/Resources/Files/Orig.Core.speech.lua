@@ -115,7 +115,15 @@ local function getCountry(message)
 			return nations.USA
 		end
 	elseif message.event > base.Message.wMsgMiG29_VMS_Null and message.event < base.Message.wMsgMiG29_VMS_Maximum then
-		if nativeCockpitLanguage then
+		local native = nativeCockpitLanguage
+		if message.parameters.language then
+			if message.parameters.language == "native" then
+				native = true
+			else
+				native = false
+			end
+		end
+		if native then
 			return aircraftNativeCountry[message.sender:getUnit():getTypeName()] or nations.RUSSIA
 		else
 			return nations.USA

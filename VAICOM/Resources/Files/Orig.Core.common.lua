@@ -1323,10 +1323,14 @@ local bandit	= {_('_bandit'), 	'bandit'}
 
 TargetShortDescription = {
 	make = function(self, targetDesc, level, coalition, country)		
-		base.print('\t\t TargetShortDescription : targetDesc.type = '..#targetDesc.type)
-		local level = base.math.min(level, #targetDesc.type)
-		base.print('\t\t TargetShortDescription : level = '..level)
-		return self.sub.targetType:make(targetDesc.type[level] + 1) + ' ' + self.sub.BullseyeCoords:make(targetDesc.point, coalition, country)
+		local targetTypeIdx = 0
+		if (targetDesc.type ~= -1) then
+			base.print('\t\t TargetShortDescription : targetDesc.type = ',#targetDesc.type)			
+			local level = base.math.min(level, #targetDesc.type)
+			base.print('\t\t TargetShortDescription : level = ',level)
+			targetTypeIdx = targetDesc.type[level]
+		end		
+		return self.sub.targetType:make(targetTypeIdx + 1) + ' ' + self.sub.BullseyeCoords:make(targetDesc.point, coalition, country)
 	end,
 	sub = {
 		BullseyeCoords	= BullseyeCoords,

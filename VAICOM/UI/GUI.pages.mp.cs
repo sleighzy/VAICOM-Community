@@ -75,7 +75,7 @@ namespace VAICOM
             // delay transmit
             private void SetConfigEnableMP_DelayTransmit(object sender, RoutedEventArgs e) { State.activeconfig.MP_DelayTransmit = true; }
             private void SetConfigDisableMP_DelayTransmit(object sender, RoutedEventArgs e) { State.activeconfig.MP_DelayTransmit = false; }
-            private void SetCurrentValueMP_DelayTransmit(object sender, EventArgs e) { MP_DelayTransmit.IsEnabled = State.PRO && State.activeconfig.MP_VoIPUseSwitch; MP_DelayTransmit.IsChecked = State.activeconfig.MP_DelayTransmit; }
+            private void SetCurrentValueMP_DelayTransmit(object sender, EventArgs e) { MP_DelayTransmit.IsEnabled = State.PRO && (State.activeconfig.MP_VoIPUseSwitch || State.activeconfig.MP_VoIPParallel); MP_DelayTransmit.IsChecked = State.activeconfig.MP_DelayTransmit; }
 
             // ignore select
             private void SetConfigEnableMP_IgnoreSelect(object sender, RoutedEventArgs e) { State.activeconfig.MP_IgnoreSelect = true; }
@@ -138,7 +138,7 @@ namespace VAICOM
 
                 MP_AutoSwitch.IsEnabled = slider.Equals(2);
                 MP_WarnHumans.IsEnabled = State.PRO;
-                MP_DelayTransmit.IsEnabled = slider.Equals(2);
+                MP_DelayTransmit.IsEnabled = slider.Equals(2) || slider.Equals(0); // Enable for Dynamic Switching and Broadcast Parallel
                 MP_IgnoreSelect.IsEnabled = slider.Equals(2);
                 MP_AllowSwitchCommand.IsEnabled = slider.Equals(2);
                 MP_UseTXLink.IsEnabled = slider.Equals(2);
@@ -149,6 +149,3 @@ namespace VAICOM
         }
     }
 }
-
-
-

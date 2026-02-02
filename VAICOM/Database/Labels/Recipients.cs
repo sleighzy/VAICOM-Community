@@ -576,7 +576,7 @@ namespace VAICOM
                 { "descent",                "Descent"               },
 
                 { "kneeboard",              "Kneeboard"             },
-                //{ "kneeboardnotes",         "Flip to Notes tab"     },
+                //{ "kneeboard notes",         "Flip to Notes tab"     },
 
             };
 

@@ -248,7 +248,7 @@ namespace VAICOM
                     }
                     catch (Exception e)
                     {
-                        Log.Write("Problems were reported during kneeboard initialization" + e.Message, Colors.Text);
+                        Log.Write("Problems were reported during kneeboard initialization" + e.Message, Colors.Warning);
                     }
                 }
                 else
@@ -329,14 +329,17 @@ namespace VAICOM
 
             public static void StartNetwork(dynamic vaProxy)
             {
+                Log.Write("Starting network setup...", Colors.System);
+
                 try
                 {
                     Interfaces.Network.UDPsetup();
                     Interfaces.Network.UDPstart();
+                    Log.Write("Network setup completed successfully.", Colors.Message);
                 }
                 catch (Exception e)
                 {
-                    Log.Write(e.StackTrace, Colors.Text);
+                    Log.Write($"Network setup failed: {e.Message}", Colors.Critical);
                 }
             }
 
@@ -349,7 +352,7 @@ namespace VAICOM
                 }
                 catch (Exception ex)
                 {
-                    Log.Write("Beacon not started. " + ex.Message, Colors.Inline);
+                    Log.Write("Beacon not started. " + ex.Message, Colors.Warning);
                 }
 
                 try
@@ -359,7 +362,7 @@ namespace VAICOM
                 }
                 catch (Exception ex)
                 {
-                    Log.Write("UI timer not started. " + ex.Message, Colors.Inline);
+                    Log.Write("UI timer not started. " + ex.Message, Colors.Warning);
                 }
 
                 try
@@ -368,18 +371,21 @@ namespace VAICOM
                 }
                 catch (Exception ex)
                 {
-                    Log.Write("SRS Timer not initialized. " + ex.Message, Colors.Inline);
+                    Log.Write("SRS Timer not initialized. " + ex.Message, Colors.Warning);
                 }
 
                 try
                 {
                     Extensions.Chatter.AudioTimer.Chatter_Initialize();
                     if (State.activeconfig.ChatterAutostart)
-                    { Extensions.Chatter.AudioTimer.Chatter_TimerPlayToggle(); }
+                    {
+                        Log.Write("Chatter auto-start triggered on module connection.", Colors.Text);
+                        Extensions.Chatter.AudioTimer.Chatter_TimerPlayToggle();
+                    }
                 }
                 catch (Exception ex)
                 {
-                    Log.Write("Chatter not started. " + ex.Message, Colors.Inline);
+                    Log.Write("Chatter not started. " + ex.Message, Colors.Warning);
                 }
             }
 
@@ -392,7 +398,7 @@ namespace VAICOM
                 }
                 catch (Exception ex)
                 {
-                    Log.Write("TTS not started. " + ex.Message, Colors.Inline);
+                    Log.Write("TTS not started. " + ex.Message, Colors.Warning);
                 }
 
             }
@@ -441,7 +447,7 @@ namespace VAICOM
                 }
                 catch
                 {
-                    Log.Write("Problems were reported during plugin startup.", Colors.Message);
+                    Log.Write("Problems were reported during plugin startup.", Colors.Warning);
                 }
 
                 State.startup = false;

@@ -202,6 +202,19 @@ namespace VAICOM
                 }
 
 
+                public static void RefreshCurrentPage()
+                {
+                    try
+                    {
+                        KneeboardMessage msg = new KneeboardMessage();
+                        msg.logdata = new LogData(State.KneeboardState.activecat, State.kneeboardcurrentbuffer);
+                        Client.DcsClient.SendKneeboardMessage(msg);
+                    }
+                    catch
+                    {
+                    }
+                }
+
             }
 
             public class KneeboardState
