@@ -74,24 +74,23 @@ Flashing Comms Menu after DCS World update is a known issue and can be resolved 
 ## Patch Notes
 
 
-**VAICOM plugin 3.0.6.9**
+**VAICOM plugin 3.0.8.1**
 
-This update fixes a major bug with the F-5E-3 Flaming Cliffs module and adds a new approach for community support via the new more expansive Help tab in the Vaicom UI.
-It also sets the frameworks for future proofing the pending removal of Windows Speech Recognition from Windows 11.
+This update fixes a few bugs, adds a new Import F10 Menu scanning routine, enhances the logic of the Chatter expansion module to include the monitoring of radio frequency as well as power, which allows muting/unmuting by changing the frequency. It also adds some new command aliases for CASE III carrier Comms and an update of core DCS files.
 
--	Fixes DCS crash with F-5E-3 Flaming Cliffs version.
--	Add keyword training mode Windows Speech Recognition detection and logging enhancements.
--	Add option for Voice Access use with keyword training (disabled for now).
--	Change DIAG tab on Vaicom UI to Help tab.
--	Add Help tab button for direct log file access.
--	Add Help tab button for direct Vaicom PDF manual access.
--	Add Help tab button for direct YouTube tutorial access.
--	Other minor bug fixes with UI and module database.
+
+-	Update core DCS files.
+-	Adds new iterative scan and stack traversal for F10 menu importing to improve performance.
+-	Add a check to wait for module connection before processing F10 menu items.
+-	Add additional aliases for CASE III carrier communications to respond to "Say Needles" request.
+-	Adds new Chatter logic to include check for frequency 281.0 and radio power.
+-	Add Frequency monitor and new Chatter Auto Start logic.
+-	New Kneeboard refresh routine to improve performance.
 
 
 Known Issues
 
--	None
+-	Chatter Frequency monitor updates are linked to the processing of DCS traffic this may take upto 6 seconds (keying the PTT will make this instant by forcing the update).
 
 ## Community Team
 
