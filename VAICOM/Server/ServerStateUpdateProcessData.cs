@@ -188,22 +188,14 @@ namespace VAICOM
                     return;
                 }
 
-                if (State.menuauximported)
-                {
-                    Log.Write("F10 menu items already imported. Skipping processing.", Colors.Text);
-                    return;
-                }
-
                 try
                 {
                     Log.Write("Processing F10 menu items...", Colors.Text);
-                    ImportAuxMenu();
-                    State.menuauximported = true; // Mark as imported
+                    ImportAuxMenu(); // Always process the menu
                 }
                 catch (Exception ex)
                 {
                     Log.Write($"There was a problem importing F10 menu items: {ex.Message}", Colors.Text);
-                    State.menuauximported = false;
                 }
             }
 

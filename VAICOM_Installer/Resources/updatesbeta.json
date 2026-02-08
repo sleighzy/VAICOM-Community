@@ -7,11 +7,11 @@
       "isbeta": false,
       "isdev": false,
       "productid": 1,
-      "releasedate": 20260202,
-      "version": 3082,
-      "versionstring": "3.0.8.2",
+      "releasedate": 20260208,
+      "version": 3084,
+      "versionstring": "3.0.8.4",
       "downloadurl": "https://raw.githubusercontent.com/Penecruz/VAICOM-Community/Development/VAICOM_Installer/Resources/VAICOMPRO.zip",
-      "releasenotes": " Remove Kola Radio.lua update routine, fix f10 menu items not being removed on reset, fix blank space F10 Action Items."
+      "releasenotes": " Fix bug with F10 dynamic import, Adds WIP campaign Key Phrases, Remove Kola Radio.lua update routine, fix f10 menu items not being removed on reset, fix blank space F10 Action Items."
     }
   ]
 }
