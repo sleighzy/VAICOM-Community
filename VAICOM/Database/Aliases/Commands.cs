@@ -529,7 +529,7 @@ namespace VAICOM
                 { "I'll be marking white",           "Action White Smoke"                              },
                 { "Range Weather",                   "Action Weather Report"                           },
                     
-                    // Moose AWACS TODO
+                    // Moose AWACS
                 { "Chalice Checking In",             "Action Check In"                                 }, // difficult due to conflicts with DCS aliases.
                 { "Chalice Say Bogey Dope",          "Action Bogey Dope"                               }, 
                 { "Chalice Say Picture",             "Action Picture"                                  }, 
@@ -547,10 +547,17 @@ namespace VAICOM
                 //{ "Place Holder",                    "Place Holder"                                  }, //Hound is tricky due to the number of dynamic commands what is important?
                 //{ "Place Holder",                    "Place Holder"                                  },
 
-                // Foothold Mission set
-                //{ "Place Holder",                    "Place Holder"                                  }, //used in Imported script Dynamic F10 menu Commands for the Foothold Script
-                //{ "Place Holder",                    "Place Holder"                                  }, //These aliases must be unique and different from the standard DCS aliases!!
-                //{ "Place Holder",                    "Place Holder"                                  }, 
+                // Campaign Pacific Sentry Testing WIP
+                //M02 A Red Horizon
+                { "I don't see any cruise missiles",     "Action I dont see any cruise missiles"         }, //used in Imported script Dynamic F10 menu Commands for the Sentry Pacific Campaign
+                { "Yes I see cruise missiles!",          "Action Yes I see cruise missiles!"             }, //These aliases must be unique and different from the standard DCS aliases!!
+                { "Captured Bogey Bull 045 120",         "Action Captured Bogey Bull 045/120"            },
+                { "Captured Bogey Bull 055 180",         "Action Captured Bogey Bull 055/180"            },
+                { "Venom is Bingo Fuel and need to RTB", "Action Venon is Bingo Fuel and need to RTB"    },
+                { "Venom is declaring emergency fuel!",  "Action Venom is declaring emergency fuel!"     },
+                { "We can hold for a few more minutes",  "Action Venom is min fuel - we can hold for a few more minutes"  },
+                //M11 Work Hard,Play hard
+                { "Incentive Ride Over Testing Only",    "Action INCENTIVE RIDE OVER TESTING ONLY"       }, 
                 //{ "Place Holder",                    "Place Holder"                                  },
 
                 // AI_ATC
