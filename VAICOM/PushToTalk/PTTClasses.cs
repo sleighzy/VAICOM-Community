@@ -15,6 +15,7 @@ namespace VAICOM
                 public string name;
                 public int deviceid;
                 public bool isavailable;
+                public bool isselected;
                 public int number;
                 public bool on;
                 public string frequency = "";

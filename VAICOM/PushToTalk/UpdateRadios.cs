@@ -1,5 +1,8 @@
-﻿using VAICOM.Products;
+﻿using System.Collections.Generic;
+using System.Linq;
+using VAICOM.Products;
 using VAICOM.Servers;
+using VAICOM.Static;
 using static VAICOM.Extensions.RIO.DeviceActionsLibrary;
 
 namespace VAICOM
@@ -40,6 +43,8 @@ namespace VAICOM
                         bool allocatedFM = false;
                         bool allocatedINT = false;
 
+                        string selectedRadio = State.currentstate.selectedradio;
+                        
                         State.radiocount = 0;
 
                         // logic to assign the aircraft radios (TX1-3 + TX5)
@@ -124,6 +129,7 @@ namespace VAICOM
                                 RadioDevices.Radio2.on = radiounit.on;
                                 RadioDevices.Radio2.frequency = radiounit.frequency.ToString();
                                 RadioDevices.Radio2.modulation = radiounit.modulation;
+                                RadioDevices.Radio2.isselected = radiounit.displayName == selectedRadio;
 
                                 deviceallocated = true;
                                 allocatedUHF = true;
@@ -156,6 +162,7 @@ namespace VAICOM
                                 RadioDevices.Radio1.on = radiounit.on;
                                 RadioDevices.Radio1.frequency = radiounit.frequency.ToString();
                                 RadioDevices.Radio1.modulation = radiounit.modulation;
+                                RadioDevices.Radio1.isselected = radiounit.displayName == selectedRadio;
 
                                 deviceallocated = true;
                                 allocatedAM = true;
@@ -187,6 +194,7 @@ namespace VAICOM
                                 RadioDevices.Radio3.on = radiounit.on;
                                 RadioDevices.Radio3.frequency = radiounit.frequency.ToString();
                                 RadioDevices.Radio3.modulation = radiounit.modulation;
+                                RadioDevices.Radio3.isselected = radiounit.displayName == selectedRadio;
 
                                 deviceallocated = true;
                                 allocatedFM = true;
@@ -219,6 +227,11 @@ namespace VAICOM
                     return;
                 }
 
+                if (PTT.IsPTTMultiSingle())
+                {
+                    PTT_SetConfigMultiSingle();
+                    return;
+                }
 
                 PTT_SetConfigMulti();
 
@@ -255,6 +268,77 @@ namespace VAICOM
                 }
             }
 
+            public static void PTT_SetConfigMultiSingle()
+            {
+                TXNodes.TX1.enabled = false;
+                TXNodes.TX2.enabled = false;
+                TXNodes.TX3.enabled = false;
+                TXNodes.TX4.enabled = false;
+                TXNodes.TX5.enabled = false;
+                TXNodes.TX6.enabled = false;
+
+                // Filter the list of all radios and locate the currently selected one
+                Server.RadioDevice selectedRadio = State.currentstate.radios
+                    .Where(radio => radio.isselected)
+                    .ToList()
+                    .First();
+
+                RadioDevice radioDevice = new RadioDevice
+                {
+                    deviceid = selectedRadio.deviceid,
+                    isavailable = selectedRadio.isavailable,
+                    isselected = selectedRadio.isselected,
+                    intercom = selectedRadio.intercom,
+                    AM = selectedRadio.AM,
+                    FM = selectedRadio.FM,
+                    on = selectedRadio.on,
+                    frequency = selectedRadio.frequency.ToString(),
+                    modulation = selectedRadio.modulation
+                };
+                if (selectedRadio.displayName.Length > 16)
+                {
+                    radioDevice.name = selectedRadio.displayName.Substring(selectedRadio.displayName.Length - 16, 16);
+                }
+                else
+                {
+                    radioDevice.name = selectedRadio.displayName;
+                }
+
+                List<RadioDevice> radios = new List<RadioDevice>() { radioDevice };
+                State.radiocount = State.currentstate.radios.Count - 1;
+                
+                switch (State.activeconfig.SingleHotkey)
+                {
+                    case "TX1":
+                        TXNodes.TX1 = new TXNode() { name = "TX1", enabled = true, radios = radios };
+                        State.currentTXnode = TXNodes.TX1;
+                        break;
+                    case "TX2":
+                        TXNodes.TX2 = new TXNode() { name = "TX2", enabled = true, radios = radios };
+                        State.currentTXnode = TXNodes.TX2;
+                        break;
+                    case "TX3":
+                        TXNodes.TX3 = new TXNode() { name = "TX3", enabled = true, radios = radios };
+                        State.currentTXnode = TXNodes.TX3;
+                        break;
+                    case "TX4":
+                        TXNodes.TX4 = new TXNode() { name = "TX4", enabled = true, radios = radios };
+                        State.currentTXnode = TXNodes.TX4;
+                        break;
+                    case "TX5":
+                        TXNodes.TX5 = new TXNode() { name = "TX5", enabled = true, radios = radios };
+                        State.currentTXnode = TXNodes.TX5;
+                        break;
+                    case "TX6":
+                        TXNodes.TX6 = new TXNode() { name = "TX6", enabled = true, radios = radios };
+                        State.currentTXnode = TXNodes.TX6;
+                        break;
+                    default:
+                        TXNodes.TX1 = new TXNode() { name = "TX1", enabled = true, radios = TXConfigs.ALL_RADIOS_SEL };
+                        State.currentTXnode = TXNodes.TX1;
+                        break;
+                }
+            }
         }
     }
 }
