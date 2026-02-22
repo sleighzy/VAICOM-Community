@@ -2,8 +2,6 @@
 using System.Linq;
 using VAICOM.Products;
 using VAICOM.Servers;
-using VAICOM.Static;
-using static VAICOM.Extensions.RIO.DeviceActionsLibrary;
 
 namespace VAICOM
 {
@@ -43,8 +41,6 @@ namespace VAICOM
                         bool allocatedFM = false;
                         bool allocatedINT = false;
 
-                        string selectedRadio = State.currentstate.selectedradio;
-                        
                         State.radiocount = 0;
 
                         // logic to assign the aircraft radios (TX1-3 + TX5)
@@ -129,7 +125,6 @@ namespace VAICOM
                                 RadioDevices.Radio2.on = radiounit.on;
                                 RadioDevices.Radio2.frequency = radiounit.frequency.ToString();
                                 RadioDevices.Radio2.modulation = radiounit.modulation;
-                                RadioDevices.Radio2.isselected = radiounit.displayName == selectedRadio;
 
                                 deviceallocated = true;
                                 allocatedUHF = true;
@@ -162,7 +157,6 @@ namespace VAICOM
                                 RadioDevices.Radio1.on = radiounit.on;
                                 RadioDevices.Radio1.frequency = radiounit.frequency.ToString();
                                 RadioDevices.Radio1.modulation = radiounit.modulation;
-                                RadioDevices.Radio1.isselected = radiounit.displayName == selectedRadio;
 
                                 deviceallocated = true;
                                 allocatedAM = true;
@@ -194,7 +188,6 @@ namespace VAICOM
                                 RadioDevices.Radio3.on = radiounit.on;
                                 RadioDevices.Radio3.frequency = radiounit.frequency.ToString();
                                 RadioDevices.Radio3.modulation = radiounit.modulation;
-                                RadioDevices.Radio3.isselected = radiounit.displayName == selectedRadio;
 
                                 deviceallocated = true;
                                 allocatedFM = true;
@@ -277,10 +270,10 @@ namespace VAICOM
                 TXNodes.TX5.enabled = false;
                 TXNodes.TX6.enabled = false;
 
-                // Filter the list of all radios and locate the currently selected one
+                // Filter the list of all radios and locate the currently selected one.
+                // Should be a list of one radio entry after filter so get the first entry.
                 Server.RadioDevice selectedRadio = State.currentstate.radios
                     .Where(radio => radio.isselected)
-                    .ToList()
                     .First();
 
                 RadioDevice radioDevice = new RadioDevice
