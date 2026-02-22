@@ -396,7 +396,6 @@ namespace VAICOM
                                 TXNodes.TX1.radios = TXConfigs.SNGL_RADIO_Radio1;
 
                                 RadioDevices.Radio1.isavailable = radiounit.isavailable;
-                                RadioDevices.Radio1.isselected = radiounit.isselected;
                                 RadioDevices.Radio1.deviceid = radiounit.deviceid;
                                 RadioDevices.Radio1.name = radiolist_SRS.Slot_map[0];
                                 RadioDevices.Radio1.intercom = radiounit.intercom;
@@ -423,7 +422,6 @@ namespace VAICOM
                                 TXNodes.TX2.radios = TXConfigs.SNGL_RADIO_Radio2;
 
                                 RadioDevices.Radio2.isavailable = radiounit.isavailable;
-                                RadioDevices.Radio2.isselected = radiounit.isselected;
                                 RadioDevices.Radio2.deviceid = radiounit.deviceid;
                                 RadioDevices.Radio2.name = radiolist_SRS.Slot_map[1];
                                 RadioDevices.Radio2.intercom = radiounit.intercom;
@@ -449,7 +447,6 @@ namespace VAICOM
                                 TXNodes.TX3.radios = TXConfigs.SNGL_RADIO_Radio3;
 
                                 RadioDevices.Radio3.isavailable = radiounit.isavailable;
-                                RadioDevices.Radio3.isselected = radiounit.isselected;
                                 RadioDevices.Radio3.deviceid = radiounit.deviceid;
                                 RadioDevices.Radio3.name = radiolist_SRS.Slot_map[2];
                                 RadioDevices.Radio3.intercom = radiounit.intercom;

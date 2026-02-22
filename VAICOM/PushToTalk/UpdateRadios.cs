@@ -276,28 +276,25 @@ namespace VAICOM
                     .Where(radio => radio.isselected)
                     .First();
 
-                RadioDevice radioDevice = new RadioDevice
-                {
-                    deviceid = selectedRadio.deviceid,
-                    isavailable = selectedRadio.isavailable,
-                    isselected = selectedRadio.isselected,
-                    intercom = selectedRadio.intercom,
-                    AM = selectedRadio.AM,
-                    FM = selectedRadio.FM,
-                    on = selectedRadio.on,
-                    frequency = selectedRadio.frequency.ToString(),
-                    modulation = selectedRadio.modulation
-                };
+
+                RadioDevices.SEL.deviceid = selectedRadio.deviceid;
+                RadioDevices.SEL.isavailable = selectedRadio.isavailable;
+                RadioDevices.SEL.intercom = selectedRadio.intercom;
+                RadioDevices.SEL.AM = selectedRadio.AM;
+                RadioDevices.SEL.FM = selectedRadio.FM;
+                RadioDevices.SEL.on = selectedRadio.on;
+                RadioDevices.SEL.frequency = selectedRadio.frequency.ToString();
+                RadioDevices.SEL.modulation = selectedRadio.modulation;
                 if (selectedRadio.displayName.Length > 16)
                 {
-                    radioDevice.name = selectedRadio.displayName.Substring(selectedRadio.displayName.Length - 16, 16);
+                    RadioDevices.SEL.name = selectedRadio.displayName.Substring(selectedRadio.displayName.Length - 16, 16);
                 }
                 else
                 {
-                    radioDevice.name = selectedRadio.displayName;
+                    RadioDevices.SEL.name = selectedRadio.displayName;
                 }
 
-                List<RadioDevice> radios = new List<RadioDevice>() { radioDevice };
+                List<RadioDevice> radios = new List<RadioDevice>() { RadioDevices.SEL };
                 State.radiocount = State.currentstate.radios.Count - 1;
                 
                 switch (State.activeconfig.SingleHotkey)
