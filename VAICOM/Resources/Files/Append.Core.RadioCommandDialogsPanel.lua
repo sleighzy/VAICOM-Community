@@ -113,8 +113,9 @@ function checkRadioCommunicatorTuned(target, communicator, communicatorId)
 	local radioavail = base.GetDevice(data.intercomId):is_communicator_available(communicatorId)	
 	local freqModTbl = target:getFrequenciesModulations()	
 	if radioavail and (freqModTbl ~= nil) then	
-		local radiofreq = base.GetDevice(communicatorId).get_frequency and base.GetDevice(communicatorId):get_frequency() or 0
-		local radiomod = base.GetDevice(communicatorId).get_modulation and base.GetDevice(communicatorId):get_modulation() or 0			
+		local commDevice = base.GetDevice(communicatorId)
+		local radiofreq = commDevice.get_frequency and commDevice:get_frequency() or 0
+		local radiomod = commDevice.get_modulation and commDevice:get_modulation() or 0			
 		for transiverId, freqMod in base.pairs(freqModTbl) do
 			local tgtmod = freqMod.modulation
 			if (radiomod == tgtmod) and (base.math.abs(radiofreq - freqMod.frequency) < 2500) then				
@@ -150,16 +151,18 @@ function selectCommunicatorDeviceId(targetCommunicator)
 	end
 	local ID = nil
 	if (data.curCommunicatorId == COMMUNICATOR_VOID) or (data.curCommunicatorId == COMMUNICATOR_AUTO) or (data.curCommunicatorId == 0) then
-		for communicatorId, communicator in base.pairs(data.communicators) do 
-			if base.GetDevice(communicatorId) and base.GetDevice(communicatorId).is_on and base.GetDevice(communicatorId):is_on() and checkRadioCommunicatorTuned(targetCommunicator, communicator, communicatorId) then
-				ID = communicatorId 
+		for communicatorId, communicator in base.pairs(data.communicators) do
+			local commDevice = base.GetDevice(communicatorId)
+			if commDevice and commDevice.is_on and commDevice:is_on() and checkRadioCommunicatorTuned(targetCommunicator, communicator, communicatorId) then
+				ID = communicatorId
 				break
 			end
 		end
 		if not ID then
-			for communicatorId, communicator in base.pairs(data.communicators) do 
-				if base.GetDevice(communicatorId) and base.GetDevice(communicatorId).is_on and base.GetDevice(communicatorId):is_on() and checkRadioCommunicatorAvailability(targetCommunicator, communicator, communicatorId) then
-					ID = communicatorId 
+			for communicatorId, communicator in base.pairs(data.communicators) do
+				local commDevice = base.GetDevice(communicatorId)
+				if commDevice and commDevice.is_on and commDevice:is_on() and checkRadioCommunicatorAvailability(targetCommunicator, communicator, communicatorId) then
+					ID = communicatorId
 					break
 				end
 			end		
@@ -327,7 +330,7 @@ local function findRadioDisplayName(...)
     return nil
 end
 function getSelectedRadio(dcsId)
-	base.print("dcsId: "..dcsId) -- print the dcsId for debugging
+	if base.vaicom.state.debugmode then base.print("dcsId: "..dcsId) end
 	local selectedRadio = ""
 	if dcsId == "AH-64D_BLK_II" then
 		-- get pilot or CP/G
@@ -1724,13 +1727,12 @@ base.vaicom.state = {
 									airborne			= base.vaicom.state.airborne,								
 									intercom			= data.intercomId,
 									fsmstate 			= base.tostring(base.fsm.state),
-									selectedradio		= getSelectedRadio(base.vaicom.state.dcsid), 
 									radios				= {},
 								  }
-				chunk[3] 		= {		
+				chunk[3] 		= {
 									missiontitle		= base.DCS.getMissionName(),
 									missionbriefing		= base.DCS.getPlayerBriefing().descText,
-									missiondetails		= base.DCS.getPlayerBriefing().mission_goal,	
+									missiondetails		= base.DCS.getPlayerBriefing().mission_goal,
 								  }
 				chunk[4] 		= {
 									availablerecipients =   {						
@@ -1781,11 +1783,14 @@ base.vaicom.state = {
 				chunk[12] 		= {
 								  }
 				local selectedRadio = getSelectedRadio(base.vaicom.state.dcsid)
+				chunk[2].selectedradio = selectedRadio
+				local intercomDev = base.GetDevice(data.intercomId)
 				for n,k in base.pairs(data.communicators) do
-					local Viper_VHF = (base.vaicom.state.dcsid == "F-16C_50" and n == 38) 
+					local commDevice = base.GetDevice(n)
+					local Viper_VHF = (base.vaicom.state.dcsid == "F-16C_50" and n == 38)
 					local ICS = (n == data.intercomId)
-					local ICS_linked = (base.GetDevice(data.intercomId) and base.GetDevice(data.intercomId):is_communicator_available(n))
-					local ICS_set = (Viper_VHF or ICS_linked) 
+					local ICS_linked = (intercomDev and intercomDev:is_communicator_available(n))
+					local ICS_set = (Viper_VHF or ICS_linked)
 					local radio =  	{
 									deviceid = n,
 									displayName = k.displayName,
@@ -1794,10 +1799,10 @@ base.vaicom.state = {
 									isavailable = ICS_set,
 									isselected = k.displayName == selectedRadio,
 									intercom = ICS,
-									on =  ICS or ((ICS_set and (( base.GetDevice(n) and base.GetDevice(n).is_on and base.GetDevice(n):is_on() ))) or false),
-									frequency = ( ICS_set and (( (not ICS) and base.GetDevice(n) and base.GetDevice(n).get_frequency and base.GetDevice(n):get_frequency() ) or 0)) or 0,
-									modulation = ( ICS_set and (( (not ICS) and base.GetDevice(n) and base.GetDevice(n).get_modulation and (((base.GetDevice(n):get_modulation() == 1) and "FM") or "AM") ) or "XX")) or "XX", 
-									}						
+									on =  ICS or ((ICS_set and commDevice and commDevice.is_on and commDevice:is_on()) or false),
+									frequency = (ICS_set and ((not ICS) and commDevice and commDevice.get_frequency and commDevice:get_frequency()) or 0) or 0,
+									modulation = (ICS_set and ((not ICS) and commDevice and commDevice.get_modulation and (((commDevice:get_modulation() == 1) and "FM") or "AM")) or "XX") or "XX",
+									}
 					base.table.insert(chunk[2].radios, radio)
 				end					
 				for recipientclass,_ in base.pairs(base.vaicom.state.availablerecipients) do
